@@ -123,6 +123,33 @@
   .postcard img.art,.postcard video.art{width:100%;height:100%;object-fit:cover}
   .postcard .art::after{content:"";position:absolute;inset:0;
     background:linear-gradient(180deg,rgba(5,7,13,0) 30%,rgba(5,7,13,.55) 72%,rgba(5,7,13,.96))}
+
+  /* ---- видео места ---- */
+  .postcard .ytwrap{position:absolute;inset:0;z-index:0;overflow:hidden;background:#05070d;cursor:pointer}
+  .postcard .ytwrap .thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .postcard .ytwrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+  .postcard .ytwrap::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(5,7,13,.15) 30%,rgba(5,7,13,.55) 72%,rgba(5,7,13,.96))}
+  .postcard .ytwrap.playing::after{display:none}
+  .playbig{position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);z-index:2;
+    width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:22px;color:#04121f;padding-left:4px;pointer-events:none;
+    background:linear-gradient(135deg,#dff3ff,#a9ddff 40%,#5cc8ff 75%,#2f83cf);
+    box-shadow:0 10px 34px rgba(92,200,255,.5),inset 0 1px 0 rgba(255,255,255,.85);
+    transition:transform .2s}
+  .postcard .ytwrap:hover .playbig{transform:translate(-50%,-60%) scale(1.08)}
+  .vidbtn{display:inline-flex;align-items:center;gap:8px;margin-top:10px;
+    padding:9px 16px;border-radius:999px;font-size:12.5px;font-weight:600;
+    color:#dff3ff;text-decoration:none;cursor:pointer;white-space:nowrap;
+    background:linear-gradient(150deg,rgba(140,215,255,.26),rgba(92,200,255,.10) 55%),rgba(20,40,66,.42);
+    backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%);
+    border:1px solid rgba(92,200,255,.5);
+    box-shadow:0 6px 20px rgba(92,200,255,.22),inset 0 1px 0 rgba(255,255,255,.4);
+    transition:transform .15s, box-shadow .2s, border-color .2s}
+  .vidbtn:hover{transform:translateY(-1px);border-color:rgba(92,200,255,.85);
+    box-shadow:0 10px 28px rgba(92,200,255,.35),inset 0 1px 0 rgba(255,255,255,.5)}
+  .vidbtn .play{font-size:11px}
+  .postcard .vidbtn{position:absolute;top:20px;right:56px;z-index:4;margin:0}
   .postcard .big-emoji{position:absolute;top:18px;left:22px;font-size:46px;z-index:1;
     filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))}
   .postcard .replace{position:absolute;top:24px;right:56px;z-index:2;font-size:10px;letter-spacing:.14em;
@@ -349,6 +376,82 @@
    ДАННЫЕ. 30 мест. Реальные координаты.
    Здесь ты потом подменяешь image/video на своё футаж.
    ============================================================ */
+/* ============================================================
+   ВИДЕО ДЛЯ КАЖДОГО МЕСТА
+   ------------------------------------------------------------
+   Как добавить своё видео:
+   1) Открой ролик на YouTube, скопируй адрес, например:
+      https://www.youtube.com/watch?v=DYcPztv8Atc
+   2) Возьми часть ПОСЛЕ "v=" — это DYcPztv8Atc
+   3) Вставь её в кавычки рядом с нужным местом ниже.
+   Если оставить пустые кавычки "" — в карточке появится
+   кнопка «Смотреть видео», она откроет поиск по этому месту.
+   ============================================================ */
+const CAT_VIDEO = {
+  forest:  "DYcPztv8Atc",
+  animals: "DXMFZ-HgsAg",
+  water:   "csJY3xCz5-k",
+  volcano: "sIplN0KPDgM",
+  ocean:   "avsT3Y3oqng",
+  island:  "Nrdh_63V78Y",
+  mountain:"3omnQ9lbaI8",
+  desert:  "4Y8eHOp9ah4",
+  paradise:"zocEuJg1fmw",
+};
+
+const VIDEOS = {
+  amazon:      "DYcPztv8Atc",
+  pantanal:    "DXMFZ-HgsAg",
+  iguazu:      "csJY3xCz5-k",
+  lencois:     "",
+  noronha:     "Nrdh_63V78Y",
+  kilauea:     "OjIiudJolro",
+  etna:        "YqbNdDxa_i4",
+  vesuvius:    "",
+  krakatoa:    "",
+  nyiragongo:  "",
+  gbr:         "avsT3Y3oqng",
+  galapagos:   "",
+  serengeti:   "",
+  sahara:      "",
+  everest:     "",
+  grandcanyon: "4Y8eHOp9ah4",
+  iceland:     "ZTbX81lIxs0",
+  niagara:     "Pbs0yR5nfYo",
+  victoria:    "",
+  maldives:    "zocEuJg1fmw",
+  bluehole:    "",
+  patagonia:   "",
+  zhangjiajie: "",
+  uyuni:       "jr5DTDalgNU",
+  plitvice:    "3RvQNWHc2To",
+  cappadocia:  "ddfp10Hoj7w",
+  baikal:      "3OLn7XpaxJ0",
+  fjords:      "3omnQ9lbaI8",
+  komodo:      "",
+  yosemite:    "",
+  borabora:    "Fmw-F4r5sc8",
+  santorini:   "kS8hZ0sCb2Y",
+  seychelles:  "STGZs-q431M",
+  bali:        "QrRB1vxWYQU",
+  zanzibar:    "CtfGH1O28JE",
+  elnido:      "",
+  exuma:       "",
+  whitehaven:  "",
+  aitutaki:    "",
+  mauritius:   "",
+  phiphi:      "",
+  capri:       "xGZ81uHFuCc",
+  turkscaicos: "",
+  fiji:        "",
+  maldives2:   "zocEuJg1fmw",
+  amalfi:      "5d1G5cSqCXw",
+  formentera:  "",
+  sardinia:    "",
+  dubrovnik:   "a1LMpbgcLDw",
+  madeira:     "",
+};
+
 const CATS = {
   forest:  {label:"Леса",     emoji:"🌳", color:"#48c07a", grad:["#0b2a12","#1b5e20","#66bb6a"]},
   animals: {label:"Животные", emoji:"🐾", color:"#d4a24e", grad:["#2a1a05","#8d6e3a","#e0b56a"]},
@@ -1113,17 +1216,40 @@ function openPanel(pl){
   selectedId = pl.id;
   const cat = CATS[pl.cat];
   const grad = `linear-gradient(135deg, ${cat.grad[0]}, ${cat.grad[1]} 55%, ${cat.grad[2]})`;
-  const media = pl.video
+  const ytId = (VIDEOS[pl.id]||'').trim() || (CAT_VIDEO[pl.cat]||'').trim();
+  const searchUrl = 'https://www.youtube.com/results?search_query=' +
+        encodeURIComponent(pl.name + ' ' + pl.country + ' 4K');
+  const watchUrl = ytId ? 'https://www.youtube.com/watch?v='+ytId : searchUrl;
+
+  const media = ytId
+    ? `<div class="ytwrap" id="ytwrap" data-yt="${ytId}">
+         <img class="thumb" src="https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg"
+              onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${ytId}/hqdefault.jpg'" alt="">
+         <div class="playbig">&#9654;</div>
+       </div>`
+    : pl.video
     ? `<video class="art" autoplay muted loop playsinline src="${pl.video}"></video>`
     : pl.image
     ? `<img class="art" src="${pl.image}" alt="">`
     : `<div class="art" style="background:${grad}"></div>`;
+
   document.getElementById('postcard').innerHTML = `
     ${media}
-    <span class="replace">${pl.video||pl.image?'':'сюда — твоё фото/видео'}</span>
+    <a class="vidbtn" href="${watchUrl}" target="_blank" rel="noopener">
+      <span class="play">&#9654;</span>Открыть на YouTube</a>
     <span class="big-emoji">${cat.emoji}</span>
     <h2>${pl.name}</h2>
     <div class="loc"><span>${pl.country}</span><span class="tag">${cat.label}</span></div>`;
+
+  const wrap = document.getElementById('ytwrap');
+  if(wrap){
+    wrap.addEventListener('click', ()=>{
+      const id = wrap.dataset.yt;
+      wrap.classList.add('playing');
+      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+        allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="${pl.name}"></iframe>`;
+    }, {once:true});
+  }
   document.getElementById('panelBody').innerHTML = `
     <p class="lead">О месте</p>
     <p class="desc">${pl.desc}</p>
