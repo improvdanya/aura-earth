@@ -298,6 +298,30 @@
     letter-spacing:.02em;max-width:230px;line-height:1.5;pointer-events:none}
   .hint b{color:#c7d0dd;font-weight:600}
 
+  /* ---------- авто-путешествие («режим фильма») ---------- */
+  .journey{position:absolute;left:50%;transform:translateX(-50%);bottom:80px;z-index:22;
+    display:flex;align-items:center;gap:9px;padding:11px 18px;border-radius:999px;cursor:pointer;
+    font-size:13.5px;font-weight:600;color:#ccf6fb;white-space:nowrap;user-select:none;
+    background:linear-gradient(150deg,rgba(110,230,240,.28),rgba(79,209,224,.10) 55%),rgba(14,44,52,.42);
+    backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+    border:1px solid rgba(79,209,224,.6);
+    box-shadow:0 8px 26px rgba(79,209,224,.26),inset 0 1px 0 rgba(255,255,255,.5);
+    transition:transform .15s, box-shadow .2s, opacity .25s}
+  .journey:hover{transform:translateX(-50%) translateY(-1px);
+    box-shadow:0 12px 32px rgba(79,209,224,.36),inset 0 1px 0 rgba(255,255,255,.55)}
+  .journey[hidden]{display:none}
+  .journey .ji{font-size:14px}
+  .journey.playing{color:#fff;border-color:rgba(255,120,90,.65);
+    background:linear-gradient(150deg,rgba(255,120,90,.30),rgba(255,107,61,.12) 55%),rgba(52,24,16,.44);
+    box-shadow:0 8px 26px rgba(255,107,61,.32),inset 0 1px 0 rgba(255,255,255,.42)}
+
+  /* ---------- ссылка «поделиться местом» ---------- */
+  .sharelink{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:12.5px;font-weight:600;
+    color:#cfe0f0;text-decoration:none;padding:9px 14px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    transition:background .15s,border-color .15s}
+  .sharelink:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
+
   @media (max-width:640px){
     .brand{top:16px;left:16px}
     .brand p{display:none}
@@ -307,6 +331,7 @@
     .hint{display:none}
     .filters{bottom:16px}
     .chip-sep{display:none}
+    .journey{bottom:auto;top:114px;padding:10px 15px;font-size:12.5px}
   }
 </style>
 
@@ -333,6 +358,10 @@
 <button class="surprise" id="surprise"><span class="die">🎲</span><span class="lbl">Удиви меня</span></button>
 
 <div class="filters" id="filters"></div>
+
+<div class="journey" id="journey" hidden>
+  <span class="ji">▶</span><span id="journeyLbl">Смотреть путешествие</span>
+</div>
 
 <div class="tooltip" id="tooltip"></div>
 
@@ -1263,7 +1292,18 @@ function openPanel(pl){
       <div class="coords">
         <span class="c">${fmtCoord(pl.lat,'N','S')}, ${fmtCoord(pl.lon,'E','W')}</span>
         <a href="https://www.google.com/maps?q=${pl.lat},${pl.lon}" target="_blank" rel="noopener">Открыть на карте</a>
-      </div></div>`;
+      </div></div>
+    <div class="block"><a class="sharelink" id="shareLink">🔗 Скопировать ссылку на это место</a></div>`;
+
+  const sl = document.getElementById('shareLink');
+  if(sl) sl.onclick = ()=>{
+    const url = location.origin + location.pathname + '?place=' + pl.id;
+    const done = ()=>{ sl.textContent='✓ Ссылка скопирована'; setTimeout(()=>{ sl.textContent='🔗 Скопировать ссылку на это место'; },1800); };
+    if(navigator.clipboard){ navigator.clipboard.writeText(url).then(done).catch(()=>{}); }
+    else { done(); }
+  };
+
+  setPlaceUrl(pl.id);
   panel.classList.add('open');
 }
 function fmtCoord(v,pos,neg){return Math.abs(v).toFixed(2)+'° '+(v>=0?pos:neg);}
@@ -1292,17 +1332,19 @@ function clearChipState(){
 }
 function toggleCat(key,btn){
   activeRoute=null;
-  if(activeCat===key){activeCat=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); return;}
+  if(activeCat===key){activeCat=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney(); return;}
   activeCat=key; clearChipState(); btn.classList.add('on'); clearRoutes();
   const set = PLACES.filter(p=>p.cat===key);
   highlightPins(set.map(p=>p.id)); setLabels(set);
+  showJourney(set, CATS[key].label);
 }
 function toggleRoute(key,btn){
   activeCat=null;
-  if(activeRoute===key){activeRoute=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); return;}
+  if(activeRoute===key){activeRoute=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney(); return;}
   activeRoute=key; clearChipState(); btn.classList.add('on');
   const r=ROUTES[key]; const set=r.ids.map(id=>PLACES.find(p=>p.id===id)).filter(Boolean);
   highlightPins(set.map(p=>p.id)); setLabels(set); drawRoute(set, r.color);
+  showJourney(set, r.label);
   // мягко подлетаем к первой точке маршрута
   flyTo(set[0], false); lastInteract=performance.now();
 }
@@ -1365,7 +1407,7 @@ function pick(pl){
 let dragging=false, moved=false, px=0, py=0;
 function addEvents(){
   const dom=renderer.domElement;
-  dom.addEventListener('pointerdown',e=>{dragging=true;moved=false;px=e.clientX;py=e.clientY;idle=false;fly=null;});
+  dom.addEventListener('pointerdown',e=>{dragging=true;moved=false;px=e.clientX;py=e.clientY;idle=false;fly=null; if(tour) stopTour();});
   window.addEventListener('pointermove',e=>{
     if(dragging){
       const dx=e.clientX-px, dy=e.clientY-py; px=e.clientX; py=e.clientY;
@@ -1383,6 +1425,7 @@ function addEvents(){
   });
   dom.addEventListener('wheel',e=>{
     e.preventDefault();
+    if(tour) stopTour();
     cam.radius = Math.max(1.35, Math.min(4.2, cam.radius + e.deltaY*0.0016));
     applyCameraFromSpherical(); idle=false; fly=null; lastInteract=performance.now();
   },{passive:false});
@@ -1396,7 +1439,8 @@ function addEvents(){
     if(!e.target.closest('.search-wrap')) resultsEl.classList.remove('show');
   });
   document.getElementById('surprise').onclick=surprise;
-  document.getElementById('panelClose').onclick=closePanel;
+  document.getElementById('journey').onclick=toggleTour;
+  document.getElementById('panelClose').onclick=()=>{ stopTour(); closePanel(); };
   window.addEventListener('resize',onResize);
 }
 
@@ -1431,10 +1475,74 @@ function surprise(){
   const pl = PLACES[Math.floor(Math.random()*PLACES.length)];
   // сбрасываем фильтры для чистого «броска»
   activeCat=activeRoute=null; clearChipState(); showAllPins(); clearRoutes(); setLabels([]);
+  hideJourney();
   const btn=document.getElementById('surprise');
   btn.style.transform='rotate(0deg)';
   btn.querySelector('.die').animate([{transform:'rotate(0)'},{transform:'rotate(360deg)'}],{duration:500});
   flyTo(pl,true);
+}
+
+/* ============================================================
+   АВТО-ПУТЕШЕСТВИЕ («режим фильма»)
+   Камера сама облетает набор мест (маршрут или категорию),
+   на каждом останавливается и показывает карточку.
+   ============================================================ */
+let currentSet = [];        // активный набор мест
+let currentLabel = '';      // подпись набора
+let tour = null;            // {set, i, timer, playing}
+const DWELL_MS = 5200;      // сколько любоваться каждым местом
+
+function showJourney(set, label){
+  currentSet = set || []; currentLabel = label || '';
+  document.getElementById('journey').hidden = currentSet.length < 2;
+  updateJourneyBtn();
+}
+function hideJourney(){
+  currentSet = []; currentLabel = '';
+  document.getElementById('journey').hidden = true;
+  stopTour();
+}
+function updateJourneyBtn(){
+  const el = document.getElementById('journey');
+  const lbl = document.getElementById('journeyLbl');
+  const icon = el.querySelector('.ji');
+  if(tour && tour.playing){
+    el.classList.add('playing'); icon.textContent = '⏸';
+    lbl.textContent = 'Путешествие · '+(tour.i+1)+'/'+tour.set.length+' · остановить';
+  } else {
+    el.classList.remove('playing'); icon.textContent = '▶';
+    lbl.textContent = 'Смотреть путешествие' + (currentLabel ? ' · '+currentLabel : '');
+  }
+}
+function startTour(){
+  if(!currentSet || currentSet.length < 2) return;
+  stopTour();
+  tour = {set: currentSet.slice(), i: 0, timer: null, playing: true};
+  tourStep();
+}
+function tourStep(){
+  if(!tour || !tour.playing) return;
+  if(tour.i >= tour.set.length){ stopTour(); return; }
+  flyTo(tour.set[tour.i], true);
+  updateJourneyBtn();
+  tour.timer = setTimeout(()=>{ if(tour){ tour.i++; tourStep(); } }, 1150 + DWELL_MS);
+}
+function stopTour(){
+  if(tour){ clearTimeout(tour.timer); tour = null; }
+  updateJourneyBtn();
+}
+function toggleTour(){ (tour && tour.playing) ? stopTour() : startTour(); }
+
+/* ---- глубокая ссылка: открыть сайт сразу на нужном месте ---- */
+function deepLinkId(){
+  try{
+    const u = new URL(location.href);
+    return u.searchParams.get('place') ||
+           (location.hash.match(/place=([a-z0-9_-]+)/i) || [])[1] || '';
+  }catch(e){ return ''; }
+}
+function setPlaceUrl(id){
+  try{ history.replaceState(null, '', location.pathname + '?place=' + id); }catch(e){}
 }
 // Подбираем угол обзора так, чтобы планета красиво вписывалась
 // на любых пропорциях: на десктопе как раньше, на телефоне — по ширине,
@@ -1477,6 +1585,9 @@ function unlock(save){
   const g=document.getElementById('gate');
   g.classList.add('unlocked');
   setTimeout(()=>{ g.style.display='none'; }, 750);
+  // если сайт открыт по ссылке на место — сразу летим туда
+  const id = deepLinkId();
+  if(id){ const pl = PLACES.find(p=>p.id===id); if(pl) setTimeout(()=>flyTo(pl,true), 950); }
 }
 
 function initGate(){
