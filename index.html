@@ -166,6 +166,25 @@
     border:1px solid rgba(255,255,255,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
 
   .body{padding:22px 24px 40px;overflow-y:auto;flex:1}
+
+  /* ---- список мест по категории/маршруту ---- */
+  .list-head{padding:40px 0 16px}
+  .list-head h2{margin:0;font-family:var(--display);font-size:25px;font-weight:600;line-height:1.1}
+  .list-sub{margin:9px 0 0;font-size:13px;color:#b7c2d2;line-height:1.5}
+  .pitem{display:flex;align-items:center;gap:13px;cursor:pointer;padding:13px 14px;border-radius:14px;margin-bottom:9px;
+    background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);
+    transition:background .15s,border-color .15s,transform .15s}
+  .pitem:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);transform:translateX(-3px)}
+  .pdot{width:11px;height:11px;border-radius:50%;flex:none}
+  .pmeta{flex:1;min-width:0}
+  .pn{font-size:15px;font-weight:600;color:#eaf1fa}
+  .pc{font-size:12px;color:#9fb0c4;margin-top:2px}
+  .pgo{color:#7fa8d0;font-size:16px;flex:none;opacity:.6}
+  .pitem:hover .pgo{opacity:1}
+  .list-back{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;letter-spacing:.03em;
+    color:#cfe0f0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    padding:7px 13px;border-radius:999px;margin-bottom:16px;transition:background .15s}
+  .list-back:hover{background:rgba(255,255,255,.1)}
   .lead{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 8px;
     text-shadow:0 0 16px rgba(92,200,255,.35)}
   .desc{margin:0 0 22px;font-size:15px;line-height:1.62;color:#d7deea}
@@ -322,16 +341,72 @@
     transition:background .15s,border-color .15s}
   .sharelink:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
 
+  /* ---------- кнопка «Отели» (под «Удиви меня») ---------- */
+  .hotels-btn{position:absolute;top:70px;right:26px;z-index:25;display:flex;align-items:center;gap:8px;
+    padding:12px 19px;font-size:13.5px;font-weight:700;color:#2a1600;cursor:pointer;border:0;border-radius:999px;
+    font-family:inherit;
+    background:linear-gradient(135deg,#fff0cf,#ffd98a 45%,#ffca6a 75%,#f2a94e);
+    box-shadow:0 8px 24px rgba(242,169,78,.42),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -6px 14px rgba(150,90,20,.28);
+    transition:transform .15s, box-shadow .2s}
+  .hotels-btn:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(242,169,78,.55),inset 0 1px 0 rgba(255,255,255,.85)}
+  .hotels-btn:active{transform:translateY(0)}
+  .hotels-btn .hb-ic{font-size:15px}
+
+  /* ---------- левая панель отелей (зеркало правой) ---------- */
+  .panel-left{right:auto;left:0;transform:translateX(-105%);
+    border-left:0;border-right:1px solid rgba(255,255,255,.16);
+    box-shadow:30px 0 80px rgba(0,0,0,.5),inset -1px 0 0 rgba(255,255,255,.25)}
+  .panel-left.open{transform:translateX(0)}
+  .panel-left .close{right:auto;left:16px}
+  .lpanel-head{padding:64px 24px 4px}
+  .lpanel-head h2{margin:0;font-family:var(--display);font-size:25px;font-weight:600;line-height:1.1}
+  .lpanel-head .sub{margin:9px 0 0;font-size:13.5px;color:#c4cede;line-height:1.5}
+  .lp-back{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;letter-spacing:.03em;
+    color:#cfe0f0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    padding:7px 13px;border-radius:999px;margin-bottom:14px;transition:background .15s}
+  .lp-back:hover{background:rgba(255,255,255,.1)}
+  .country{display:flex;align-items:center;gap:14px;cursor:pointer;padding:14px;border-radius:16px;margin-bottom:10px;
+    background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);
+    transition:background .15s,border-color .15s,transform .15s}
+  .country:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);transform:translateX(3px)}
+  .country .flag{font-size:30px;flex:none}
+  .flag-svg{display:inline-block;width:34px;height:23px;border-radius:4px;overflow:hidden;flex:none;
+    box-shadow:0 1px 3px rgba(0,0,0,.45);vertical-align:-5px;line-height:0}
+  .flag-svg svg{display:block;width:100%;height:100%}
+  .flag-svg.sm{width:27px;height:18px;border-radius:3px;vertical-align:-3px}
+  .country .cn{font-family:var(--display);font-size:18px;font-weight:600}
+  .country .cd{font-size:12.5px;color:#b7c2d2;margin-top:3px;line-height:1.45}
+  .hotel{border-radius:16px;overflow:hidden;margin-bottom:14px;
+    border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+  .hotel .ph{height:118px;position:relative;display:flex;align-items:flex-end;padding:12px 14px}
+  .hotel .ph::after{content:"";position:absolute;inset:0;z-index:0;
+    background:linear-gradient(180deg,rgba(5,7,13,0) 25%,rgba(5,7,13,.72))}
+  .hotel .ph .nm{position:relative;z-index:1;font-family:var(--display);font-size:18px;font-weight:600;color:#fff}
+  .hotel .in{padding:13px 14px 14px}
+  .hotel .nt{font-size:13px;color:#c4cede;line-height:1.5;margin:0 0 13px}
+  .hotel .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .hotel .price{font-size:12.5px;color:#dbe4ef}
+  .hotel .price b{font-family:var(--display);font-size:18px;color:#fff;font-weight:600}
+  .book{display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;white-space:nowrap;
+    padding:10px 15px;border-radius:999px;font-weight:700;font-size:12.5px;color:#2a1600;font-family:inherit;
+    background:linear-gradient(135deg,#ffe6a7,#ffca6a 55%,#f2a94e);
+    box-shadow:0 6px 16px rgba(242,169,78,.4),inset 0 1px 0 rgba(255,255,255,.7);transition:transform .15s}
+  .book:hover{transform:translateY(-1px)}
+  .lp-note{font-size:11px;color:#8b97a8;margin-top:4px;line-height:1.45}
+
   @media (max-width:640px){
     .brand{top:16px;left:16px}
     .brand p{display:none}
     .surprise{top:14px;right:14px;padding:11px 15px;font-size:13px}
     .surprise .lbl{display:none}
+    .hotels-btn{top:56px;right:14px;padding:10px 13px;font-size:13px}
+    .hotels-btn .lbl{display:none}
     .search-wrap{top:64px;width:88vw}
     .hint{display:none}
     .filters{bottom:16px}
     .chip-sep{display:none}
     .journey{bottom:auto;top:114px;padding:10px 15px;font-size:12.5px}
+    .lpanel-head{padding:60px 20px 4px}
   }
 </style>
 
@@ -356,6 +431,7 @@
 </div>
 
 <button class="surprise" id="surprise"><span class="die">🎲</span><span class="lbl">Удиви меня</span></button>
+<button class="hotels-btn" id="hotelsBtn"><span class="hb-ic">🏨</span><span class="lbl">Отели</span></button>
 
 <div class="filters" id="filters"></div>
 
@@ -371,6 +447,12 @@
   <button class="close" id="panelClose">✕</button>
   <div class="postcard" id="postcard"></div>
   <div class="body" id="panelBody"></div>
+</aside>
+
+<aside class="panel panel-left" id="panelLeft">
+  <button class="close" id="panelLeftClose">✕</button>
+  <div class="lpanel-head" id="lpanelHead"></div>
+  <div class="body" id="panelLeftBody"></div>
 </aside>
 
 <div id="loader"><div class="spinner"></div><p id="loadText">Собираем планету…</p></div>
@@ -479,6 +561,23 @@ const VIDEOS = {
   sardinia:    "",
   dubrovnik:   "a1LMpbgcLDw",
   madeira:     "",
+
+  // новые места (сюда вставляй ID своих видео с YouTube)
+  kelsuu:      "YQSsdOUgFRk",
+  dettifoss:   "",
+  huttlagoon:  "",
+  nazare:      "",
+  studlagil:   "",
+  pamukkale:   "",
+  danxia:      "",
+  baatara:     "",
+  marblecaves: "",
+  angelfalls:  "",
+  ilulissat:   "",
+  sulak:       "",
+  peritomoreno:"",
+  vatnajokull: "",
+  geiranger:   "",
 };
 
 const CATS = {
@@ -743,6 +842,81 @@ const PLACES = [
    desc:"Вулканический остров в Атлантике, который зовут «островом вечной весны». Тут отвесные скалы падают прямо в океан, а по горам вьются тропы вдоль старинных водных каналов сквозь древний лавровый лес.",
    facts:["Лавровый лес Мадейры — реликт, доживший с доисторических времён, под охраной ЮНЕСКО.","Вдоль оросительных каналов-левад проложены сотни километров троп.","Мягкая погода тут держится круглый год."],
    animals:["Мадейрский тюлень-монах","Буревестник Зино","Киты и дельфины у берега","Мадейрская ящерица"]},
+
+  {id:"dettifoss",name:"Дэттифосс",country:"Исландия",cat:"water",lat:65.81,lon:-16.38,
+   desc:"Самый мощный водопад Европы — сквозь него каждую секунду прорывается стена серой ледниковой воды и обрушивается в чёрное базальтовое ущелье. Грохот слышно задолго до того, как увидишь сам поток, а брызги висят в воздухе облаком.",
+   facts:["Воду ему даёт таяние ледника Ватнайёкюдль, оттого она мутно-серая.","Ширина потока — около ста метров, высота падения — сорок четыре.","Этим водопадом открывается фильм «Прометей»."],
+   animals:["Полярная лисица","Гуси и утки","Морские птицы на скалах"]},
+
+  {id:"huttlagoon",name:"Лагуна Хатт",country:"Австралия",cat:"water",lat:-28.13,lon:114.25,
+   desc:"Огромное озеро цвета клубничного молока на западном берегу Австралии. Розовым его делают не химикаты, а крошечные водоросли, и оттенок меняется от нежно-розового до почти малинового в зависимости от солнца и времени года.",
+   facts:["Цвет даёт водоросль, из которой добывают бета-каротин для еды и косметики.","Розовым озеро бывает не всегда — краснее всего в солнечный полдень.","С высоты граница воды и берега кажется нарисованной."],
+   animals:["Рачки-артемии","Кулики и другие птицы","Кенгуру на побережье"]},
+
+  {id:"nazare",name:"Назаре",country:"Португалия",cat:"ocean",lat:39.60,lon:-9.07,
+   desc:"Маленький рыбацкий городок, где рождаются самые большие волны на Земле. Зимой сюда съезжаются серферы со всего мира, чтобы поймать водяную гору высотой с многоэтажку — и не все возвращаются к берегу целыми.",
+   facts:["Здесь установлен рекорд самой большой покорённой волны — около 26 метров.","Волны-гиганты создаёт подводный каньон глубиной до пяти километров, который разгоняет океан.","С маяка на мысе за серферами наблюдают в бинокль, как за крошечными точками."],
+   animals:["Дельфины","Морские птицы","Косатки в океане поблизости"]},
+
+  {id:"studlagil",name:"Каньон Стюдлагил",country:"Исландия",cat:"mountain",lat:65.15,lon:-15.30,
+   desc:"Спрятанное на востоке Исландии ущелье, стены которого сложены из идеально ровных шестигранных базальтовых колонн, а по дну течёт река невероятного сине-зелёного цвета. Долгое время его почти никто не видел — оно скрывалось под водой.",
+   facts:["Колонны открылись людям недавно, когда плотина понизила уровень реки.","Это одно из крупнейших скоплений базальтовых колонн в стране.","Такие шестигранники получаются, когда лава остывает очень медленно и ровно."],
+   animals:["Гуси","Полярная лисица","Северные птицы"]},
+
+  {id:"pamukkale",name:"Памуккале",country:"Турция",cat:"water",lat:37.92,lon:29.12,
+   desc:"Белоснежный «хлопковый замок» — каскад террас, застывших из горячих источников. Вода веками откладывала известь, и склон холма превратился в ослепительно белые чаши с тёплой бирюзовой водой, спускающиеся ступенями.",
+   facts:["Белым склон делает кальций, который оседает из тёплой минеральной воды.","На вершине стоят руины античного города Иераполис.","В бассейне Клеопатры купаются прямо среди упавших римских колонн."],
+   animals:["Птицы у источников","Ящерицы на тёплых камнях"]},
+
+  {id:"danxia",name:"Даньсяские горы",country:"Китай",cat:"mountain",lat:38.92,lon:100.13,
+   desc:"Горы, будто раскрашенные гигантской кистью в красные, оранжевые, жёлтые и зелёные полосы. Эти цвета — не краска, а слои разноцветных пород, которые копились десятками миллионов лет, а потом их подняло и обнажило.",
+   facts:["Полосы — это спрессованные слои песчаника и минералов разного возраста.","Ярче всего краски вспыхивают на закате и после дождя.","Пейзаж под охраной ЮНЕСКО как всемирное наследие."],
+   animals:["Птицы","Мелкие пустынные звери"]},
+
+  {id:"baatara",name:"Ущелье Баатара",country:"Ливан",cat:"water",lat:34.10,lon:35.87,
+   desc:"Водопад, который падает с высоты в четверть километра, пролетая сквозь три природных каменных моста, повисших один над другим. Он оживает всего на несколько недель в году, когда в горах тает снег, — и тогда вода исчезает в тёмном провале.",
+   facts:["Поток пролетает мимо трёх естественных известняковых мостов.","В полную силу водопад идёт только весной, в таянье снегов.","Провал под ним изучили лишь в середине прошлого века."],
+   animals:["Горные птицы","Козы на склонах"]},
+
+  {id:"marblecaves",name:"Мраморные пещеры",country:"Чили",cat:"water",lat:-46.65,lon:-72.63,
+   desc:"Пещеры из гладкого мрамора с сине-голубыми разводами, вымытые волнами прямо в скалах посреди ледникового озера в Патагонии. Вода отражается от стен, и внутри всё светится бирюзовым, будто ты внутри морской раковины.",
+   facts:["Волны вытачивали эти узоры больше шести тысяч лет.","Добраться можно только по воде, на маленькой лодке.","Оттенок стен меняется вместе с уровнем и цветом озера."],
+   animals:["Рыбы","Водоплавающие птицы","Кондор в небе над озером"]},
+
+  {id:"kelsuu",name:"Кёль-Суу и Ала-Кёль",country:"Кыргызстан",cat:"mountain",lat:40.30,lon:77.29,
+   desc:"Затерянные высоко в Тянь-Шане бирюзовые озёра, к которым добираются лишь немногие. Кёль-Суу зажат меж отвесных скал у самой китайской границы и иногда таинственно уходит под землю; Ала-Кёль сияет на высоте больше трёх километров на горной тропе.",
+   facts:["Кёль-Суу возник, когда обвал перекрыл ущелье и запер реку.","Порой вода Кёль-Суу уходит сквозь трещины, обнажая дно.","Ала-Кёль лежит выше трёх с половиной тысяч метров, на популярном треке."],
+   animals:["Горный козёл-тэке","Сурок","Беркут","Улар"]},
+
+  {id:"angelfalls",name:"Водопад Анхель",country:"Венесуэла",cat:"water",lat:5.97,lon:-62.53,
+   desc:"Самый высокий водопад на планете — вода срывается с плоской вершины столовой горы почти с километровой высоты. Она летит так долго, что не долетает до земли цельным потоком, а рассеивается в туман и оседает на джунгли внизу мелкой моросью.",
+   facts:["Высота падения — 979 метров, почти километр.","Вода часто превращается в облако мороси, не достигая дна.","Именно он вдохновил «водопад Рай» в мультфильме «Вверх»."],
+   animals:["Обезьяны","Тропические птицы","Ягуар в сельве"]},
+
+  {id:"ilulissat",name:"Илулиссат",country:"Гренландия",cat:"ocean",lat:69.22,lon:-51.10,
+   desc:"Фьорд на западе Гренландии, куда сползает один из самых быстрых ледников мира и роняет в океан айсберги размером с целые здания. Они плывут к морю, скрипят и переворачиваются, а рядом, на самом севере, стоит крошечный посёлок Каанаак.",
+   facts:["Ледник рождает столько льда, что этот фьорд — под защитой ЮНЕСКО.","По одной из версий, айсберг, потопивший «Титаник», приплыл отсюда.","Отдельные айсберги поднимаются над водой на высоту многоэтажки."],
+   animals:["Кит","Тюлень","Ездовые собаки","Полярный медведь"]},
+
+  {id:"sulak",name:"Каньон Сулак",country:"Россия",cat:"mountain",lat:43.02,lon:46.82,
+   desc:"Один из самых глубоких каньонов на Земле, разрезавший горы Дагестана почти на два километра вглубь. По дну змеится река ослепительного бирюзового цвета, а сверху обрыв уходит так резко, что кружится голова.",
+   facts:["В отдельных местах он глубже знаменитого Гранд-Каньона.","Бирюзовый цвет реке дают растворённые минералы с гор.","Стены каньона поднимаются почти на два километра."],
+   animals:["Орёл","Тур","Горные птицы"]},
+
+  {id:"peritomoreno",name:"Ледник Перито-Морено",country:"Аргентина",cat:"mountain",lat:-50.47,lon:-73.05,
+   desc:"Гигантская стена голубого льда в патагонских горах — один из немногих ледников мира, который не отступает, а продолжает наступать. Время от времени он перекрывает рукав озера, и тогда ледяная дамба с оглушительным грохотом обрушивается в воду.",
+   facts:["Пока большинство ледников тает, этот держит фронт и растёт.","Стена льда поднимается над озером примерно на семьдесят метров.","Раз в несколько лет ледяной мост эффектно рушится на глазах у зрителей."],
+   animals:["Кондор","Гуанако","Патагонская лисица"]},
+
+  {id:"vatnajokull",name:"Ледяные пещеры Ватнайёкюдль",country:"Исландия",cat:"water",lat:64.41,lon:-16.87,
+   desc:"Каждую зиму под крупнейшим ледником Европы талая вода вытачивает пещеры из чистейшего голубого льда. Внутри свет становится синим, будто ты попал внутрь замёрзшей волны, — но к лету пещеры тают и на следующий год появляются уже другими.",
+   facts:["Лёд такой плотный и без воздуха, что пропускает только синий свет.","Пещеры живут одну зиму и каждый год образуются заново.","Заходить внутрь можно лишь с проводником — лёд постоянно движется."],
+   animals:["Полярные птицы","Тюлени у побережья"]},
+
+  {id:"geiranger",name:"Гейрангер-фьорд",country:"Норвегия",cat:"ocean",lat:62.10,lon:7.01,
+   desc:"Один из самых красивых фьордов Норвегии: узкий морской рукав, зажатый между отвесными скалами высотой почти в два километра. По стенам сбегают водопады «Семь сестёр», а на крошечных уступах над водой всё ещё видны заброшенные хутора.",
+   facts:["Водопады «Семь сестёр» падают со скал прямо напротив «Жениха».","На отвесных уступах над фьордом когда-то стояли настоящие фермы.","Фьорд включён в список всемирного наследия ЮНЕСКО."],
+   animals:["Тюлень","Морская свинья","Орлан","Морские птицы"]},
 ];
 
 /* Тематические маршруты — та самая связка с фильмами канала */
@@ -754,6 +928,80 @@ const ROUTES = {
   ocean:{label:"Подводный мир", emoji:"🌊", color:"#4fd1e0",
     ids:["gbr","maldives","bluehole","galapagos","noronha"]},
 };
+
+/* ============================================================
+   ОТЕЛИ (Путь А): курортные направления + ссылки на бронирование.
+   AFF_PREFIX — сюда позже вставишь свой партнёрский префикс
+   (Travelpayouts / Booking affiliate). Пусто = обычная ссылка.
+   ============================================================ */
+const AFF_PREFIX = '';
+function bookingUrl(query){
+  const base = 'https://www.booking.com/searchresults.html?ss=' + encodeURIComponent(query);
+  return AFF_PREFIX ? AFF_PREFIX + encodeURIComponent(base) : base;
+}
+const HOTELS = {
+  thailand:{name:"Таиланд", emoji:"🇹🇭", lat:7.88, lon:98.39, grad:["#03303a","#0fa3a3","#ffd8b0"],
+    blurb:"Пляжи Андаманского моря, острова-скалы и тёплый океан круглый год.",
+    areas:[
+      {name:"Пхукет",          note:"Главный пляжный остров — от шумного Патонга до тихих южных бухт.", from:"$35"},
+      {name:"Краби · Ао Нанг",  note:"Известняковые скалы, лагуны и трамплин к островам Пхи-Пхи.",       from:"$30"},
+      {name:"Ко Самуи",        note:"Зелёный остров в Сиамском заливе со спокойными пляжами.",           from:"$40"},
+    ]},
+  vietnam:{name:"Вьетнам", emoji:"🇻🇳", lat:12.24, lon:109.19, grad:["#06263a","#0e6ba8","#a7e0ff"],
+    blurb:"Длинное побережье с песчаными курортами и зелёными островами.",
+    areas:[
+      {name:"Нячанг",          note:"Курортная классика: длинный городской пляж и острова рядом.",       from:"$25"},
+      {name:"Фукуок",          note:"Тропический остров с белым песком на юге страны.",                  from:"$30"},
+      {name:"Дананг · Хойан",   note:"Большой пляж и старинный фонарный городок под боком.",               from:"$28"},
+    ]},
+  bali:{name:"Бали", emoji:"🇮🇩", lat:-8.68, lon:115.14, grad:["#063b2e","#1abc9c","#ffe6a7"],
+    blurb:"Остров храмов, рисовых террас и сёрфа в Индийском океане.",
+    areas:[
+      {name:"Семиньяк",        note:"Модные пляжные клубы, закаты и рестораны.",                          from:"$35"},
+      {name:"Убуд",            note:"Джунгли, рисовые террасы и йога вдали от моря.",                     from:"$30"},
+      {name:"Улувату",         note:"Скалы, храм над океаном и лучшие сёрф-споты.",                       from:"$40"},
+    ]},
+  turkey:{name:"Турция", emoji:"🇹🇷", lat:36.85, lon:30.80, grad:["#2b0a06","#c23616","#ffb300"],
+    blurb:"Средиземное и Эгейское побережья с системой «всё включено».",
+    areas:[
+      {name:"Анталья · Белек",  note:"Курортная столица юга: длинные пляжи и большие отели.",              from:"$45"},
+      {name:"Бодрум",          note:"Белые домики, яхты и бирюзовые бухты Эгейского моря.",               from:"$50"},
+      {name:"Фетхие · Олюдениз", note:"Голубая лагуна и параглайдинг над морем.",                          from:"$40"},
+    ]},
+  uae:{name:"ОАЭ", emoji:"🇦🇪", lat:25.20, lon:55.27, grad:["#10233a","#c9962f","#ffe6b0"],
+    blurb:"Небоскрёбы, роскошные пляжи и пустыня у самого моря.",
+    areas:[
+      {name:"Дубай",           note:"Небоскрёбы, острова, аквапарки и пляжи Джумейры.",                    from:"$60"},
+      {name:"Абу-Даби",        note:"Столица: мечеть шейха Зайда, острова и трасса Формулы-1.",            from:"$55"},
+      {name:"Рас-эль-Хайма",    note:"Тихий эмират: горы, пляжи и самый длинный зиплайн в мире.",            from:"$50"},
+    ]},
+  egypt:{name:"Египет", emoji:"🇪🇬", lat:27.26, lon:33.81, grad:["#2a1a08","#c98a3c","#ffe6b0"],
+    blurb:"Коралловые рифы Красного моря и пирамиды в одной поездке.",
+    areas:[
+      {name:"Хургада",         note:"Красное море, дайвинг и рифы круглый год.",                          from:"$35"},
+      {name:"Шарм-эль-Шейх",    note:"Курорты у заповедника Рас-Мохаммед и лучшие рифы.",                   from:"$40"},
+      {name:"Каир · Гиза",      note:"Пирамиды и Сфинкс в получасе езды от отеля.",                         from:"$30"},
+    ]},
+  china:{name:"Китай", emoji:"🇨🇳", lat:39.90, lon:116.40, grad:["#2a0a0a","#c23616","#ffca6a"],
+    blurb:"От тропических пляжей Хайнаня до Великой стены и мегаполисов.",
+    areas:[
+      {name:"Пекин",           note:"Великая Китайская стена, Запретный город и храмы.",                   from:"$40"},
+      {name:"Шанхай",          note:"Футуристический скайлайн, набережная Бунд и огни.",                   from:"$45"},
+      {name:"Санья · Хайнань",  note:"Тропический остров-курорт на Южно-Китайском море.",                   from:"$35"},
+    ]},
+};
+
+/* Векторные флаги — рендерятся одинаково на всех системах (в т.ч. Windows) */
+const FLAGS = {
+  thailand:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#A51931"/><rect y=".333" width="3" height="1.333" fill="#F4F5F8"/><rect y=".667" width="3" height=".667" fill="#2D2A4A"/></svg>`,
+  vietnam:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#DA251D"/><polygon fill="#FF0" points="1.5,0.5 1.612,0.845 1.976,0.845 1.682,1.059 1.794,1.404 1.5,1.191 1.206,1.404 1.318,1.059 1.024,0.845 1.388,0.845"/></svg>`,
+  bali:`<svg viewBox="0 0 3 2"><rect width="3" height="1" fill="#E70011"/><rect y="1" width="3" height="1" fill="#fff"/></svg>`,
+  turkey:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#E30A17"/><circle cx="1.2" cy="1" r=".5" fill="#fff"/><circle cx="1.35" cy="1" r=".4" fill="#E30A17"/><polygon fill="#fff" points="1.85,0.78 1.899,0.932 2.059,0.932 1.93,1.026 1.979,1.178 1.85,1.084 1.721,1.178 1.77,1.026 1.641,0.932 1.801,0.932"/></svg>`,
+  uae:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#000"/><rect width="3" height="1.333" fill="#fff"/><rect width="3" height="0.667" fill="#00732F"/><rect width="0.75" height="2" fill="#FF0000"/></svg>`,
+  egypt:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#000"/><rect width="3" height="1.333" fill="#fff"/><rect width="3" height="0.667" fill="#CE1126"/><g fill="#BF9B30"><polygon points="1.5,0.8 1.62,0.9 1.95,0.88 1.62,1.02 1.5,0.98 1.38,1.02 1.05,0.88 1.38,0.9"/><rect x="1.45" y="0.97" width="0.1" height="0.17"/><rect x="1.4" y="1.12" width="0.2" height="0.12" rx="0.02"/></g></svg>`,
+  china:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#DE2910"/><g fill="#FFDE00"><polygon points="0.5000,0.2000 0.5674,0.4073 0.7853,0.4073 0.6090,0.5354 0.6763,0.7427 0.5000,0.6146 0.3237,0.7427 0.3910,0.5354 0.2147,0.4073 0.4326,0.4073"/><polygon points="0.9143,0.2514 0.9619,0.1966 0.9246,0.1343 0.9914,0.1628 1.0391,0.1080 1.0328,0.1803 1.0996,0.2088 1.0288,0.2251 1.0224,0.2975 0.9851,0.2352"/><polygon points="1.1010,0.4141 1.1662,0.3821 1.1560,0.3102 1.2065,0.3624 1.2718,0.3304 1.2378,0.3946 1.2884,0.4467 1.2168,0.4343 1.1829,0.4985 1.1726,0.4266"/><polygon points="1.1038,0.6725 1.1765,0.6699 1.1964,0.6001 1.2213,0.6683 1.2939,0.6657 1.2367,0.7105 1.2616,0.7787 1.2014,0.7382 1.1442,0.7830 1.1641,0.7131"/><polygon points="0.9219,0.8375 0.9899,0.8632 1.0353,0.8064 1.0319,0.8790 1.0999,0.9046 1.0298,0.9239 1.0265,0.9964 0.9865,0.9357 0.9165,0.9550 0.9618,0.8982"/></g></svg>`,
+};
+function flagHTML(key, cls){ return `<span class="flag-svg ${cls||''}">${FLAGS[key]||''}</span>`; }
 
 /* ============================================================
    THREE.JS СЦЕНА
@@ -781,9 +1029,14 @@ const ACCESS_HASHES = [
 ];
 
 let scene, camera, renderer, globe, pinGroup, routeGroup, clouds, aura;
+let sunLight, nightMat;                 // солнце и слой ночных огней
+let cloudShadow;                        // мягкая тень облаков
+let meteorPool = [], meteorTimer = 0, nextMeteor = 2.5;  // падающие звёзды
+let hotelPinGroup, hotelsMode = false;  // режим отелей
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 const pinMeshes = [];
+const hotelMeshes = [];
 
 // сферические координаты камеры
 const cam = {theta:0.6, phi:1.15, radius:IDLE_RADIUS};
@@ -978,14 +1231,16 @@ function buildEarthTexture(){
         sp=26;
       } else {
         const dp=_fbm(nx*1.5,ny*1.5,72,3,53);
-        let c=_mix(DEEP,MIDO,dp);
+        const dp2=_fbm(nx*.6,ny*.6,32,4,151);          // крупные океанские впадины
+        let c=_mix([4,17,42],DEEP,_sm(.22,.74,dp2));    // абиссаль → глубокая синь
+        c=_mix(c,MIDO,dp);                              // средние глубины
         const sA=SHD[i]/255, s1=_sm(.12,.8,sA);
-        c=_mix(c,SHAL,s1*.85);
-        c=_mix(c,FOAM,_sm(.55,.97,sA)*.45);
-        c=_mix(c,[24,44,66],_sm(58,82,t)*.35);
+        c=_mix(c,SHAL,s1*.9);                           // мелководье у берегов
+        c=_mix(c,FOAM,_sm(.55,.97,sA)*.5);              // бирюзовая пена
+        c=_mix(c,[20,40,62],_sm(58,82,t)*.35);          // холоднее к полюсам
         r=c[0];g=c[1];b=c[2];
         bp=128+(dp-.5)*8;
-        sp=235-s1*70;
+        sp=246-s1*82;                                   // ярче блик в открытом океане
       }
       out.data[i]=r;out.data[i+1]=g;out.data[i+2]=b;out.data[i+3]=255;
       bout.data[i]=bp;bout.data[i+1]=bp;bout.data[i+2]=bp;bout.data[i+3]=255;
@@ -1017,6 +1272,62 @@ function buildCloudTexture(){
   }
   x.putImageData(out,0,0);
   const tex=new THREE.CanvasTexture(c);tex.anisotropy=4;return tex;
+}
+
+/* ---- ночные огни: тёплые точки-города на суше ---- */
+function buildNightTexture(){
+  const W=2048,H=1024;
+  const P=(lon,lat)=>[(lon+180)/360*W,(90-lat)/180*H];
+  // маска суши (те же континенты, что и на дневной текстуре)
+  const lm=document.createElement('canvas');lm.width=W;lm.height=H;
+  const lx=lm.getContext('2d');
+  lx.fillStyle='#000';lx.fillRect(0,0,W,H);
+  lx.fillStyle='#fff';
+  CONTINENTS.forEach(poly=>{lx.beginPath();poly.forEach((pt,i)=>{const q=P(pt[0],pt[1]);i?lx.lineTo(q[0],q[1]):lx.moveTo(q[0],q[1]);});lx.closePath();lx.fill();});
+  const LM=lx.getImageData(0,0,W,H).data;
+  // сами огни
+  const c=document.createElement('canvas');c.width=W;c.height=H;
+  const x=c.getContext('2d');const out=x.createImageData(W,H);
+  for(let y=0;y<H;y++){
+    const lat=90-(y+.5)/H*180, t=Math.abs(lat);
+    const band=Math.max(0,1-Math.pow((t-40)/44,2));   // города — в умеренных широтах
+    const ny=y/H*60;
+    for(let xx=0;xx<W;xx++){
+      const i=(y*W+xx)*4;
+      if(LM[i]<127) continue;                          // не суша — пропускаем
+      const nx=xx/W*120;
+      const cluster=_fbm(nx,ny,120,4,451);             // где скапливаются огни
+      const spark=_hash(xx,y,7);                       // мелкая точечная рябь
+      const v=_sm(.52,.86,cluster)*band;
+      if(spark > 0.9 - v*0.55){
+        const a=Math.min(1, v*(0.45+spark*0.7));
+        out.data[i]=175+Math.floor(spark*45); out.data[i+1]=214+Math.floor(spark*30); out.data[i+2]=255; out.data[i+3]=a*255;
+      }
+    }
+  }
+  x.putImageData(out,0,0);
+  // мягкое свечение под точками
+  const g=document.createElement('canvas');g.width=W;g.height=H;
+  const gx=g.getContext('2d');
+  gx.filter='blur(1.6px)';gx.drawImage(c,0,0);gx.filter='none';
+  gx.globalCompositeOperation='lighter';gx.drawImage(c,0,0);
+  const tex=new THREE.CanvasTexture(g);tex.anisotropy=4;return tex;
+}
+
+/* ---- положение солнца: реальная подсолнечная точка ---- */
+function subsolarDir(){
+  const now=new Date();
+  const utcMin=now.getUTCHours()*60+now.getUTCMinutes()+now.getUTCSeconds()/60;
+  const sunLon=180-(utcMin/1440)*360;                 // ° в.д.
+  const start=Date.UTC(now.getUTCFullYear(),0,0);
+  const doy=(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate())-start)/86400000;
+  const sunLat=23.44*Math.sin(2*Math.PI*(doy-81)/365);// склонение по дню года
+  return latLonToVec3(sunLat,sunLon,1).normalize();
+}
+function updateSun(){
+  const d=subsolarDir();
+  if(sunLight) sunLight.position.copy(d.clone().multiplyScalar(6));
+  if(nightMat) nightMat.uniforms.sunDir.value.copy(d);
 }
 
 function init(){
@@ -1059,17 +1370,25 @@ function init(){
   const et = buildEarthTexture();
   const earth = new THREE.Mesh(
     new THREE.SphereGeometry(R,128,128),
-    new THREE.MeshPhongMaterial({map:et.map,bumpMap:et.bump,bumpScale:.05,
-      specularMap:et.spec,specular:new THREE.Color(0x3d6b95),shininess:18})
+    new THREE.MeshPhongMaterial({map:et.map,bumpMap:et.bump,bumpScale:.09,
+      specularMap:et.spec,specular:new THREE.Color(0x6fb4ec),shininess:36})
   );
   globe.add(earth);
 
-  // облака — отдельный слой, вращается сам по себе
+  // облака — отдельный слой, вращается сам по себе (тоньше и воздушнее)
+  const cloudTex = buildCloudTexture();
   clouds = new THREE.Mesh(
     new THREE.SphereGeometry(R*1.014,96,96),
-    new THREE.MeshStandardMaterial({map:buildCloudTexture(),transparent:true,opacity:.9,depthWrite:false})
+    new THREE.MeshStandardMaterial({map:cloudTex,transparent:true,opacity:.62,depthWrite:false})
   );
   globe.add(clouds);
+
+  // мягкая тень облаков на землю (тёмный след чуть в стороне от облаков)
+  cloudShadow = new THREE.Mesh(
+    new THREE.SphereGeometry(R*1.007,96,96),
+    new THREE.MeshBasicMaterial({map:cloudTex,color:0x0a1522,transparent:true,opacity:.16,depthWrite:false})
+  );
+  globe.add(cloudShadow);
 
   // атмосфера (голубой ободок у края планеты)
   const atmo = new THREE.Mesh(
@@ -1097,10 +1416,32 @@ function init(){
   );
   scene.add(aura);
 
-  // свет: тёплое «солнце» + холодная космическая подсветка с тени
-  scene.add(new THREE.AmbientLight(0xffffff,.6));
-  const dir = new THREE.DirectionalLight(0xfff3dd,1.35); dir.position.set(4,1.8,2.5); scene.add(dir);
-  const rim = new THREE.DirectionalLight(0x6fa8ff,.4); rim.position.set(-4,-1,-3); scene.add(rim);
+  // ночная сторона: огни городов на суше (проявляются только в тени)
+  nightMat = new THREE.ShaderMaterial({
+    transparent:true, blending:THREE.AdditiveBlending, depthWrite:false,
+    uniforms:{ tex:{value:buildNightTexture()}, sunDir:{value:new THREE.Vector3(1,0,0)} },
+    vertexShader:`varying vec2 vUv; varying vec3 vWN;
+      void main(){ vUv=uv; vWN=normalize(mat3(modelMatrix)*normal);
+        gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
+    fragmentShader:`uniform sampler2D tex; uniform vec3 sunDir; varying vec2 vUv; varying vec3 vWN;
+      void main(){
+        float ndl = dot(normalize(vWN), normalize(sunDir));
+        float night = smoothstep(0.10, -0.12, ndl);                 // 1 на ночной стороне
+        vec4 l = texture2D(tex, vUv);
+        vec3 city = l.rgb * l.a * night * 1.35;                      // холодные огни городов
+        float band = smoothstep(-0.05,0.03,ndl) * smoothstep(0.18,0.04,ndl); // узкая сумеречная полоса
+        vec3 twilight = vec3(0.32,0.62,1.0) * band * 0.32;           // холодный синий рассвет
+        gl_FragColor = vec4(city + twilight, 1.0);
+      }`
+  });
+  const nightMesh = new THREE.Mesh(new THREE.SphereGeometry(R*1.004,128,128), nightMat);
+  globe.add(nightMesh);
+
+  // свет: солнце стоит в реальной подсолнечной точке → настоящая линия дня и ночи
+  scene.add(new THREE.AmbientLight(0x2b3550, .34));                  // слабый холодный подсвет тени
+  sunLight = new THREE.DirectionalLight(0xe0efff, 1.5); scene.add(sunLight);
+  const rim = new THREE.DirectionalLight(0x5a86c8,.32); rim.position.set(-4,-1,-3); scene.add(rim);
+  updateSun();
 
   // точки
   pinGroup = new THREE.Group(); globe.add(pinGroup);
@@ -1124,7 +1465,25 @@ function init(){
     pinMeshes.push(hit);
   });
 
+  // пины отелей (по странам) — видны только в режиме «Отели»
+  hotelPinGroup = new THREE.Group(); globe.add(hotelPinGroup); hotelPinGroup.visible = false;
+  Object.entries(HOTELS).forEach(([key,h])=>{
+    const col = new THREE.Color('#ffca6a');
+    const pos = latLonToVec3(h.lat, h.lon, R*1.008);
+    const grp = new THREE.Group(); grp.position.copy(pos);
+    const core = new THREE.Mesh(new THREE.SphereGeometry(.017,16,16), new THREE.MeshBasicMaterial({color:col}));
+    const halo = new THREE.Sprite(new THREE.SpriteMaterial({map:haloTex,color:col,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));
+    halo.scale.set(.13,.13,.13);
+    const hit = new THREE.Mesh(new THREE.SphereGeometry(.06,8,8), new THREE.MeshBasicMaterial({visible:false}));
+    grp.add(core); grp.add(halo); grp.add(hit);
+    grp.userData = {hotelKey:key};
+    hotelPinGroup.add(grp);
+    hit.userData.pinGroup = grp;
+    hotelMeshes.push(hit);
+  });
+
   applyCameraFromSpherical();
+  for(let i=0;i<4;i++) meteorPool.push(makeMeteor());   // падающие звёзды
   addEvents();
   applyLogo();
   animate();
@@ -1143,6 +1502,61 @@ function makeHalo(){
   g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.25,'rgba(255,255,255,.55)');
   g.addColorStop(1,'rgba(255,255,255,0)');
   x.fillStyle=g;x.fillRect(0,0,s,s);return new THREE.CanvasTexture(c);
+}
+
+/* ---- падающие звёзды (метеоры) ---- */
+function makeMeteor(){
+  const N=14, TRAIL=4;
+  const geo=new THREE.BufferGeometry();
+  const pos=new Float32Array(N*3), col=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    const t=i/(N-1);                 // 0 = голова, 1 = хвост
+    pos[i*3]=-t*TRAIL; pos[i*3+1]=0; pos[i*3+2]=0;
+    const b=(1-t)*(1-t);             // затухание к хвосту
+    col[i*3]=0.72*b; col[i*3+1]=0.86*b; col[i*3+2]=1.0*b;  // холодный бело-голубой
+  }
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const mat=new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+  const line=new THREE.Line(geo,mat);
+  const head=new THREE.Sprite(new THREE.SpriteMaterial({map:makeHalo(),color:0xe4f3ff,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));
+  const g=new THREE.Group(); g.add(line); g.add(head); g.visible=false; scene.add(g);
+  return {g,line,head,mat,active:false,life:0,dur:1,peak:1,vel:new THREE.Vector3()};
+}
+function spawnMeteor(){
+  const m=meteorPool.find(x=>!x.active); if(!m) return;
+  const camDir=camera.position.clone().normalize();       // от центра к камере
+  const forward=camDir.clone().multiplyScalar(-1);        // куда смотрит камера
+  const up0=Math.abs(camDir.y)>0.95?new THREE.Vector3(1,0,0):new THREE.Vector3(0,1,0);
+  const right=new THREE.Vector3().crossVectors(up0,camDir).normalize();
+  const camUp=new THREE.Vector3().crossVectors(camDir,right).normalize();
+  const side=Math.random()<0.5?-1:1;
+  const rx=side*(16+Math.random()*12), ry=6+Math.random()*16, depth=22+Math.random()*16;
+  m.g.position.copy(right.clone().multiplyScalar(rx))
+              .add(camUp.clone().multiplyScalar(ry))
+              .add(forward.clone().multiplyScalar(depth));
+  const speed=18+Math.random()*10;
+  m.vel.copy(right.clone().multiplyScalar(-side))
+       .add(camUp.clone().multiplyScalar(-0.35))
+       .normalize().multiplyScalar(speed);
+  m.g.quaternion.setFromUnitVectors(new THREE.Vector3(1,0,0), m.vel.clone().normalize());
+  m.head.scale.setScalar(1.5+Math.random()*0.9);
+  m.life=0; m.dur=1.0+Math.random()*0.6; m.peak=0.75+Math.random()*0.35;
+  m.active=true; m.g.visible=true;
+}
+function updateMeteors(dt){
+  const s=dt/1000;
+  meteorTimer+=s;
+  if(meteorTimer>nextMeteor){ meteorTimer=0; nextMeteor=2.5+Math.random()*4.5; spawnMeteor(); }
+  for(const m of meteorPool){
+    if(!m.active) continue;
+    m.life+=s;
+    const k=m.life/m.dur;
+    if(k>=1){ m.active=false; m.g.visible=false; m.mat.opacity=0; m.head.material.opacity=0; continue; }
+    m.g.position.add(m.vel.clone().multiplyScalar(s));
+    const env=Math.sin(Math.PI*k)*m.peak;   // плавно 0→1→0
+    m.mat.opacity=env; m.head.material.opacity=env;
+  }
 }
 
 function applyCameraFromSpherical(){
@@ -1170,7 +1584,7 @@ function flyTo(place, open=true){
 const easeInOut = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
 
 /* ---------- рендер-цикл ---------- */
-let selectedId=null, tPrev=performance.now();
+let selectedId=null, tPrev=performance.now(), sunAcc=0;
 function animate(now){
   requestAnimationFrame(animate);
   now = now||performance.now();
@@ -1191,6 +1605,8 @@ function animate(now){
 
   // облака медленно плывут, аура мягко дышит
   if(clouds) clouds.rotation.y += dt*0.00002;
+  if(cloudShadow) cloudShadow.rotation.y = clouds.rotation.y + 0.03;
+  sunAcc += dt; if(sunAcc > 2000){ updateSun(); sunAcc = 0; }
   if(aura) aura.material.uniforms.p.value = 0.9 + Math.sin(now*0.0011)*0.18;
 
   // пульсация выбранной точки
@@ -1200,6 +1616,7 @@ function animate(now){
     g.userData.halo.scale.setScalar((sel?.16:.09)*s);
   });
 
+  updateMeteors(dt);
   renderer.render(scene, camera);
   updateLabels();
 }
@@ -1245,6 +1662,7 @@ function hexA(hex,a){const n=parseInt(hex.slice(1),16);return `rgba(${n>>16&255}
 
 function openPanel(pl){
   selectedId = pl.id;
+  document.getElementById('postcard').style.display = '';
   const cat = CATS[pl.cat];
   const grad = `linear-gradient(135deg, ${cat.grad[0]}, ${cat.grad[1]} 55%, ${cat.grad[2]})`;
   const ytId = (VIDEOS[pl.id]||'').trim() || (CAT_VIDEO[pl.cat]||'').trim();
@@ -1282,6 +1700,7 @@ function openPanel(pl){
     }, {once:true});
   }
   document.getElementById('panelBody').innerHTML = `
+    ${currentList ? `<div class="list-back" id="listBack">← ${currentList.title}</div>` : ''}
     <p class="lead">О месте</p>
     <p class="desc">${pl.desc}</p>
     <div class="block"><p class="lead">Интересные факты</p>
@@ -1302,12 +1721,35 @@ function openPanel(pl){
     if(navigator.clipboard){ navigator.clipboard.writeText(url).then(done).catch(()=>{}); }
     else { done(); }
   };
+  const lb = document.getElementById('listBack');
+  if(lb) lb.onclick = ()=>{ if(currentList) openList(currentList.title, currentList.sub, currentList.places); };
 
   setPlaceUrl(pl.id);
   panel.classList.add('open');
 }
 function fmtCoord(v,pos,neg){return Math.abs(v).toFixed(2)+'° '+(v>=0?pos:neg);}
-function closePanel(){panel.classList.remove('open'); selectedId=null; lastInteract=performance.now();}
+function closePanel(){panel.classList.remove('open'); selectedId=null; document.getElementById('postcard').style.display=''; lastInteract=performance.now();}
+
+/* ---- список мест (по категории или маршруту) в правой панели ---- */
+let currentList = null;   // {title, sub, places}
+function openList(title, sub, places){
+  currentList = {title, sub, places};
+  document.getElementById('postcard').style.display = 'none';
+  document.getElementById('panelBody').innerHTML = `
+    <div class="list-head"><h2>${title}</h2><p class="list-sub">${sub}</p></div>
+    ${places.map(p=>{
+      const col = CATS[p.cat].color;
+      return `<div class="pitem" data-id="${p.id}">
+        <span class="pdot" style="background:${col};box-shadow:0 0 9px ${col}"></span>
+        <div class="pmeta"><div class="pn">${p.name}</div><div class="pc">${p.country}</div></div>
+        <span class="pgo">→</span>
+      </div>`;
+    }).join('')}`;
+  document.getElementById('panelBody').querySelectorAll('.pitem').forEach(el=>{
+    el.onclick = ()=>{ const pl = PLACES.find(p=>p.id===el.dataset.id); if(pl) flyTo(pl, true); };
+  });
+  panel.classList.add('open');
+}
 
 /* ---- фильтры ---- */
 let activeCat=null, activeRoute=null;
@@ -1331,20 +1773,24 @@ function clearChipState(){
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
 }
 function toggleCat(key,btn){
+  if(hotelsMode) closeLeft();
   activeRoute=null;
-  if(activeCat===key){activeCat=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney(); return;}
+  if(activeCat===key){activeCat=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney(); currentList=null; closePanel(); return;}
   activeCat=key; clearChipState(); btn.classList.add('on'); clearRoutes();
   const set = PLACES.filter(p=>p.cat===key);
   highlightPins(set.map(p=>p.id)); setLabels(set);
   showJourney(set, CATS[key].label);
+  openList(CATS[key].label, 'Выбери место из списка — покажу его на планете.', set);
 }
 function toggleRoute(key,btn){
+  if(hotelsMode) closeLeft();
   activeCat=null;
-  if(activeRoute===key){activeRoute=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney(); return;}
+  if(activeRoute===key){activeRoute=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney(); currentList=null; closePanel(); return;}
   activeRoute=key; clearChipState(); btn.classList.add('on');
   const r=ROUTES[key]; const set=r.ids.map(id=>PLACES.find(p=>p.id===id)).filter(Boolean);
   highlightPins(set.map(p=>p.id)); setLabels(set); drawRoute(set, r.color);
   showJourney(set, r.label);
+  openList(r.label, 'Маршрут по местам — выбери точку из списка.', set);
   // мягко подлетаем к первой точке маршрута
   flyTo(set[0], false); lastInteract=performance.now();
 }
@@ -1399,6 +1845,8 @@ function runSearch(q){
   });
 }
 function pick(pl){
+  if(hotelsMode) closeLeft();
+  currentList=null;
   resultsEl.classList.remove('show'); searchInput.value=pl.name; searchInput.blur();
   flyTo(pl,true);
 }
@@ -1440,7 +1888,12 @@ function addEvents(){
   });
   document.getElementById('surprise').onclick=surprise;
   document.getElementById('journey').onclick=toggleTour;
-  document.getElementById('panelClose').onclick=()=>{ stopTour(); closePanel(); };
+  document.getElementById('hotelsBtn').onclick=openHotels;
+  document.getElementById('panelLeftClose').onclick=closeLeft;
+  document.getElementById('panelClose').onclick=()=>{
+    stopTour(); closePanel(); currentList=null;
+    activeCat=activeRoute=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney();
+  };
   window.addEventListener('resize',onResize);
 }
 
@@ -1451,20 +1904,25 @@ function setPointer(e){
 }
 function pickPin(e){
   setPointer(e); raycaster.setFromCamera(pointer,camera);
-  const hit=raycaster.intersectObjects(pinMeshes,false);
+  const targets = hotelsMode ? hotelMeshes : pinMeshes;
+  const hit=raycaster.intersectObjects(targets,false);
   return hit.length?hit[0].object.userData.pinGroup:null;
 }
 function clickSelect(e){
   const g=pickPin(e);
-  if(g) flyTo(g.userData.place,true);
+  if(!g) return;
+  if(hotelsMode) openCountry(g.userData.hotelKey);
+  else flyTo(g.userData.place,true);
 }
 function hover(e){
   const g=pickPin(e);
   const dom=renderer.domElement;
   if(g){
     dom.style.cursor='pointer';
-    const pl=g.userData.place;
-    tooltip.innerHTML=`<span class="em">${CATS[pl.cat].emoji}</span>${pl.name}`;
+    let em, nm;
+    if(hotelsMode){ const h=HOTELS[g.userData.hotelKey]; em='🏨'; nm=h.name; }
+    else { const pl=g.userData.place; em=CATS[pl.cat].emoji; nm=pl.name; }
+    tooltip.innerHTML=`<span class="em">${em}</span>${nm}`;
     tooltip.style.left=e.clientX+'px'; tooltip.style.top=e.clientY+'px';
     tooltip.classList.add('show');
   } else {
@@ -1472,6 +1930,8 @@ function hover(e){
   }
 }
 function surprise(){
+  if(hotelsMode) closeLeft();
+  currentList=null;
   const pl = PLACES[Math.floor(Math.random()*PLACES.length)];
   // сбрасываем фильтры для чистого «броска»
   activeCat=activeRoute=null; clearChipState(); showAllPins(); clearRoutes(); setLabels([]);
@@ -1543,6 +2003,63 @@ function deepLinkId(){
 }
 function setPlaceUrl(id){
   try{ history.replaceState(null, '', location.pathname + '?place=' + id); }catch(e){}
+}
+
+/* ============================================================
+   ОТЕЛИ — левая панель (мини-букинг)
+   ============================================================ */
+function openHotels(){
+  hotelsMode = true;
+  // выходим из режимов планеты
+  activeCat = activeRoute = null; clearChipState(); clearRoutes(); setLabels([]); hideJourney();
+  currentList = null; showAllPins();
+  closePanel();
+  pinGroup.visible = false; hotelPinGroup.visible = true;
+  renderCountryList();
+  document.getElementById('panelLeft').classList.add('open');
+}
+function closeLeft(){
+  hotelsMode = false;
+  if(hotelPinGroup) hotelPinGroup.visible = false;
+  if(pinGroup) pinGroup.visible = true;
+  document.getElementById('panelLeft').classList.remove('open');
+}
+function renderCountryList(){
+  document.getElementById('lpanelHead').innerHTML =
+    `<h2>Отели · куда поехать</h2>
+     <p class="sub">Популярные пляжные направления. Выбери страну — покажу курорты и открою бронирование.</p>`;
+  const el = document.getElementById('panelLeftBody');
+  el.innerHTML = Object.entries(HOTELS).map(([key,h])=>
+    `<div class="country" data-k="${key}">
+       ${flagHTML(key)}
+       <div><div class="cn">${h.name}</div><div class="cd">${h.blurb}</div></div>
+     </div>`).join('');
+  el.querySelectorAll('.country').forEach(c=> c.onclick=()=>openCountry(c.dataset.k));
+}
+function openCountry(key){
+  const h = HOTELS[key]; if(!h) return;
+  hotelsMode = true; hotelPinGroup.visible = true; pinGroup.visible = false;
+  flyTo({lat:h.lat, lon:h.lon}, false); lastInteract = performance.now();
+  document.getElementById('lpanelHead').innerHTML =
+    `<div class="lp-back" id="lpBack">← Все направления</div>
+     <h2>${flagHTML(key,'sm')} ${h.name}</h2><p class="sub">${h.blurb}</p>`;
+  const grad = `linear-gradient(135deg, ${h.grad[0]}, ${h.grad[1]} 55%, ${h.grad[2]})`;
+  const cards = h.areas.map(a=>{
+    const url = bookingUrl(a.name + ' ' + h.name);
+    return `<div class="hotel">
+      <div class="ph" style="background:${grad}"><span class="nm">${a.name}</span></div>
+      <div class="in">
+        <p class="nt">${a.note}</p>
+        <div class="row">
+          <span class="price">от <b>${a.from}</b> / ночь</span>
+          <a class="book" href="${url}" target="_blank" rel="noopener">🏨 Забронировать</a>
+        </div>
+      </div></div>`;
+  }).join('');
+  const el = document.getElementById('panelLeftBody');
+  el.innerHTML = cards + `<p class="lp-note">Цены ориентировочные. Кнопка открывает подбор отелей по этому направлению.</p>`;
+  document.getElementById('panelLeft').classList.add('open');
+  const back = document.getElementById('lpBack'); if(back) back.onclick = renderCountryList;
 }
 // Подбираем угол обзора так, чтобы планета красиво вписывалась
 // на любых пропорциях: на десктопе как раньше, на телефоне — по ширине,
