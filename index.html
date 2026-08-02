@@ -127,6 +127,7 @@
   /* ---- видео места ---- */
   .postcard .ytwrap{position:absolute;inset:0;z-index:0;overflow:hidden;background:#05070d;cursor:pointer}
   .postcard .ytwrap .thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .postcard .scene{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
   .postcard .ytwrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
   .postcard .ytwrap::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(5,7,13,.15) 30%,rgba(5,7,13,.55) 72%,rgba(5,7,13,.96))}
@@ -311,6 +312,101 @@
   .gate-gen-out{margin-top:10px;padding:11px 13px;font-size:11.5px;word-break:break-all;color:var(--cyan);
     background:rgba(79,209,224,.07);border:1px solid rgba(79,209,224,.22);border-radius:12px;font-family:ui-monospace,Menlo,Consolas,monospace}
   .gate-gen-hint{margin-top:8px;font-size:11.5px;color:#9aa6b6;line-height:1.4}
+
+  /* ---------- ВИТРИНА (демо перед замком) ---------- */
+  .showcase{position:relative;width:min(940px,94vw);max-height:calc(100vh - 40px);overflow:auto;
+    padding:34px 34px 30px;border-radius:32px;text-align:left;isolation:isolate;
+    background:linear-gradient(155deg,rgba(255,255,255,.13),rgba(255,255,255,.04) 44%,rgba(255,255,255,.012) 80%),rgba(12,20,34,.30);
+    backdrop-filter:blur(30px) saturate(185%) brightness(1.05);-webkit-backdrop-filter:blur(30px) saturate(185%) brightness(1.05);
+    box-shadow:0 44px 110px rgba(0,0,0,.62),0 6px 24px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.42),inset 0 -30px 64px rgba(4,8,16,.34);
+    animation:scIn .8s cubic-bezier(.22,1,.36,1) both}
+  .showcase::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.2px;pointer-events:none;
+    background:linear-gradient(140deg,rgba(255,255,255,.7),rgba(255,255,255,.05) 34%,rgba(255,255,255,0) 56%,rgba(120,200,255,.2));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+  @keyframes scIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+
+  .sc-top{display:flex;align-items:center;gap:11px;margin-bottom:20px}
+  .sc-orb{width:34px;height:34px;border-radius:50%;flex:none;overflow:hidden;
+    background:radial-gradient(circle at 36% 30%,#eaf7ff,var(--gold) 52%,#1c5c9e);
+    box-shadow:0 0 22px rgba(92,200,255,.6),inset 0 -6px 12px rgba(10,40,80,.4)}
+  .sc-orb img{width:100%;height:100%;object-fit:cover;display:block}
+  .sc-brand{font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:.01em;line-height:1.1}
+  .sc-brand span{display:block;font-family:inherit;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:3px}
+
+  .sc-eyebrow{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);font-weight:700;text-shadow:0 0 18px rgba(92,200,255,.4)}
+  .sc-title{margin:12px 0 0;font-family:var(--display);font-weight:600;font-size:clamp(28px,4.6vw,46px);line-height:1.08;letter-spacing:.004em;color:#fbfdff;text-shadow:0 2px 30px rgba(0,0,0,.4);max-width:16ch}
+  .sc-title em{font-style:normal;background:linear-gradient(120deg,#dff3ff,var(--gold) 60%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sc-sub{margin:14px 0 0;font-size:15px;line-height:1.55;color:#c6cfdd;max-width:54ch}
+
+  .sc-stats{display:flex;flex-wrap:wrap;align-items:center;gap:8px 6px;margin:20px 0 22px}
+  .sc-stat{display:flex;align-items:baseline;gap:7px;padding:8px 13px;border-radius:999px;white-space:nowrap;
+    background:linear-gradient(150deg,rgba(255,255,255,.1),rgba(255,255,255,.03)),rgba(14,22,36,.28);
+    border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+  .sc-stat b{font-family:var(--display);font-size:16px;font-weight:600;color:#eaf3ff}
+  .sc-stat i{font-style:normal;font-size:12.5px;color:var(--muted)}
+
+  .sc-lead{margin:0 0 12px;font-size:12px;letter-spacing:.06em;color:#9aa6b6}
+  .sc-lead b{color:#cdd6e2;font-weight:600}
+  .sc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+  .sc-card{position:relative;overflow:hidden;border-radius:20px;cursor:pointer;aspect-ratio:5/4;
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 34px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.22);
+    transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s}
+  .sc-card svg.scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .sc-card .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,7,13,.85),rgba(4,7,13,.12) 55%,rgba(4,7,13,.04))}
+  .sc-card .body{position:absolute;left:0;right:0;bottom:0;padding:13px 14px;z-index:2}
+  .sc-card .free{position:absolute;top:11px;left:11px;z-index:2;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#04121f;
+    padding:4px 9px;border-radius:999px;background:linear-gradient(135deg,#dff3ff,#9adcff 60%,var(--gold));box-shadow:0 4px 12px rgba(92,200,255,.4)}
+  .sc-card .nm{font-family:var(--display);font-size:19px;font-weight:600;line-height:1.1;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .sc-card .co{margin-top:4px;font-size:11px;letter-spacing:.06em;color:#b9c6d8;font-family:ui-monospace,'SF Mono','JetBrains Mono',Menlo,monospace}
+  .sc-card .go{margin-top:9px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#dff3ff;opacity:.92}
+  .sc-card:hover{transform:translateY(-4px);box-shadow:0 22px 46px rgba(0,0,0,.5),0 0 0 1px rgba(92,200,255,.3),inset 0 1px 0 rgba(255,255,255,.3)}
+  .sc-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  .sc-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:24px 0 6px}
+  .sc-try{position:relative;overflow:hidden;border:0;cursor:pointer;font-family:inherit;font-weight:700;font-size:15px;letter-spacing:.01em;color:#04121f;
+    padding:15px 24px;border-radius:999px;background:linear-gradient(135deg,#dff3ff,#a9ddff 40%,var(--gold) 75%,#2f83cf);
+    box-shadow:0 10px 30px rgba(92,200,255,.42),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -6px 14px rgba(12,52,96,.3);
+    transition:transform .14s,box-shadow .2s,filter .2s}
+  .sc-try::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.7),rgba(255,255,255,0));transform:skewX(-18deg);animation:sheen 5s ease-in-out infinite}
+  .sc-try:hover{transform:translateY(-1px);filter:brightness(1.04);box-shadow:0 14px 36px rgba(92,200,255,.55),inset 0 1px 0 rgba(255,255,255,.85)}
+  .sc-try:active{transform:translateY(0)}
+  .sc-have{cursor:pointer;font-family:inherit;font-weight:600;font-size:14.5px;color:#dfe7f2;padding:14px 20px;border-radius:999px;
+    background:linear-gradient(150deg,rgba(255,255,255,.12),rgba(255,255,255,.03)),rgba(14,22,36,.3);
+    border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.35);transition:border-color .18s,transform .14s}
+  .sc-have:hover{border-color:rgba(92,200,255,.5);transform:translateY(-1px)}
+  .sc-foot{margin:16px 0 0;font-size:12.5px;color:#8a97a8;line-height:1.5}
+  .sc-foot b{color:#b7c2d2;font-weight:600}
+
+  /* заметка о закрытом месте над формой кода + возврат к витрине */
+  .gate-back{display:inline-flex;align-items:center;gap:6px;margin:-6px auto 14px;font-size:12.5px;color:#9aa6b6;cursor:pointer;background:none;border:0;font-family:inherit}
+  .gate-back:hover{color:#dfe7f2}
+  .gate-locked{margin:-2px 0 16px;font-size:13.5px;line-height:1.5;color:#cdd6e2}
+  .gate-locked b{font-family:var(--display);font-weight:600;color:#fff}
+
+  /* демо-подсказка */
+  .demo-hint{position:absolute;left:50%;bottom:84px;transform:translateX(-50%) translateY(10px);z-index:22;
+    display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;font-size:13px;color:#dfe7f2;
+    background:linear-gradient(150deg,rgba(255,255,255,.12),rgba(255,255,255,.03)),rgba(10,16,28,.5);
+    backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+    border:1px solid rgba(255,255,255,.15);box-shadow:0 10px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35);
+    opacity:0;pointer-events:none;transition:opacity .4s,transform .4s}
+  .demo-hint.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .demo-hint b{font-weight:700;color:#eaf3ff}
+  .demo-hint .x{cursor:pointer;pointer-events:auto;margin-left:2px;opacity:.6;font-size:16px;line-height:1}
+  .demo-hint .x:hover{opacity:1}
+
+  @media (max-width:760px){
+    .showcase{padding:24px 20px 22px;border-radius:26px}
+    .sc-cards{grid-template-columns:1fr;gap:11px}
+    .sc-card{aspect-ratio:16/7}
+    .sc-cta{flex-direction:column;align-items:stretch}
+    .sc-try,.sc-have{width:100%;text-align:center}
+    .demo-hint{bottom:74px;font-size:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .showcase{animation:none}
+    .sc-try::after{display:none}
+  }
   @media (prefers-reduced-motion:reduce){#gateBtn::after{animation:none;display:none}}
 
   .hint{position:absolute;bottom:26px;left:26px;z-index:15;font-size:12px;color:var(--muted);
@@ -394,6 +490,154 @@
   .book:hover{transform:translateY(-1px)}
   .lp-note{font-size:11px;color:#8b97a8;margin-top:4px;line-height:1.45}
 
+  /* ---------- «Мои места» ---------- */
+  .mine-btn{position:absolute;top:120px;right:26px;z-index:25;display:flex;align-items:center;gap:8px;
+    padding:12px 18px;font-size:13.5px;font-weight:700;color:#2a0d16;cursor:pointer;border:0;border-radius:999px;font-family:inherit;
+    background:linear-gradient(135deg,#ffd9e0,#ff9db1 50%,#ff6b8a);
+    box-shadow:0 8px 24px rgba(255,107,138,.4),inset 0 1px 0 rgba(255,255,255,.8);transition:transform .15s,box-shadow .2s}
+  .mine-btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(255,107,138,.5),inset 0 1px 0 rgba(255,255,255,.85)}
+  .mine-btn .mb-ic{font-size:14px}
+  .mine-count{min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:rgba(42,13,22,.4);color:#fff;
+    font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;line-height:1}
+  .mine-count.show{display:inline-flex}
+
+  /* ---------- Викторина ---------- */
+  .quiz-btn{position:absolute;top:170px;right:26px;z-index:25;display:flex;align-items:center;gap:8px;
+    padding:12px 18px;font-size:13.5px;font-weight:700;color:#160a2a;cursor:pointer;border:0;border-radius:999px;font-family:inherit;
+    background:linear-gradient(135deg,#e0d4ff,#b79dff 50%,#8f6bff);
+    box-shadow:0 8px 24px rgba(143,107,255,.4),inset 0 1px 0 rgba(255,255,255,.8);transition:transform .15s,box-shadow .2s}
+  .quiz-btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(143,107,255,.5),inset 0 1px 0 rgba(255,255,255,.85)}
+  .quiz-btn .qb-ic{font-size:14px}
+
+  /* тумблеры Хочу/Был в карточке места */
+  .myrow{display:flex;gap:10px}
+  .mybtn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;
+    padding:11px 12px;border-radius:12px;font-size:13px;font-weight:600;font-family:inherit;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);color:#cfdae8;transition:all .15s}
+  .mybtn:hover{background:rgba(255,255,255,.09)}
+  .mybtn.wish.on{background:linear-gradient(135deg,rgba(255,107,138,.28),rgba(255,107,138,.12));border-color:rgba(255,120,150,.6);color:#ffd9e0}
+  .mybtn.visited.on{background:linear-gradient(135deg,rgba(90,200,150,.28),rgba(90,200,150,.12));border-color:rgba(90,210,150,.6);color:#c9f7df}
+
+  .mine-sec{margin-bottom:20px}
+  .mine-empty{font-size:13px;color:#8b97a8;line-height:1.5;margin:6px 0 0}
+  .mine-blank{text-align:center;padding:24px 6px 16px}
+  .mine-blank-ic{font-size:46px;margin-bottom:14px;filter:drop-shadow(0 4px 14px rgba(255,107,138,.35))}
+  .mine-blank-t{font-family:var(--display);font-size:19px;font-weight:600;color:#eaf1fa;margin:0 0 9px}
+  .mine-blank-d{font-size:13.5px;color:#b7c2d2;line-height:1.6;margin:0 auto 22px;max-width:290px}
+  .mine-blank-d b{color:#dbe4ef}
+  .mine-cta{display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:0;border-radius:999px;font-family:inherit;
+    padding:13px 24px;font-size:14px;font-weight:700;color:#2a0d16;
+    background:linear-gradient(135deg,#ffd9e0,#ff9db1 50%,#ff6b8a);
+    box-shadow:0 8px 22px rgba(255,107,138,.4),inset 0 1px 0 rgba(255,255,255,.7);transition:transform .15s}
+  .mine-cta:hover{transform:translateY(-1px)}
+
+  /* ---------- Викторина (игра) ---------- */
+  .quiz{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;width:min(460px,94vw)}
+  .quiz[hidden]{display:none}
+  body.quizing .filters, body.quizing .journey, body.quizing .hint,
+  body.quizing .surprise, body.quizing .hotels-btn, body.quizing .mine-btn, body.quizing .quiz-btn,
+  body.quizing .search-wrap{display:none !important}
+  .quiz-card{position:relative;width:100%;border-radius:24px;overflow:hidden;
+    background:linear-gradient(160deg,rgba(20,28,44,.97),rgba(10,15,26,.98));
+    border:1px solid rgba(255,255,255,.14);box-shadow:0 34px 100px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.32)}
+  .quiz-card.shake{animation:qshake .4s}
+  @keyframes qshake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+  .quiz-screen[hidden]{display:none}
+  .quiz-close{position:absolute;top:13px;right:14px;z-index:6;width:32px;height:32px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.2);background:rgba(10,14,24,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    color:#fff;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center}
+  .quiz-close:hover{background:rgba(255,255,255,.16)}
+
+  #quizIntro{padding:28px 24px 24px;text-align:center}
+  .qi-badge{width:56px;height:56px;margin:0 auto 12px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;
+    background:linear-gradient(135deg,rgba(92,200,255,.28),rgba(79,209,224,.12));border:1px solid rgba(92,200,255,.4);box-shadow:0 8px 24px rgba(92,200,255,.25)}
+  .qi-title{margin:0;font-family:var(--display);font-size:23px;font-weight:600;color:#fff}
+  .qi-sub{margin:8px 0 20px;font-size:14px;color:#b7c2d2;line-height:1.5}
+  .qi-modes{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .qi-mode{display:flex;flex-direction:column;align-items:flex-start;gap:2px;cursor:pointer;font-family:inherit;text-align:left;
+    padding:15px 16px;border-radius:16px;color:#eaf1fa;
+    background:linear-gradient(150deg,rgba(255,255,255,.09),rgba(255,255,255,.03)),rgba(14,22,36,.4);
+    border:1px solid rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.28);transition:transform .14s,border-color .18s}
+  .qi-mode b{font-family:var(--display);font-size:16px;font-weight:600}
+  .qi-mode span{font-size:12px;color:var(--muted)}
+  .qi-mode:hover{transform:translateY(-2px);border-color:rgba(92,200,255,.5)}
+  .qi-cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+  .qi-cats[hidden]{display:none}
+  .qi-cat{cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:#dfe7f2;padding:9px 13px;border-radius:999px;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);transition:all .15s}
+  .qi-cat:hover{border-color:rgba(92,200,255,.55);background:rgba(92,200,255,.12)}
+
+  .quiz-bar{position:absolute;top:0;left:0;right:0;height:4px;z-index:5;background:rgba(255,255,255,.08)}
+  .quiz-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#4fd1e0,#5cc8ff)}
+  .quiz-bar i.low{background:linear-gradient(90deg,#ff9b3d,#ff5a5a)}
+
+  .quiz-media{position:relative;height:172px;background:#0a0e18;overflow:hidden}
+  .quiz-media .quiz-thumb{width:100%;height:100%;object-fit:cover;display:block}
+  .quiz-media .scene{position:absolute;inset:0;width:100%;height:100%}
+  .quiz-media .qmys{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:64px;color:rgba(255,255,255,.5);
+    background:radial-gradient(120% 90% at 50% 20%,#243654,#0a0f1a)}
+  .quiz-media::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(10,15,26,0) 42%,rgba(10,15,26,.97))}
+
+  .quiz-hud{position:absolute;top:14px;left:14px;right:52px;z-index:4;display:flex;align-items:center;gap:8px}
+  .q-score{padding:6px 12px;border-radius:999px;font-size:13px;font-weight:800;color:#04121f;letter-spacing:.01em;
+    background:linear-gradient(135deg,#dff3ff,#9adcff 60%,#5cc8ff);box-shadow:0 4px 14px rgba(92,200,255,.4)}
+  .q-streak{padding:6px 11px;border-radius:999px;font-size:12.5px;font-weight:800;color:#2a0f04;
+    background:linear-gradient(135deg,#ffd58a,#ff8a3d);box-shadow:0 4px 14px rgba(255,138,61,.45)}
+  .q-streak[hidden]{display:none}
+  .q-streak.pulse{animation:qpulse .45s}
+  @keyframes qpulse{0%{transform:scale(1)}40%{transform:scale(1.28)}100%{transform:scale(1)}}
+  .q-prog{margin-left:auto;font-size:12px;font-weight:600;color:#cdd6e2;background:rgba(10,14,24,.5);padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .q-mute{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,14,24,.5);color:#fff;cursor:pointer;font-size:13px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+
+  .q-float{position:absolute;top:44px;left:50%;transform:translateX(-50%);z-index:7;font-family:var(--display);font-size:28px;font-weight:700;
+    color:#8affc8;text-shadow:0 3px 18px rgba(72,255,180,.5);pointer-events:none;animation:qfloat 1s ease-out forwards;white-space:nowrap}
+  @keyframes qfloat{0%{opacity:0;transform:translate(-50%,6px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-42px) scale(1.1)}}
+
+  .quiz-body{padding:4px 22px 22px;margin-top:-14px;position:relative;z-index:2}
+  .quiz-q{margin:0 0 12px;font-family:var(--display);font-size:20px;font-weight:600;color:#fff;line-height:1.25}
+  .quiz-q em{font-style:normal;color:var(--gold)}
+  .quiz-hint{font-size:13.5px;color:#c6cfdd;line-height:1.55;margin-bottom:14px;min-height:20px}
+  .quiz-hint .qi{font-size:16px;margin-right:6px}
+  .quiz-hint b{color:#fff;font-family:var(--display);font-size:16px}
+  .quiz-hint .qfact{display:block;margin-top:7px;font-size:13px;color:#aeb9c9}
+  .quiz-options{display:flex;flex-direction:column;gap:9px}
+  .quiz-options[hidden]{display:none}
+  .quiz-opt{width:100%;text-align:left;padding:13px 15px;border-radius:13px;cursor:pointer;font-size:14.5px;font-weight:600;font-family:inherit;
+    background:linear-gradient(150deg,rgba(255,255,255,.08),rgba(255,255,255,.03)),rgba(14,22,36,.4);
+    border:1px solid rgba(255,255,255,.13);color:#e7edf5;transition:all .14s}
+  .quiz-opt:hover{border-color:rgba(92,200,255,.5);transform:translateX(3px)}
+  .quiz-opt.right{background:linear-gradient(135deg,rgba(72,210,140,.4),rgba(72,210,140,.16));border-color:rgba(80,220,150,.8);color:#d6ffe8;box-shadow:0 0 0 1px rgba(80,220,150,.35),0 8px 22px rgba(40,180,110,.28)}
+  .quiz-opt.wrong{background:linear-gradient(135deg,rgba(255,90,90,.34),rgba(255,90,90,.12));border-color:rgba(255,110,110,.7);color:#ffdada}
+  .quiz-geo{text-align:center;font-size:14px;color:#dfe7f2;padding:14px 12px;border-radius:14px;line-height:1.5;
+    background:linear-gradient(150deg,rgba(92,200,255,.14),rgba(92,200,255,.04));border:1px dashed rgba(92,200,255,.45)}
+  .quiz-geo[hidden]{display:none}
+  .quiz-geo b{color:var(--gold)}
+  .quiz-next{margin-top:14px;width:100%;padding:13px;border-radius:13px;border:0;cursor:pointer;font-size:14.5px;font-weight:700;font-family:inherit;
+    color:#04121f;background:linear-gradient(135deg,#dff3ff,#a9ddff 45%,#5cc8ff 80%,#2f83cf);box-shadow:0 10px 26px rgba(92,200,255,.4)}
+  .quiz-next[hidden]{display:none}
+
+  #quizEnd{padding:28px 24px 24px;text-align:center}
+  .qe-rank{font-size:52px;line-height:1;margin-bottom:6px}
+  .qe-title{margin:0;font-family:var(--display);font-size:24px;font-weight:600;color:#fff}
+  .qe-sub{margin:6px 0 4px;font-size:13.5px;color:#b7c2d2}
+  .qe-stats{display:flex;justify-content:center;gap:10px;margin:18px 0 6px}
+  .qe-stat{flex:1;max-width:130px;padding:14px 8px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+  .qe-stat b{display:block;font-family:var(--display);font-size:23px;font-weight:600;color:#eaf3ff}
+  .qe-stat span{font-size:11px;color:var(--muted);letter-spacing:.05em}
+  .qe-missed{margin:16px 0 4px;text-align:left}
+  .qe-missed[hidden]{display:none}
+  .qe-missed h4{margin:0 0 8px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .qe-miss{display:inline-flex;align-items:center;gap:6px;margin:0 6px 6px 0;padding:7px 11px;border-radius:999px;cursor:pointer;font-size:12.5px;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#dfe7f2;transition:all .15s}
+  .qe-miss:hover{border-color:rgba(92,200,255,.5);background:rgba(92,200,255,.1)}
+  .qe-actions{display:flex;gap:11px;margin-top:20px}
+  .qe-again{flex:1;padding:14px;border-radius:14px;border:0;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:700;color:#04121f;
+    background:linear-gradient(135deg,#dff3ff,#a9ddff 45%,#5cc8ff 80%,#2f83cf);box-shadow:0 10px 26px rgba(92,200,255,.4)}
+  .qe-share{flex:1;padding:14px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:600;color:#dfe7f2;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+  .qe-share:hover{border-color:rgba(92,200,255,.5)}
+
   @media (max-width:640px){
     .brand{top:16px;left:16px}
     .brand p{display:none}
@@ -406,6 +650,11 @@
     .filters{bottom:16px}
     .chip-sep{display:none}
     .journey{bottom:auto;top:114px;padding:10px 15px;font-size:12.5px}
+    .mine-btn{top:98px;right:14px;padding:10px 13px;font-size:13px}
+    .mine-btn .lbl{display:none}
+    .quiz-btn{top:140px;right:14px;padding:10px 13px;font-size:13px}
+    .quiz-btn .lbl{display:none}
+    .search-wrap{top:64px;left:14px;transform:none;width:calc(100% - 76px)}
     .lpanel-head{padding:60px 20px 4px}
   }
 </style>
@@ -432,6 +681,8 @@
 
 <button class="surprise" id="surprise"><span class="die">🎲</span><span class="lbl">Удиви меня</span></button>
 <button class="hotels-btn" id="hotelsBtn"><span class="hb-ic">🏨</span><span class="lbl">Отели</span></button>
+<button class="mine-btn" id="mineBtn"><span class="mb-ic">★</span><span class="lbl">Мои места</span><span class="mine-count" id="mineCount"></span></button>
+<button class="quiz-btn" id="quizBtn"><span class="qb-ic">🎓</span><span class="lbl">Викторина</span></button>
 
 <div class="filters" id="filters"></div>
 
@@ -455,14 +706,170 @@
   <div class="body" id="panelLeftBody"></div>
 </aside>
 
+<div class="quiz" id="quiz" hidden>
+  <div class="quiz-card" id="quizCard">
+    <button class="quiz-close" id="quizClose">✕</button>
+
+    <!-- экран: выбор режима -->
+    <div class="quiz-screen" id="quizIntro">
+      <div class="qi-badge">🎓</div>
+      <h2 class="qi-title">Викторина «Аура Земли»</h2>
+      <p class="qi-sub">Насколько хорошо ты знаешь планету? Выбери режим.</p>
+      <div class="qi-modes">
+        <button class="qi-mode" data-mode="quick"><b>Быстрая</b><span>10 вопросов</span></button>
+        <button class="qi-mode" data-mode="marathon"><b>Марафон</b><span>20 вопросов</span></button>
+        <button class="qi-mode" data-mode="survival"><b>На выживание</b><span>3 ошибки — конец</span></button>
+        <button class="qi-mode" data-mode="cat"><b>По стихии</b><span>выбери тему</span></button>
+      </div>
+      <div class="qi-cats" id="quizCats" hidden></div>
+    </div>
+
+    <!-- экран: вопрос -->
+    <div class="quiz-screen" id="quizPlay" hidden>
+      <div class="quiz-bar" id="quizBar"><i></i></div>
+      <div class="quiz-media" id="quizMedia"></div>
+      <div class="quiz-hud">
+        <span class="q-score" id="quizScore">0</span>
+        <span class="q-streak" id="quizStreak" hidden></span>
+        <span class="q-prog" id="quizProg"></span>
+        <button class="q-mute" id="quizMute" title="Звук">🔊</button>
+      </div>
+      <div class="quiz-body">
+        <p class="quiz-q" id="quizQ">Что это за место?</p>
+        <div class="quiz-hint" id="quizHint"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-geo" id="quizGeo" hidden>Крути планету и <b>ткни, где это место</b> ↗</div>
+        <button class="quiz-next" id="quizNext" hidden>Дальше →</button>
+      </div>
+    </div>
+
+    <!-- экран: финал -->
+    <div class="quiz-screen" id="quizEnd" hidden>
+      <div class="qe-rank" id="qeRank">🌍</div>
+      <h2 class="qe-title" id="qeTitle">Готово!</h2>
+      <p class="qe-sub" id="qeSub"></p>
+      <div class="qe-stats" id="qeStats"></div>
+      <div class="qe-missed" id="qeMissed" hidden></div>
+      <div class="qe-actions">
+        <button class="qe-again" id="qeAgain">Ещё раз</button>
+        <button class="qe-share" id="qeShare">Поделиться</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="loader"><div class="spinner"></div><p id="loadText">Собираем планету…</p></div>
 
 <!-- ====== ЭКРАН ДОСТУПА ====== -->
 <div id="gate">
-  <div class="gate-card">
+
+  <!-- ВИТРИНА: первый экран для нового человека -->
+  <div class="showcase" id="showcase">
+    <div class="sc-top">
+      <div class="sc-orb"><img id="scLogo" alt="" hidden></div>
+      <div class="sc-brand">Аура Земли<span>Живой атлас планеты</span></div>
+    </div>
+
+    <div class="sc-eyebrow">Дикие места Земли</div>
+    <h1 class="sc-title">Целая планета <em>помещается в ладони</em></h1>
+    <p class="sc-sub">Крути живую 3D-Землю, лови линию между днём и ночью, открывай самые дикие уголки планеты — от лавовых озёр до зеркальных солончаков. Три места можно открыть прямо сейчас, бесплатно.</p>
+
+    <div class="sc-stats">
+      <div class="sc-stat"><b>80</b><i>мест</i></div>
+      <div class="sc-stat"><b>9</b><i>стихий</i></div>
+      <div class="sc-stat"><b>День ↔ ночь</b></div>
+      <div class="sc-stat"><b>Маршруты</b></div>
+      <div class="sc-stat"><b>Отели</b></div>
+    </div>
+
+    <p class="sc-lead"><b>Открой бесплатно</b> — 3 места из атласа</p>
+    <div class="sc-cards">
+      <div class="sc-card" data-free="socotra" role="button" tabindex="0" aria-label="Открыть: Сокотра">
+        <svg class="scene" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><linearGradient id="soc-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#16273f"/><stop offset="55%" stop-color="#2f5273"/><stop offset="100%" stop-color="#e0a862"/></linearGradient>
+            <radialGradient id="soc-sun" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff2d6"/><stop offset="55%" stop-color="#f2c078"/><stop offset="100%" stop-color="#f2c07800"/></radialGradient></defs>
+          <rect width="300" height="240" fill="url(#soc-sky)"/>
+          <circle cx="212" cy="176" r="46" fill="url(#soc-sun)"/><circle cx="212" cy="176" r="15" fill="#ffe9c2"/>
+          <path d="M0 196 Q80 176 150 190 T300 184 V240 H0 Z" fill="#0b1626"/>
+          <g fill="#08111d">
+            <path d="M70 240 V150 M70 150 q-26 -6 -34 -22 M70 150 q-6 -20 4 -34 M70 150 q22 -8 30 -26 M70 150 q10 -22 -2 -38" stroke="#08111d" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="70" cy="126" rx="40" ry="16"/>
+            <path d="M124 240 V172 M124 172 q-16 -4 -22 -16 M124 172 q16 -6 22 -18 M124 172 q3 -14 -1 -22" stroke="#08111d" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <ellipse cx="124" cy="158" rx="26" ry="11"/>
+          </g>
+        </svg>
+        <div class="veil"></div>
+        <div class="free">Бесплатно</div>
+        <div class="body">
+          <div class="nm">Сокотра</div>
+          <div class="co">N 12°28′ · E 53°49′ · Йемен</div>
+          <div class="go">Открыть <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+
+      <div class="sc-card" data-free="uyuni" role="button" tabindex="0" aria-label="Открыть: Солончак Уюни">
+        <svg class="scene" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><linearGradient id="uy-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1b2d4c"/><stop offset="70%" stop-color="#4a7aa2"/><stop offset="100%" stop-color="#eaf4fc"/></linearGradient>
+            <linearGradient id="uy-ref" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#eaf4fc"/><stop offset="35%" stop-color="#7fa6c6"/><stop offset="100%" stop-color="#22375a"/></linearGradient></defs>
+          <rect width="300" height="120" fill="url(#uy-sky)"/>
+          <rect y="120" width="300" height="120" fill="url(#uy-ref)"/>
+          <ellipse cx="96" cy="70" rx="46" ry="12" fill="#ffffff" opacity=".5"/>
+          <ellipse cx="96" cy="170" rx="46" ry="12" fill="#ffffff" opacity=".28"/>
+          <ellipse cx="214" cy="52" rx="30" ry="8" fill="#ffffff" opacity=".4"/>
+          <ellipse cx="214" cy="188" rx="30" ry="8" fill="#ffffff" opacity=".2"/>
+          <rect y="118" width="300" height="4" fill="#f4fbff" opacity=".85"/>
+          <g stroke="#cfe3f2" stroke-width="1" opacity=".5" fill="none">
+            <path d="M0 210 H300 M0 226 H300 M60 200 V240 M150 200 V240 M240 200 V240"/></g>
+        </svg>
+        <div class="veil"></div>
+        <div class="free">Бесплатно</div>
+        <div class="body">
+          <div class="nm">Солончак Уюни</div>
+          <div class="co">S 20°08′ · W 67°29′ · Боливия</div>
+          <div class="go">Открыть <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+
+      <div class="sc-card" data-free="nyiragongo" role="button" tabindex="0" aria-label="Открыть: Ньирагонго">
+        <svg class="scene" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><linearGradient id="ny-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#05070d"/><stop offset="100%" stop-color="#160f18"/></linearGradient>
+            <radialGradient id="ny-glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffd27a"/><stop offset="40%" stop-color="#ff6b3d"/><stop offset="100%" stop-color="#ff6b3d00"/></radialGradient></defs>
+          <rect width="300" height="240" fill="url(#ny-sky)"/>
+          <g fill="#dfe7f2"><circle cx="40" cy="34" r="1.2"/><circle cx="88" cy="20" r="1"/><circle cx="150" cy="40" r="1.3"/><circle cx="228" cy="26" r="1"/><circle cx="270" cy="54" r="1.2"/><circle cx="196" cy="60" r="1"/></g>
+          <ellipse cx="150" cy="150" rx="150" ry="70" fill="url(#ny-glow)" opacity=".55"/>
+          <path d="M40 240 L128 118 H172 L260 240 Z" fill="#0a1018"/>
+          <path d="M128 118 H172 L182 132 Q150 148 118 132 Z" fill="url(#ny-glow)"/>
+          <ellipse cx="150" cy="126" rx="24" ry="7" fill="#ffe0a0"/>
+          <g fill="#ffb066"><circle cx="140" cy="96" r="2"/><circle cx="162" cy="82" r="1.6"/><circle cx="150" cy="70" r="1.4"/><circle cx="172" cy="104" r="1.6"/></g>
+        </svg>
+        <div class="veil"></div>
+        <div class="free">Бесплатно</div>
+        <div class="body">
+          <div class="nm">Ньирагонго</div>
+          <div class="co">S 01°31′ · E 29°15′ · ДР Конго</div>
+          <div class="go">Открыть <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-cta">
+      <button class="sc-try" id="scTry">Открыть 3 места бесплатно&nbsp;→</button>
+      <button class="sc-have" id="scHave">У меня есть код</button>
+    </div>
+    <p class="sc-foot">Остальные <b>77 мест</b>, живые маршруты и отели открываются кодом доступа. Крути планету, загляни внутрь — и решай.</p>
+  </div>
+
+  <!-- ЗАМОК: ввод кода (появляется по «У меня есть код» или на попытке открыть закрытое место) -->
+  <div class="gate-card" hidden>
     <div class="gate-orb"><img id="gateLogo" alt="" hidden></div>
+    <button class="gate-back" id="gateBack" type="button">← назад к витрине</button>
     <div class="gate-eyebrow">Аура Земли</div>
     <h2 class="gate-title">Твоё путешествие по планете начинается здесь</h2>
+    <p class="gate-locked" id="gateLocked" hidden></p>
     <p class="gate-sub">Введи код доступа, чтобы открыть интерактивный атлас.</p>
     <div class="gate-form">
       <input id="gateInput" type="text" placeholder="Код доступа" autocomplete="off" spellcheck="false">
@@ -578,6 +985,23 @@ const VIDEOS = {
   peritomoreno:"",
   vatnajokull: "",
   geiranger:   "",
+
+  // острова
+  socotra:     "-dHlekfyXq4",
+  rajaampat:   "O9ZC5NLGx1Q",
+  palawan:     "YHm5A_HtspQ",
+  easter:      "VuP7pDniokc",
+  lofoten:     "CS1zOgkihZI",
+  faroe:       "IrFRcACQjEo",
+  madagascar:  "1Ly1wgFw0L0",
+  kauai:       "XpRRA1nv-Es",
+  tasmania:    "qqmBC-FXkGE",
+  ladigue:     "iTpr4KOzFXk",
+  azores:      "G-Y6Aajjc1k",
+  reunion:     "WoAeQQj5T6o",
+  zakynthos:   "CFBJzsQOmtg",
+  skye:        "suw-Dxxc3nI",
+  gozo:        "ELQq8VR8NQ4",
 };
 
 const CATS = {
@@ -917,6 +1341,81 @@ const PLACES = [
    desc:"Один из самых красивых фьордов Норвегии: узкий морской рукав, зажатый между отвесными скалами высотой почти в два километра. По стенам сбегают водопады «Семь сестёр», а на крошечных уступах над водой всё ещё видны заброшенные хутора.",
    facts:["Водопады «Семь сестёр» падают со скал прямо напротив «Жениха».","На отвесных уступах над фьордом когда-то стояли настоящие фермы.","Фьорд включён в список всемирного наследия ЮНЕСКО."],
    animals:["Тюлень","Морская свинья","Орлан","Морские птицы"]},
+
+  {id:"socotra",name:"Сокотра",country:"Йемен",cat:"island",lat:12.47,lon:53.82,
+   desc:"Остров, будто вырезанный из другой планеты. Здесь растут «драконовы деревья» в форме зонтиков, из которых сочится кроваво-красная смола, и бутылочные деревья с раздутыми стволами. Сокотра так долго была отрезана от мира, что жизнь на ней пошла своим путём.",
+   facts:["Каждое третье растение острова не встречается больше нигде на Земле.","При надрезе драконово дерево «кровоточит» красной смолой.","Остров изолирован от материка около двадцати миллионов лет."],
+   animals:["Сокотрийский хамелеон","Египетский гриф","Дикие козы","Эндемичные птицы"]},
+
+  {id:"rajaampat",name:"Раджа-Ампат",country:"Индонезия",cat:"island",lat:-0.23,lon:130.52,
+   desc:"Архипелаг из сотен зелёных островков-грибов, разбросанных по бирюзовому морю у западной оконечности Новой Гвинеи. Под водой здесь прячется самое богатое морское царство планеты — рыбы и кораллов больше, чем где-либо ещё.",
+   facts:["В этих водах живёт больше видов кораллов и рыб, чем в любом другом месте мира.","С высоты острова похожи на зелёные грибы, растущие прямо из воды.","Название переводится как «Четыре короля»."],
+   animals:["Манта","Рифовые акулы","Райская птица","Морская черепаха"]},
+
+  {id:"palawan",name:"Палаван · Эль-Нидо",country:"Филиппины",cat:"island",lat:11.20,lon:119.40,
+   desc:"Отвесные известняковые скалы, встающие прямо из моря, а между ними — потайные лагуны, в которые попадаешь через узкие щели в камне. Внутри вода такого цвета, что кажется подсвеченной изнутри.",
+   facts:["В скрытые лагуны можно попасть только вплавь или на каяке через расщелины.","Неподалёку течёт подземная река — одна из длиннейших в мире.","Острова архипелага почти сплошь из древнего известняка."],
+   animals:["Морская черепаха","Варан","Птица-носорог","Рифовые рыбы"]},
+
+  {id:"easter",name:"Остров Пасхи",country:"Чили",cat:"island",lat:-27.11,lon:-109.35,
+   desc:"Один из самых одиноких населённых островов на планете — до ближайшей земли тысячи километров открытого океана. По его берегам стоят почти девять сотен каменных истуканов-моаи, которых вырезал и поднял народ рапануи, а как — до сих пор спорят.",
+   facts:["Ближайший обитаемый остров — примерно в двух тысячах километров.","У многих моаи под землёй скрыты огромные тела, не только головы.","Самый тяжёлый истукан весит около восьмидесяти тонн."],
+   animals:["Морские птицы","Черепахи у берега","Дикие лошади"]},
+
+  {id:"lofoten",name:"Лофотенские острова",country:"Норвегия",cat:"island",lat:68.15,lon:13.60,
+   desc:"Острые пики поднимаются прямо из холодного моря за Полярным кругом, а у их подножия жмутся красные рыбацкие домики. Летом солнце тут не заходит вовсе, зимой над водой пляшет северное сияние, и при этом благодаря тёплому течению не так уж и морозно.",
+   facts:["Острова лежат за Полярным кругом, но Гольфстрим смягчает их климат.","Летом здесь стоит полярный день — солнце не садится сутками.","Красные домики-рорбу когда-то были жильём рыбаков."],
+   animals:["Орлан-белохвост","Косатки","Тупики","Морские птицы"]},
+
+  {id:"faroe",name:"Фарерские острова",country:"Дания",cat:"island",lat:62.00,lon:-6.79,
+   desc:"Восемнадцать зелёных островов посреди сурового северного океана, где водопады срываются с обрывов прямо в волны, а домики укрыты травяными крышами. Овец тут больше, чем людей, а одно из озёр из-за оптической иллюзии будто парит над морем.",
+   facts:["Овец на островах больше, чем жителей.","Водопад Мулафоссур падает с обрыва сразу в океан.","Озеро Сорвагсватн из-за иллюзии кажется висящим над морем."],
+   animals:["Тупик","Овцы","Морские птицы","Тюлени"]},
+
+  {id:"madagascar",name:"Мадагаскар",country:"Мадагаскар",cat:"island",lat:-20.25,lon:44.42,
+   desc:"Огромный остров, который откололся от Африки так давно, что жизнь на нём стала почти инопланетной: лемуры, хамелеоны и деревья-баобабы, каких больше нигде нет. По знаменитой Аллее Баобабов стоят великаны, которым по несколько сотен лет.",
+   facts:["Около девяти из десяти здешних животных не встречаются больше нигде.","Остров отделился от Африки почти девяносто миллионов лет назад.","Некоторым баобабам на Аллее — по восемьсот лет."],
+   animals:["Лемур","Хамелеон","Фосса","Баобаб"]},
+
+  {id:"kauai",name:"Кауаи",country:"США",cat:"island",lat:22.08,lon:-159.72,
+   desc:"Самый зелёный из Гавайских островов, где изумрудные скалы побережья На-Пали обрываются в Тихий океан складками, будто смятый бархат. Добраться до них можно только по морю, пешком или с воздуха — дорог туда нет.",
+   facts:["К скалам На-Пали нет дорог — только тропа, лодка или вертолёт.","Здесь одно из самых дождливых мест на Земле.","Каньон Ваймеа зовут «Гранд-Каньоном Тихого океана»."],
+   animals:["Гавайский тюлень-монах","Дельфины","Морские черепахи","Птицы"]},
+
+  {id:"tasmania",name:"Тасмания",country:"Австралия",cat:"island",lat:-42.16,lon:148.30,
+   desc:"Дикий остров к югу от Австралии, где почти половина земли — заповедники. Идеальная дуга пляжа Вайнгласс-Бэй, древние леса и, говорят, самый чистый воздух на планете, который приносит ветер прямо из Антарктики.",
+   facts:["Здесь измеряют один из самых чистых воздухов в мире.","Около сорока процентов острова — охраняемая дикая природа.","Только тут в природе живёт тасманийский дьявол."],
+   animals:["Тасманийский дьявол","Вомбат","Валлаби","Ехидна"]},
+
+  {id:"ladigue",name:"Ла-Диг",country:"Сейшелы",cat:"island",lat:-4.36,lon:55.83,
+   desc:"Крошечный сейшельский остров, где розоватый песок обрамляют огромные гранитные валуны, обточенные океаном в плавные формы. Пляж Анс-Сурс-д’Аржан называют самым фотографируемым в мире, а по острову передвигаются на велосипедах и воловьих повозках.",
+   facts:["Гранитные валуны океан обтачивал сотни тысяч лет.","Машин почти нет — ездят на велосипедах и повозках.","На острове живут гигантские сухопутные черепахи."],
+   animals:["Гигантская черепаха","Райская мухоловка","Крыланы","Морские черепахи"]},
+
+  {id:"azores",name:"Азорские острова",country:"Португалия",cat:"island",lat:37.74,lon:-25.30,
+   desc:"Девять вулканических островов, затерянных посреди Атлантики. В кратерах давно уснувших вулканов лежат озёра — одно голубое, другое зелёное, бок о бок, — а из-под земли бьют горячие источники, в которых прямо в земле готовят еду.",
+   facts:["Соседние озёра Сети-Сидадеш — одно голубое, другое зелёное.","Еду здесь томят прямо в вулканической земле у горячих источников.","Все острова выросли из подводных вулканов."],
+   animals:["Кашалоты","Дельфины","Азорский снегирь","Морские птицы"]},
+
+  {id:"reunion",name:"Реюньон",country:"Франция",cat:"island",lat:-21.13,lon:55.52,
+   desc:"Тропический остров в Индийском океане с зелёными цирками-долинами, водопадами и одним из самых активных вулканов планеты. Питон-де-ла-Фурнез извергается чуть ли не каждый год, и потоки лавы иногда доходят прямо до океана.",
+   facts:["Вулкан Питон-де-ла-Фурнез — один из самых активных в мире.","Иногда лава стекает по склону до самого океана.","Кольцо диких зелёных цирков-долин — под охраной ЮНЕСКО."],
+   animals:["Киты и дельфины у берега","Тропические птицы","Гекконы","Хамелеоны"]},
+
+  {id:"zakynthos",name:"Закинтос · Навайо",country:"Греция",cat:"island",lat:37.86,lon:20.62,
+   desc:"Греческий остров, знаменитый одной бухтой: пляж Навайо, зажатый между отвесными белыми скалами, куда можно попасть только с воды. На его песке лежит ржавый остов старого судна, а вода вокруг светится нереально ярким бирюзовым.",
+   facts:["На пляж Навайо нельзя прийти по суше — только приплыть на лодке.","На песке лежит корпус выброшенного давным-давно корабля.","В водах острова гнездятся редкие морские черепахи каретта."],
+   animals:["Черепаха каретта","Тюлень-монах","Дельфины","Морские птицы"]},
+
+  {id:"skye",name:"Остров Скай",country:"Шотландия",cat:"island",lat:57.29,lon:-6.22,
+   desc:"Суровый и сказочный шотландский остров с зубчатыми чёрными горами, туманами и потайными местами вроде Волшебных заводей — цепочки ледяных бирюзовых ванн среди скал. Погода тут меняется по десять раз на дню, и от этого пейзаж всё время другой.",
+   facts:["Волшебные заводи — череда прозрачных бирюзовых озёр среди скал.","Зубчатый хребет Куиллин — один из сложнейших в Британии.","Название острова связывают с древним словом «туман»."],
+   animals:["Благородный олень","Орлан-белохвост","Тюлени","Выдра"]},
+
+  {id:"gozo",name:"Гозо · Голубая лагуна",country:"Мальта",cat:"island",lat:36.05,lon:14.19,
+   desc:"Тихий сосед главного острова Мальты со своими храмами древнее пирамид и с Голубой лагуной у островка Комино — узким проливом, где вода такая прозрачная и яркая, что лодки будто парят в воздухе над белым дном.",
+   facts:["В Голубой лагуне вода такая прозрачная, что лодки кажутся парящими.","Храмы Джгантия старше египетских пирамид.","До недавнего времени рядом стояла каменная арка Лазурное окно."],
+   animals:["Морские птицы","Рыбы в лагуне","Ящерицы"]},
 ];
 
 /* Тематические маршруты — та самая связка с фильмами канала */
@@ -989,6 +1488,111 @@ const HOTELS = {
       {name:"Шанхай",          note:"Футуристический скайлайн, набережная Бунд и огни.",                   from:"$45"},
       {name:"Санья · Хайнань",  note:"Тропический остров-курорт на Южно-Китайском море.",                   from:"$35"},
     ]},
+  maldives:{name:"Мальдивы", emoji:"🇲🇻", lat:3.20, lon:73.22, grad:["#012a4a","#00b4d8","#caf0f8"],
+    blurb:"Атоллы в Индийском океане: виллы над бирюзовой водой и рифы под ногами.",
+    areas:[
+      {name:"Северный Мале",   note:"Ближе всего к аэропорту, виллы прямо над водой.",  from:"$120"},
+      {name:"Ари Атолл",       note:"Дайвинг с мантами и китовыми акулами.",             from:"$140"},
+      {name:"Баа Атолл",       note:"Биосферный заповедник ЮНЕСКО.",                     from:"$160"},
+    ]},
+  dominicana:{name:"Доминикана", emoji:"🇩🇴", lat:18.58, lon:-68.40, grad:["#00296b","#00b4d8","#ffd166"],
+    blurb:"Карибы с системой «всё включено»: белый песок и пальмы.",
+    areas:[
+      {name:"Пунта-Кана",      note:"Курортная столица: длинные пляжи и «всё включено».", from:"$70"},
+      {name:"Самана",          note:"Киты, водопады и дикие пляжи.",                      from:"$60"},
+      {name:"Ла-Романа",       note:"Гольф, острова и пляж Саона рядом.",                 from:"$75"},
+    ]},
+  mexico:{name:"Мексика", emoji:"🇲🇽", lat:21.16, lon:-86.85, grad:["#0a3d2e","#1abc9c","#ffe6a7"],
+    blurb:"Карибское побережье, руины майя и подземные сеноты.",
+    areas:[
+      {name:"Канкун",          note:"Бирюзовое Карибское море и ночная жизнь.",          from:"$60"},
+      {name:"Ривьера-Майя",    note:"Сеноты, рифы и руины Тулума.",                       from:"$65"},
+      {name:"Косумель",        note:"Остров с лучшим дайвингом на рифах.",                from:"$70"},
+    ]},
+  cuba:{name:"Куба", emoji:"🇨🇺", lat:23.15, lon:-81.25, grad:["#002a8f","#0e6ba8","#e6eefc"],
+    blurb:"Ретро-атмосфера, ром и белоснежные пляжи Варадеро.",
+    areas:[
+      {name:"Варадеро",        note:"Двадцать километров белого песка и «всё включено».", from:"$55"},
+      {name:"Гавана",          note:"Старинные улицы, кабриолеты и малекон.",             from:"$45"},
+      {name:"Кайо-Коко",       note:"Тихий остров с коралловыми рифами.",                 from:"$60"},
+    ]},
+  srilanka:{name:"Шри-Ланка", emoji:"🇱🇰", lat:6.03, lon:80.22, grad:["#3a1f05","#8D153A","#EB7400"],
+    blurb:"Пляжи, чайные плантации и слоны на одном острове.",
+    areas:[
+      {name:"Мирисса",         note:"Сёрф, пляжи и киты в океане.",                       from:"$30"},
+      {name:"Галле",           note:"Голландский форт у самого моря.",                    from:"$35"},
+      {name:"Элла",            note:"Чайные горы и поезд сквозь джунгли.",                from:"$28"},
+    ]},
+  greece:{name:"Греция", emoji:"🇬🇷", lat:36.39, lon:25.46, grad:["#0D5EAF","#00b4d8","#eaf4ff"],
+    blurb:"Белые домики над синим Эгейским морем и тысячи островов.",
+    areas:[
+      {name:"Санторини",       note:"Белые домики и закаты над кальдерой вулкана.",       from:"$80"},
+      {name:"Крит",            note:"Крупнейший остров: пляжи и древности.",              from:"$55"},
+      {name:"Родос",           note:"Средневековый город и лагуны.",                      from:"$50"},
+    ]},
+  spain:{name:"Испания", emoji:"🇪🇸", lat:39.57, lon:2.65, grad:["#AA151B","#F1BF00","#ffe6a7"],
+    blurb:"Средиземные острова, солнечная коста и вечное лето.",
+    areas:[
+      {name:"Майорка",         note:"Бухты, горы Трамунтана и пляжи.",                    from:"$65"},
+      {name:"Тенерифе",        note:"Океан и вулкан Тейде круглый год.",                  from:"$60"},
+      {name:"Коста-Брава",     note:"Скалистые бухты Каталонии.",                         from:"$55"},
+    ]},
+  cyprus:{name:"Кипр", emoji:"🇨🇾", lat:34.70, lon:33.02, grad:["#2a1a08","#D57700","#caf0f8"],
+    blurb:"Один из самых длинных купальных сезонов в Средиземноморье.",
+    areas:[
+      {name:"Айя-Напа",        note:"Бирюзовые бухты и ночная жизнь.",                    from:"$50"},
+      {name:"Пафос",           note:"Античность у моря и бухта Афродиты.",                from:"$45"},
+      {name:"Лимасол",         note:"Курортная набережная и вино.",                       from:"$55"},
+    ]},
+  montenegro:{name:"Черногория", emoji:"🇲🇪", lat:42.29, lon:18.84, grad:["#2a0a0a","#C40308","#C0A050"],
+    blurb:"Адриатика между горами: близко, красиво и недорого.",
+    areas:[
+      {name:"Будва",           note:"Старый город и вереница пляжей.",                    from:"$45"},
+      {name:"Котор",           note:"Фьорд-бухта под горами, наследие ЮНЕСКО.",           from:"$50"},
+      {name:"Свети-Стефан",    note:"Остров-отель, открытка Адриатики.",                  from:"$70"},
+    ]},
+  georgia:{name:"Грузия", emoji:"🇬🇪", lat:41.65, lon:41.64, grad:["#2a1010","#FF0000","#ffe6a7"],
+    blurb:"Море, горы, вино и еда — всё сразу и без визы.",
+    areas:[
+      {name:"Батуми",          note:"Черноморский курорт с яркой набережной.",           from:"$30"},
+      {name:"Тбилиси",         note:"Старый город, серные бани и балконы.",               from:"$28"},
+      {name:"Сванетия",        note:"Древние башни и снежные вершины Кавказа.",           from:"$25"},
+    ]},
+  armenia:{name:"Армения", emoji:"🇦🇲", lat:40.56, lon:45.34, grad:["#2a1520","#D90012","#F2A800"],
+    blurb:"Горное озеро Севан, древние монастыри и бюджетный отдых.",
+    areas:[
+      {name:"Севан",           note:"Высокогорное озеро и пляжи.",                        from:"$25"},
+      {name:"Ереван",          note:"Розовый город под горой Арарат.",                    from:"$30"},
+      {name:"Дилижан",         note:"Лесной курорт, «армянская Швейцария».",              from:"$28"},
+    ]},
+  uzbekistan:{name:"Узбекистан", emoji:"🇺🇿", lat:39.65, lon:66.96, grad:["#0a2a3a","#0099B5","#ffd166"],
+    blurb:"Бирюзовые купола Самарканда и Бухары на Великом шёлковом пути.",
+    areas:[
+      {name:"Самарканд",       note:"Регистан и бирюзовые медресе.",                      from:"$30"},
+      {name:"Бухара",          note:"Живой музей под открытым небом.",                    from:"$28"},
+      {name:"Хива",            note:"Сказочный город-крепость в пустыне.",                from:"$25"},
+    ]},
+  seychelles:{name:"Сейшелы", emoji:"🇸🇨", lat:-4.68, lon:55.49, grad:["#003F87","#007A3D","#FCD856"],
+    blurb:"Гранитные скалы, пудровый песок и премиальные острова.",
+    areas:[
+      {name:"Маэ",             note:"Главный остров и пляж Бо-Валлон.",                   from:"$150"},
+      {name:"Праслин",         note:"Пляж Анс-Лацио и заповедный лес.",                   from:"$170"},
+      {name:"Ла-Диг",          note:"Знаменитые розовые гранитные скалы.",                from:"$160"},
+    ]},
+  mauritius:{name:"Маврикий", emoji:"🇲🇺", lat:-20.35, lon:57.55, grad:["#2a0a0a","#EA2839","#00A551"],
+    blurb:"Остров-люкс в Индийском океане с лагунами и рифами.",
+    areas:[
+      {name:"Гранд-Бэ",        note:"Курортный север с спокойными лагунами.",             from:"$120"},
+      {name:"Флик-ан-Флак",    note:"Закатное западное побережье.",                       from:"$110"},
+      {name:"Ле-Морн",         note:"Гора-ЮНЕСКО и кайтсёрфинг.",                         from:"$130"},
+    ]},
+  zanzibar:{name:"Занзибар", emoji:"🇹🇿", lat:-6.16, lon:39.20, grad:["#0a3d2e","#1EB53A","#caf0f8"],
+    blurb:"Пряный остров у берегов Африки: белый песок и бирюза.",
+    areas:[
+      {name:"Нунгви",          note:"Лучшие пляжи севера без сильных отливов.",           from:"$50"},
+      {name:"Кендва",          note:"Спокойные пляжи и закаты.",                          from:"$55"},
+      {name:"Стоун-Таун",      note:"Старый город ЮНЕСКО и базары специй.",               from:"$45"},
+    ]},
 };
 
 /* Векторные флаги — рендерятся одинаково на всех системах (в т.ч. Windows) */
@@ -1000,6 +1604,21 @@ const FLAGS = {
   uae:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#000"/><rect width="3" height="1.333" fill="#fff"/><rect width="3" height="0.667" fill="#00732F"/><rect width="0.75" height="2" fill="#FF0000"/></svg>`,
   egypt:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#000"/><rect width="3" height="1.333" fill="#fff"/><rect width="3" height="0.667" fill="#CE1126"/><g fill="#BF9B30"><polygon points="1.5,0.8 1.62,0.9 1.95,0.88 1.62,1.02 1.5,0.98 1.38,1.02 1.05,0.88 1.38,0.9"/><rect x="1.45" y="0.97" width="0.1" height="0.17"/><rect x="1.4" y="1.12" width="0.2" height="0.12" rx="0.02"/></g></svg>`,
   china:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#DE2910"/><g fill="#FFDE00"><polygon points="0.5000,0.2000 0.5674,0.4073 0.7853,0.4073 0.6090,0.5354 0.6763,0.7427 0.5000,0.6146 0.3237,0.7427 0.3910,0.5354 0.2147,0.4073 0.4326,0.4073"/><polygon points="0.9143,0.2514 0.9619,0.1966 0.9246,0.1343 0.9914,0.1628 1.0391,0.1080 1.0328,0.1803 1.0996,0.2088 1.0288,0.2251 1.0224,0.2975 0.9851,0.2352"/><polygon points="1.1010,0.4141 1.1662,0.3821 1.1560,0.3102 1.2065,0.3624 1.2718,0.3304 1.2378,0.3946 1.2884,0.4467 1.2168,0.4343 1.1829,0.4985 1.1726,0.4266"/><polygon points="1.1038,0.6725 1.1765,0.6699 1.1964,0.6001 1.2213,0.6683 1.2939,0.6657 1.2367,0.7105 1.2616,0.7787 1.2014,0.7382 1.1442,0.7830 1.1641,0.7131"/><polygon points="0.9219,0.8375 0.9899,0.8632 1.0353,0.8064 1.0319,0.8790 1.0999,0.9046 1.0298,0.9239 1.0265,0.9964 0.9865,0.9357 0.9165,0.9550 0.9618,0.8982"/></g></svg>`,
+  maldives:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#D21034"/><rect x="0.6" y="0.4" width="1.8" height="1.2" fill="#007E3A"/><circle cx="1.75" cy="1" r="0.42" fill="#fff"/><circle cx="1.92" cy="1" r="0.42" fill="#007E3A"/></svg>`,
+  dominicana:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect x="0" y="0" width="1.4" height="0.9" fill="#002D62"/><rect x="1.6" y="0" width="1.4" height="0.9" fill="#CE1126"/><rect x="0" y="1.1" width="1.4" height="0.9" fill="#CE1126"/><rect x="1.6" y="1.1" width="1.4" height="0.9" fill="#002D62"/></svg>`,
+  mexico:`<svg viewBox="0 0 3 2"><rect width="1" height="2" fill="#006847"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#CE1126"/><g fill="#7a5230"><ellipse cx="1.5" cy="1" rx="0.16" ry="0.11"/><circle cx="1.62" cy="0.9" r="0.06"/></g><ellipse cx="1.5" cy="1.18" rx="0.22" ry="0.06" fill="#006847"/></svg>`,
+  cuba:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#002A8F"/><rect y="0.4" width="3" height="0.4" fill="#fff"/><rect y="1.2" width="3" height="0.4" fill="#fff"/><polygon points="0,0 1.2,1 0,2" fill="#CB1515"/><polygon fill="#fff" points="0.420,0.780 0.469,0.932 0.629,0.932 0.500,1.026 0.549,1.178 0.420,1.084 0.291,1.178 0.340,1.026 0.211,0.932 0.371,0.932"/></svg>`,
+  srilanka:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#FFB700"/><rect x="0.1" y="0.1" width="0.42" height="1.8" fill="#00534E"/><rect x="0.54" y="0.1" width="0.42" height="1.8" fill="#EB7400"/><rect x="0.98" y="0.1" width="1.92" height="1.8" fill="#8D153A"/><g fill="#FFB700"><ellipse cx="1.95" cy="1.1" rx="0.2" ry="0.42"/><circle cx="1.95" cy="0.6" r="0.15"/></g></svg>`,
+  greece:`<svg viewBox="0 0 3 2"><rect y="0.0000" width="3" height="0.2222" fill="#0D5EAF"/><rect y="0.2222" width="3" height="0.2222" fill="#fff"/><rect y="0.4444" width="3" height="0.2222" fill="#0D5EAF"/><rect y="0.6667" width="3" height="0.2222" fill="#fff"/><rect y="0.8889" width="3" height="0.2222" fill="#0D5EAF"/><rect y="1.1111" width="3" height="0.2222" fill="#fff"/><rect y="1.3333" width="3" height="0.2222" fill="#0D5EAF"/><rect y="1.5556" width="3" height="0.2222" fill="#fff"/><rect y="1.7778" width="3" height="0.2222" fill="#0D5EAF"/><rect width="1.111" height="1.111" fill="#0D5EAF"/><rect x="0.445" width="0.222" height="1.111" fill="#fff"/><rect y="0.445" width="1.111" height="0.222" fill="#fff"/></svg>`,
+  spain:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/><rect x="0.68" y="0.66" width="0.34" height="0.68" rx="0.04" fill="#AA151B"/><rect x="0.76" y="0.5" width="0.18" height="0.14" fill="#C8102E"/></svg>`,
+  cyprus:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><path fill="#D57700" d="M1.0,0.85 Q1.35,0.66 1.75,0.8 L2.25,0.72 L2.05,0.9 Q1.6,1.0 1.15,0.98 Z"/><path stroke="#4E5B31" stroke-width="0.05" fill="none" d="M1.35,1.15 Q1.5,1.3 1.5,1.5 M1.65,1.15 Q1.5,1.3 1.5,1.5"/></svg>`,
+  montenegro:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#C40308"/><rect x="0.12" y="0.12" width="2.76" height="1.76" fill="none" stroke="#C0A050" stroke-width="0.14"/><g fill="#C0A050"><circle cx="1.34" cy="0.72" r="0.12"/><circle cx="1.66" cy="0.72" r="0.12"/><polygon points="1.5,0.82 1.95,1.05 1.72,1.42 1.5,1.28 1.28,1.42 1.05,1.05"/></g></svg>`,
+  georgia:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect x="1.33" width="0.34" height="2" fill="#F00"/><rect y="0.83" width="3" height="0.34" fill="#F00"/><rect x="0.500" y="0.355" width="0.320" height="0.110" fill="#F00"/><rect x="0.605" y="0.250" width="0.110" height="0.320" fill="#F00"/><rect x="2.180" y="0.355" width="0.320" height="0.110" fill="#F00"/><rect x="2.285" y="0.250" width="0.110" height="0.320" fill="#F00"/><rect x="0.500" y="1.535" width="0.320" height="0.110" fill="#F00"/><rect x="0.605" y="1.430" width="0.110" height="0.320" fill="#F00"/><rect x="2.180" y="1.535" width="0.320" height="0.110" fill="#F00"/><rect x="2.285" y="1.430" width="0.110" height="0.320" fill="#F00"/></svg>`,
+  armenia:`<svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#D90012"/><rect y="0.667" width="3" height="0.667" fill="#0033A0"/><rect y="1.333" width="3" height="0.667" fill="#F2A800"/></svg>`,
+  uzbekistan:`<svg viewBox="0 0 3 2"><rect width="3" height="0.64" fill="#0099B5"/><rect y="0.64" width="3" height="0.72" fill="#fff"/><rect y="1.36" width="3" height="0.64" fill="#1EB53A"/><rect y="0.6" width="3" height="0.06" fill="#CE1126"/><rect y="1.34" width="3" height="0.06" fill="#CE1126"/><circle cx="0.5" cy="0.32" r="0.2" fill="#fff"/><circle cx="0.6" cy="0.32" r="0.2" fill="#0099B5"/><g fill="#fff"><polygon points="0.850,0.150 0.862,0.184 0.898,0.185 0.869,0.206 0.879,0.240 0.850,0.220 0.821,0.240 0.831,0.206 0.802,0.185 0.838,0.184"/><polygon points="1.000,0.150 1.012,0.184 1.048,0.185 1.019,0.206 1.029,0.240 1.000,0.220 0.971,0.240 0.981,0.206 0.952,0.185 0.988,0.184"/><polygon points="1.150,0.150 1.162,0.184 1.198,0.185 1.169,0.206 1.179,0.240 1.150,0.220 1.121,0.240 1.131,0.206 1.102,0.185 1.138,0.184"/><polygon points="0.850,0.350 0.862,0.384 0.898,0.385 0.869,0.406 0.879,0.440 0.850,0.420 0.821,0.440 0.831,0.406 0.802,0.385 0.838,0.384"/><polygon points="1.000,0.350 1.012,0.384 1.048,0.385 1.019,0.406 1.029,0.440 1.000,0.420 0.971,0.440 0.981,0.406 0.952,0.385 0.988,0.384"/><polygon points="1.150,0.350 1.162,0.384 1.198,0.385 1.169,0.406 1.179,0.440 1.150,0.420 1.121,0.440 1.131,0.406 1.102,0.385 1.138,0.384"/></g></svg>`,
+  seychelles:`<svg viewBox="0 0 3 2"><polygon points="0,2 0,0 0.75,0" fill="#003F87"/><polygon points="0,2 0.75,0 1.8,0" fill="#FCD856"/><polygon points="0,2 1.8,0 3,0.3" fill="#D62828"/><polygon points="0,2 3,0.3 3,1.2" fill="#fff"/><polygon points="0,2 3,1.2 3,2" fill="#007A3D"/></svg>`,
+  mauritius:`<svg viewBox="0 0 3 2"><rect width="3" height="0.5" fill="#EA2839"/><rect y="0.5" width="3" height="0.5" fill="#1A206D"/><rect y="1.0" width="3" height="0.5" fill="#FFD500"/><rect y="1.5" width="3" height="0.5" fill="#00A551"/></svg>`,
+  zanzibar:`<svg viewBox="0 0 3 2"><polygon points="0,0 3,0 0,2" fill="#1EB53A"/><polygon points="3,0 3,2 0,2" fill="#00A3DD"/><line x1="0" y1="2" x2="3" y2="0" stroke="#FCD116" stroke-width="0.52"/><line x1="0" y1="2" x2="3" y2="0" stroke="#000" stroke-width="0.34"/></svg>`,
 };
 function flagHTML(key, cls){ return `<span class="flag-svg ${cls||''}">${FLAGS[key]||''}</span>`; }
 
@@ -1570,6 +2189,7 @@ function applyCameraFromSpherical(){
 
 /* перелёт к точке */
 function flyTo(place, open=true){
+  if(DEMO && place && place.id && !FREE_IDS.has(place.id)){ raiseLock(place); return; }
   const dir = latLonToVec3(place.lat, place.lon, 1).normalize();
   const targetPhi = Math.acos(Math.max(-1,Math.min(1,dir.y)));
   let targetTheta = Math.atan2(dir.x, dir.z);
@@ -1597,7 +2217,7 @@ function animate(now){
     cam.radius= fly.from.radius+ (fly.to.radius-fly.from.radius)*k;
     applyCameraFromSpherical();
     if(fly.t>=fly.dur){ if(fly.open) openPanel(fly.place); fly=null; lastInteract=now; }
-  } else if(idle){
+  } else if(idle && !geoGuessing){
     cam.theta += dt*0.00007;
     applyCameraFromSpherical();
   }
@@ -1660,12 +2280,98 @@ const tooltip = document.getElementById('tooltip');
 
 function hexA(hex,a){const n=parseInt(hex.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
 
+// тематическая заставка ТОЛЬКО для мест без своего видео. Настоящие ютуб-обложки не трогаем.
+function sceneSVG(pl){
+  const c = (CATS[pl.cat]||{grad:["#0b1220","#243a52","#7fb2d8"]}).grad;
+  const u = 'sc'+pl.id;
+  const defs = `<defs>`
+    + `<linearGradient id="${u}k" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c[2]}"/><stop offset="55%" stop-color="${c[1]}"/><stop offset="100%" stop-color="${c[0]}"/></linearGradient>`
+    + `<radialGradient id="${u}n" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff6da" stop-opacity=".95"/><stop offset="60%" stop-color="#fff6da" stop-opacity="0"/></radialGradient>`
+    + `<radialGradient id="${u}e" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff8a3d" stop-opacity=".9"/><stop offset="60%" stop-color="#ff8a3d" stop-opacity="0"/></radialGradient>`
+    + `</defs>`;
+  const bg = `<rect width="440" height="230" fill="url(#${u}k)"/>`;
+  let b='';
+  switch(pl.cat){
+    case 'ocean':
+      b=`<circle cx="315" cy="96" r="70" fill="url(#${u}n)" opacity=".8"/><circle cx="315" cy="96" r="15" fill="#fff3d0"/>`
+       +`<rect x="305" y="120" width="20" height="70" fill="#fff3d0" opacity=".18"/>`
+       +`<path d="M0 150 Q60 100 150 120 Q110 108 0 130 Z" fill="${c[0]}" opacity=".5"/>`
+       +`<path d="M0 150 Q110 132 220 150 T440 148 V230 H0 Z" fill="${c[1]}" opacity=".7"/>`
+       +`<path d="M0 176 Q130 160 260 178 T440 174 V230 H0 Z" fill="${c[0]}" opacity=".85"/>`
+       +`<path d="M0 150 Q60 100 150 120" stroke="#eaffff" stroke-width="3" fill="none" opacity=".55"/>`;
+      break;
+    case 'mountain':
+      b=`<circle cx="350" cy="60" r="60" fill="url(#${u}n)" opacity=".4"/>`
+       +`<path d="M0 130 L70 78 L120 118 L190 66 L260 120 L330 80 L400 122 L440 96 V150 H0 Z" fill="${c[1]}"/>`
+       +`<path d="M190 66 L205 86 L175 86 Z M70 78 L82 96 L58 96 Z M330 80 L344 100 L316 100 Z" fill="#f2f6fc" opacity=".9"/>`
+       +`<path d="M0 150 L90 104 L170 150 L250 108 L340 152 L440 116 V150 H0 Z" fill="${c[0]}"/>`
+       +`<rect y="150" width="440" height="80" fill="${c[0]}"/>`
+       +`<path d="M0 150 L90 196 L170 150 L250 192 L340 150 L440 186 V150 Z" fill="${c[1]}" opacity=".35"/>`
+       +`<rect y="150" width="440" height="3" fill="#dbe4ef" opacity=".5"/>`;
+      break;
+    case 'forest':
+      b=`<circle cx="300" cy="66" r="80" fill="url(#${u}n)" opacity=".3"/>`
+       +`<path d="M300 0 L360 0 L250 230 L210 230 Z" fill="#eafff0" opacity=".06"/>`;
+      for(let x=-10;x<=450;x+=34) b+=`<circle cx="${x}" cy="122" r="22" fill="${c[1]}" opacity=".55"/>`;
+      b+=`<rect y="120" width="440" height="30" fill="${c[1]}" opacity=".55"/>`;
+      for(let x=-10;x<=450;x+=40) b+=`<circle cx="${x}" cy="156" r="30" fill="${c[0]}" opacity=".92"/>`;
+      b+=`<rect y="150" width="440" height="80" fill="${c[0]}"/>`;
+      break;
+    case 'volcano':
+      b=`<circle cx="40" cy="34" r="1.2" fill="#dfe7f2"/><circle cx="96" cy="20" r="1" fill="#dfe7f2"/><circle cx="150" cy="40" r="1.3" fill="#dfe7f2"/><circle cx="300" cy="26" r="1" fill="#dfe7f2"/><circle cx="400" cy="50" r="1.2" fill="#dfe7f2"/><circle cx="210" cy="60" r="1" fill="#dfe7f2"/>`
+       +`<ellipse cx="220" cy="150" rx="220" ry="90" fill="url(#${u}e)" opacity=".55"/>`
+       +`<path d="M70 230 L190 92 H250 L370 230 Z" fill="${c[0]}"/>`
+       +`<path d="M190 92 H250 L262 112 Q220 128 178 112 Z" fill="url(#${u}e)"/>`
+       +`<ellipse cx="220" cy="98" rx="30" ry="8" fill="#ffe0a0"/>`
+       +`<circle cx="205" cy="66" r="2" fill="#ffb066"/><circle cx="232" cy="54" r="1.6" fill="#ffb066"/><circle cx="220" cy="44" r="1.4" fill="#ffb066"/><circle cx="244" cy="74" r="1.6" fill="#ffb066"/>`;
+      break;
+    case 'desert':
+      b=`<circle cx="330" cy="92" r="80" fill="url(#${u}n)" opacity=".7"/><circle cx="330" cy="92" r="20" fill="#fff0c4"/>`
+       +`<path d="M0 150 Q140 120 280 150 T440 150 V230 H0 Z" fill="${c[1]}" opacity=".8"/>`
+       +`<path d="M0 172 Q120 150 250 176 T440 170 V230 H0 Z" fill="${c[0]}" opacity=".7"/>`
+       +`<path d="M0 200 Q160 182 300 202 T440 196 V230 H0 Z" fill="${c[0]}"/>`;
+      break;
+    case 'island':
+      b=`<circle cx="330" cy="150" r="60" fill="url(#${u}n)" opacity=".85"/><circle cx="330" cy="150" r="16" fill="#ffeec6"/>`
+       +`<rect y="158" width="440" height="72" fill="${c[0]}" opacity=".55"/>`
+       +`<path d="M0 182 Q120 170 240 182 T440 178 V230 H0 Z" fill="${c[0]}"/>`
+       +`<g stroke="#06201a" stroke-width="5" fill="none" stroke-linecap="round"><path d="M80 182 V128 M80 128 q-22 -6 -30 -20 M80 128 q-4 -18 6 -30 M80 128 q20 -6 26 -22"/></g><ellipse cx="80" cy="108" rx="34" ry="13" fill="#06201a"/>`
+       +`<g stroke="#06201a" stroke-width="4" fill="none" stroke-linecap="round"><path d="M132 182 V146 M132 146 q-14 -4 -20 -14 M132 146 q14 -5 20 -16"/></g><ellipse cx="132" cy="132" rx="22" ry="9" fill="#06201a"/>`;
+      break;
+    case 'water':
+      b=`<path d="M0 0 H150 L140 150 Q90 160 60 200 L0 230 Z" fill="${c[0]}"/>`
+       +`<path d="M440 0 H250 L262 150 Q330 160 370 200 L440 230 Z" fill="${c[0]}"/>`
+       +`<rect x="152" y="20" width="136" height="170" fill="${c[2]}" opacity=".5"/>`;
+      for(let x=160;x<286;x+=12) b+=`<rect x="${x}" y="20" width="3" height="170" fill="#f2fbff" opacity=".5"/>`;
+      b+=`<ellipse cx="220" cy="192" rx="120" ry="26" fill="#eaf8ff" opacity=".45"/><rect y="196" width="440" height="34" fill="${c[0]}"/>`;
+      break;
+    case 'animals':
+      b=`<circle cx="150" cy="120" r="90" fill="url(#${u}n)" opacity=".6"/><circle cx="150" cy="120" r="26" fill="#ffe7a6"/>`
+       +`<path d="M0 168 Q220 150 440 168 V230 H0 Z" fill="${c[1]}" opacity=".85"/>`
+       +`<path d="M0 190 Q220 176 440 190 V230 H0 Z" fill="${c[0]}"/>`
+       +`<g stroke="${c[0]}" stroke-width="6" fill="none" stroke-linecap="round"><path d="M330 190 V128 M330 138 l-26 -12 M330 132 l24 -14"/></g><path d="M286 120 Q330 100 376 120 Q356 112 330 114 Q304 112 286 120 Z" fill="${c[0]}"/>`;
+      break;
+    case 'paradise':
+      b=`<circle cx="320" cy="150" r="62" fill="url(#${u}n)" opacity=".85"/><circle cx="320" cy="150" r="18" fill="#fff0d6"/>`
+       +`<rect y="156" width="440" height="74" fill="${c[0]}" opacity=".5"/>`
+       +`<path d="M0 186 Q120 174 240 186 T440 182 V230 H0 Z" fill="${c[0]}"/>`
+       +`<path d="M96 186 Q84 130 70 96" stroke="#062a2a" stroke-width="6" fill="none" stroke-linecap="round"/>`
+       +`<g stroke="#062a2a" stroke-width="5" fill="none" stroke-linecap="round"><path d="M70 96 Q40 84 24 92 M70 96 Q44 78 30 66 M70 96 Q92 78 110 74 M70 96 Q96 86 116 92 M70 96 Q70 74 66 58"/></g>`;
+      break;
+    default:
+      b=`<circle cx="330" cy="80" r="90" fill="url(#${u}n)" opacity=".4"/>`
+       +`<path d="M0 168 Q140 150 250 164 T440 158 V230 H0 Z" fill="${c[0]}" opacity=".5"/>`
+       +`<path d="M0 196 Q120 182 250 192 T440 188 V230 H0 Z" fill="${c[0]}" opacity=".85"/>`;
+  }
+  return `<svg class="scene" viewBox="0 0 440 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${defs}${bg}${b}</svg>`;
+}
+
 function openPanel(pl){
   selectedId = pl.id;
   document.getElementById('postcard').style.display = '';
   const cat = CATS[pl.cat];
   const grad = `linear-gradient(135deg, ${cat.grad[0]}, ${cat.grad[1]} 55%, ${cat.grad[2]})`;
-  const ytId = (VIDEOS[pl.id]||'').trim() || (CAT_VIDEO[pl.cat]||'').trim();
+  const ytId = (VIDEOS[pl.id]||'').trim();   // только своё видео места; иначе — красивая заставка
   const searchUrl = 'https://www.youtube.com/results?search_query=' +
         encodeURIComponent(pl.name + ' ' + pl.country + ' 4K');
   const watchUrl = ytId ? 'https://www.youtube.com/watch?v='+ytId : searchUrl;
@@ -1680,7 +2386,7 @@ function openPanel(pl){
     ? `<video class="art" autoplay muted loop playsinline src="${pl.video}"></video>`
     : pl.image
     ? `<img class="art" src="${pl.image}" alt="">`
-    : `<div class="art" style="background:${grad}"></div>`;
+    : `<div class="art" style="background:${grad}">${sceneSVG(pl)}</div>`;
 
   document.getElementById('postcard').innerHTML = `
     ${media}
@@ -1700,7 +2406,12 @@ function openPanel(pl){
     }, {once:true});
   }
   document.getElementById('panelBody').innerHTML = `
-    ${currentList ? `<div class="list-back" id="listBack">← ${currentList.title}</div>` : ''}
+    ${currentList ? `<div class="list-back" id="listBack">← ${currentList.title}</div>`
+      : mineActive ? `<div class="list-back" id="mineBack">← Мои места</div>` : ''}
+    <div class="block myrow">
+      <button class="mybtn wish ${isMy(pl.id,'wish')?'on':''}" id="btnWish">♡ Хочу поехать</button>
+      <button class="mybtn visited ${isMy(pl.id,'visited')?'on':''}" id="btnVisited">✓ Уже был</button>
+    </div>
     <p class="lead">О месте</p>
     <p class="desc">${pl.desc}</p>
     <div class="block"><p class="lead">Интересные факты</p>
@@ -1714,6 +2425,11 @@ function openPanel(pl){
       </div></div>
     <div class="block"><a class="sharelink" id="shareLink">🔗 Скопировать ссылку на это место</a></div>`;
 
+  const bw = document.getElementById('btnWish');
+  if(bw) bw.onclick = ()=>{ toggleMy(pl.id,'wish'); bw.classList.toggle('on', isMy(pl.id,'wish')); };
+  const bv = document.getElementById('btnVisited');
+  if(bv) bv.onclick = ()=>{ toggleMy(pl.id,'visited'); bv.classList.toggle('on', isMy(pl.id,'visited')); };
+
   const sl = document.getElementById('shareLink');
   if(sl) sl.onclick = ()=>{
     const url = location.origin + location.pathname + '?place=' + pl.id;
@@ -1723,6 +2439,8 @@ function openPanel(pl){
   };
   const lb = document.getElementById('listBack');
   if(lb) lb.onclick = ()=>{ if(currentList) openList(currentList.title, currentList.sub, currentList.places); };
+  const mb = document.getElementById('mineBack');
+  if(mb) mb.onclick = ()=> openMine();
 
   setPlaceUrl(pl.id);
   panel.classList.add('open');
@@ -1733,7 +2451,7 @@ function closePanel(){panel.classList.remove('open'); selectedId=null; document.
 /* ---- список мест (по категории или маршруту) в правой панели ---- */
 let currentList = null;   // {title, sub, places}
 function openList(title, sub, places){
-  currentList = {title, sub, places};
+  currentList = {title, sub, places}; mineActive = false;
   document.getElementById('postcard').style.display = 'none';
   document.getElementById('panelBody').innerHTML = `
     <div class="list-head"><h2>${title}</h2><p class="list-sub">${sub}</p></div>
@@ -1749,6 +2467,384 @@ function openList(title, sub, places){
     el.onclick = ()=>{ const pl = PLACES.find(p=>p.id===el.dataset.id); if(pl) flyTo(pl, true); };
   });
   panel.classList.add('open');
+}
+
+/* ============================================================
+   «МОИ МЕСТА» — избранное (Хочу / Был), хранится в браузере
+   ============================================================ */
+const MY_KEY = 'aura_myplaces';
+function loadMy(){ try{ return JSON.parse(localStorage.getItem(MY_KEY)||'{}'); }catch(e){ return {}; } }
+function saveMy(){ try{ localStorage.setItem(MY_KEY, JSON.stringify(myPlaces)); }catch(e){} }
+let myPlaces = loadMy();          // { id: {wish:true, visited:true} }
+let mineActive = false;
+function isMy(id, kind){ return !!(myPlaces[id] && myPlaces[id][kind]); }
+function toggleMy(id, kind){
+  const e = myPlaces[id] || {};
+  e[kind] = !e[kind];
+  if(!e.wish && !e.visited) delete myPlaces[id]; else myPlaces[id] = e;
+  saveMy(); updateMineCount();
+}
+function myList(kind){
+  return Object.keys(myPlaces).filter(id=>myPlaces[id] && myPlaces[id][kind])
+    .map(id=>PLACES.find(p=>p.id===id)).filter(Boolean);
+}
+function updateMineCount(){
+  const el = document.getElementById('mineCount'); if(!el) return;
+  const c = Object.keys(myPlaces).length;
+  el.textContent = c; el.classList.toggle('show', c>0);
+}
+function openMine(){
+  mineActive = true; currentList = null;
+  if(hotelsMode) closeLeft();
+  document.getElementById('postcard').style.display = 'none';
+  const body = document.getElementById('panelBody');
+  const wish = myList('wish'), visited = myList('visited');
+  const browseAll = ()=> openList('Все места', 'Открой карточку и отметь «Хочу поехать» или «Уже был».', PLACES.slice());
+
+  // пустое состояние — объясняем и ведём за руку
+  if(!wish.length && !visited.length){
+    body.innerHTML = `
+      <div class="list-head"><h2>★ Мои места</h2></div>
+      <div class="mine-blank">
+        <div class="mine-blank-ic">🗺️</div>
+        <p class="mine-blank-t">Здесь будет твоя коллекция</p>
+        <p class="mine-blank-d">Открой любое место и отметь его кнопкой <b>♡ Хочу поехать</b> или <b>✓ Уже был</b> — оно появится тут. Потом отсюда сможешь улететь к нему на планете и подобрать отель.</p>
+        <button class="mine-cta" id="mineBrowse">Смотреть все места →</button>
+      </div>`;
+    const mb = document.getElementById('mineBrowse'); if(mb) mb.onclick = browseAll;
+    panel.classList.add('open');
+    return;
+  }
+
+  const item = p => {
+    const col = CATS[p.cat].color;
+    return `<div class="pitem" data-id="${p.id}">
+      <span class="pdot" style="background:${col};box-shadow:0 0 9px ${col}"></span>
+      <div class="pmeta"><div class="pn">${p.name}</div><div class="pc">${p.country}</div></div>
+      <span class="pgo">→</span></div>`;
+  };
+  const sec = (title, arr, empty) => arr.length
+    ? `<div class="mine-sec"><p class="lead">${title} · ${arr.length}</p>${arr.map(item).join('')}</div>`
+    : `<div class="mine-sec"><p class="lead">${title}</p><p class="mine-empty">${empty}</p></div>`;
+  body.innerHTML = `
+    <div class="list-head"><h2>★ Мои места</h2><p class="list-sub">Нажми на место — покажу на планете.</p></div>
+    ${sec('Хочу поехать', wish, 'Пока пусто.')}
+    ${sec('Уже был', visited, 'Пока пусто.')}
+    <div class="block"><a class="sharelink" id="mineBrowse2">➕ Добавить ещё места</a></div>
+    <div class="block"><a class="sharelink" id="mineToHotels">🏨 Подобрать отели под поездку</a></div>`;
+  body.querySelectorAll('.pitem').forEach(el=>{
+    el.onclick = ()=>{ const pl = PLACES.find(p=>p.id===el.dataset.id); if(pl) flyTo(pl, true); };
+  });
+  const th = document.getElementById('mineToHotels'); if(th) th.onclick = openHotels;
+  const b2 = document.getElementById('mineBrowse2'); if(b2) b2.onclick = browseAll;
+  panel.classList.add('open');
+}
+
+/* ============================================================
+   ВИКТОРИНА «Угадай место»
+   ============================================================ */
+let quiz = null, geoGuessing = false, geoObjs = [], qac = null;
+const QG = id => document.getElementById(id);
+
+/* ---- звук (WebAudio, без файлов) ---- */
+function qSound(type){
+  if(quiz && quiz.muted) return;
+  try{
+    qac = qac || new (window.AudioContext||window.webkitAudioContext)();
+    const t = qac.currentTime;
+    const tone = (f0,f1,dur,wave,vol)=>{ const o=qac.createOscillator(),g=qac.createGain();o.connect(g);g.connect(qac.destination);
+      o.type=wave; o.frequency.setValueAtTime(f0,t); if(f1) o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+      g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+0.02); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+      o.start(t); o.stop(t+dur+0.02); };
+    if(type==='right'){ tone(660,990,.28,'sine',.16); }
+    else if(type==='wrong'){ tone(200,90,.3,'sawtooth',.12); }
+    else if(type==='tick'){ tone(880,0,.07,'square',.05); }
+    else if(type==='win'){ [523,659,784,1047].forEach((f,i)=>{ const o=qac.createOscillator(),g=qac.createGain();o.connect(g);g.connect(qac.destination);
+      o.type='sine';o.frequency.value=f;const tt=t+i*0.12;g.gain.setValueAtTime(.0001,tt);g.gain.exponentialRampToValueAtTime(.16,tt+0.03);g.gain.exponentialRampToValueAtTime(.0001,tt+0.32);o.start(tt);o.stop(tt+0.34); }); }
+  }catch(e){}
+}
+
+/* ---- открытие / выбор режима ---- */
+function openQuizIntro(){
+  if(hotelsMode) closeLeft();
+  closePanel(); currentList=null; mineActive=false;
+  activeCat=activeRoute=null; clearChipState(); showAllPins(); clearRoutes(); hideJourney(); stopTour();
+  document.body.classList.add('quizing');
+  QG('quiz').hidden=false;
+  QG('quizIntro').hidden=false; QG('quizPlay').hidden=true; QG('quizEnd').hidden=true; QG('quizCats').hidden=true;
+  setLabels([]);
+}
+function buildCatChips(){
+  const el=QG('quizCats');
+  el.innerHTML=Object.entries(CATS).map(([k,c])=>`<button class="qi-cat" data-cat="${k}">${c.emoji} ${c.label}</button>`).join('');
+  el.querySelectorAll('.qi-cat').forEach(b=> b.onclick=()=>beginQuiz('cat', b.dataset.cat));
+}
+function beginQuiz(mode, cat){
+  const muted = quiz ? quiz.muted : false;
+  let pool = PLACES.slice(), total = 10;
+  if(mode==='marathon') total=20;
+  else if(mode==='survival') total=999;
+  else if(mode==='cat' && cat){ pool = PLACES.filter(p=>p.cat===cat); total=Math.min(pool.length,12); }
+  quiz = {mode, cat, pool, total, qIndex:0, score:0, streak:0, bestStreak:0, lives:3,
+          correctCount:0, missed:[], used:new Set(), answered:false, answer:null,
+          qType:null, lastType:null, muted, guess:null};
+  QG('quizIntro').hidden=true; QG('quizEnd').hidden=true; QG('quizPlay').hidden=false;
+  QG('quizMute').textContent = muted?'🔇':'🔊';
+  quizRound();
+}
+
+/* ---- один вопрос ---- */
+function shuffle(a){ return a.slice().sort(()=>Math.random()-0.5); }
+function quizMediaHTML(pl, hide){
+  if(hide) return `<div class="qmys">?</div>`;
+  if(pl.image) return `<img class="quiz-thumb" alt="" src="${pl.image}">`;
+  return sceneSVG(pl);
+}
+function pickType(pl){
+  let bag=['name','name','geo','geo','country'];
+  if(pl.facts&&pl.facts.length){ bag.push('fact','truefalse'); }
+  if(pl.animals&&pl.animals.length>=1){ bag.push('animal'); }
+  let t, tries=0;
+  do{ t=bag[Math.floor(Math.random()*bag.length)]; tries++; } while(t===quiz.lastType && tries<8);
+  quiz.lastType=t; return t;
+}
+function nameOpts(pl){
+  const diff=shuffle(PLACES.filter(p=>p.id!==pl.id && p.cat!==pl.cat));
+  const same=shuffle(PLACES.filter(p=>p.id!==pl.id && p.cat===pl.cat));
+  const others=[...diff,...same].slice(0,3);
+  return shuffle([pl,...others].map(p=>({label:p.name, correct:p.id===pl.id})));
+}
+function countryOpts(pl){
+  const seen=new Set([pl.country]), others=[];
+  for(const p of shuffle(PLACES)){ if(!seen.has(p.country)){ seen.add(p.country); others.push(p.country); } if(others.length>=3) break; }
+  return shuffle([{label:pl.country,correct:true},...others.map(c=>({label:c,correct:false}))]);
+}
+function animalOpts(pl){
+  const mine=pl.animals[Math.floor(Math.random()*pl.animals.length)];
+  const my=new Set(pl.animals.map(a=>a.toLowerCase()));
+  const others=[];
+  PLACES.forEach(p=>{ if(p.id!==pl.id && p.animals) p.animals.forEach(a=>{ if(!my.has(a.toLowerCase())) others.push(a); }); });
+  const uniq=[...new Set(others)];
+  return shuffle([{label:mine,correct:true},...shuffle(uniq).slice(0,3).map(a=>({label:a,correct:false}))]);
+}
+function renderOptions(list){
+  const el=QG('quizOptions'); el.hidden=false;
+  el.innerHTML=list.map(o=>`<button class="quiz-opt" data-c="${o.correct?1:0}">${o.label}</button>`).join('');
+  el.querySelectorAll('.quiz-opt').forEach(b=> b.onclick=()=>optionClick(b));
+}
+function quizRound(){
+  clearGeo(); geoGuessing=false; quiz.answered=false; quiz.guess=null;
+  QG('quizNext').hidden=true; QG('quizGeo').hidden=true; QG('quizOptions').hidden=false;
+  { const bar=QG('quizBar').firstElementChild; bar.classList.remove('low'); bar.style.transition='none'; bar.style.width='100%'; }
+  let avail=quiz.pool.filter(p=>!quiz.used.has(p.id));
+  if(!avail.length){ quiz.used.clear(); avail=quiz.pool.slice(); }
+  const pl=avail[Math.floor(Math.random()*avail.length)];
+  quiz.used.add(pl.id); quiz.answer=pl; quiz.qIndex++;
+  setLabels([]);
+  const type=pickType(pl); quiz.qType=type;
+  const media=QG('quizMedia'), qEl=QG('quizQ'), hintEl=QG('quizHint');
+  hintEl.innerHTML='';
+  if(type==='geo'){
+    media.innerHTML=quizMediaHTML(pl,false);
+    qEl.innerHTML=`Где на планете <em>${pl.name}</em>?`;
+    hintEl.innerHTML=`<span class="qi">${CATS[pl.cat].emoji}</span>${pl.country}`;
+    QG('quizOptions').hidden=true; QG('quizGeo').hidden=false;
+    geoGuessing=true;
+  } else if(type==='fact'){
+    media.innerHTML=quizMediaHTML(pl,true);
+    qEl.textContent='Угадай место по факту:';
+    const f=(pl.facts[Math.floor(Math.random()*pl.facts.length)]||'').split(pl.name).join('это место');
+    hintEl.innerHTML=`<span class="qi">${CATS[pl.cat].emoji}</span>${f}`;
+    renderOptions(nameOpts(pl)); startTimer(22);
+  } else if(type==='country'){
+    media.innerHTML=quizMediaHTML(pl,false);
+    qEl.innerHTML=`В какой стране <em>${pl.name}</em>?`;
+    renderOptions(countryOpts(pl)); startTimer(18);
+  } else if(type==='animal'){
+    media.innerHTML=quizMediaHTML(pl,false);
+    qEl.innerHTML=`Кто из них живёт здесь — <em>${pl.name}</em>?`;
+    renderOptions(animalOpts(pl)); startTimer(20);
+  } else if(type==='truefalse'){
+    media.innerHTML=quizMediaHTML(pl,false);
+    const own=Math.random()<0.5; let stmt, isTrue;
+    if(own){ stmt=pl.facts[Math.floor(Math.random()*pl.facts.length)]; isTrue=true; }
+    else { const of=PLACES.filter(p=>p.id!==pl.id && p.facts&&p.facts.length); const o=of[Math.floor(Math.random()*of.length)]; stmt=o.facts[Math.floor(Math.random()*o.facts.length)]; isTrue=false; }
+    stmt=(stmt||'').split(pl.name).join('это место');
+    qEl.innerHTML=`Про <em>${pl.name}</em> — правда или миф?`;
+    hintEl.innerHTML=`<span class="qi">💬</span>«${stmt}»`;
+    renderOptions(shuffle([{label:'✓ Правда', correct:isTrue},{label:'✕ Миф', correct:!isTrue}])); startTimer(18);
+  } else { // name
+    media.innerHTML=quizMediaHTML(pl,false);
+    qEl.textContent='Что это за место?';
+    renderOptions(nameOpts(pl)); startTimer(18);
+  }
+  updateHud();
+}
+
+/* ---- таймер ---- */
+function startTimer(sec){
+  clearTimer(); quiz.timeMax=sec; quiz.tStart=performance.now();
+  const bar=QG('quizBar').firstElementChild;
+  bar.classList.remove('low'); bar.style.transition='none'; bar.style.width='100%';
+  bar.getBoundingClientRect();
+  bar.style.transition=`width ${sec}s linear`; bar.style.width='0%';
+  quiz.timeoutId=setTimeout(onTimeout, sec*1000);
+  quiz.lowId=setTimeout(()=>{ if(!quiz.answered) bar.classList.add('low'); }, Math.max(0,(sec-5))*1000);
+}
+function clearTimer(){ if(quiz){ clearTimeout(quiz.timeoutId); clearTimeout(quiz.lowId); } }
+function timeLeftFrac(){ return quiz.timeMax? Math.max(0, 1-(performance.now()-quiz.tStart)/(quiz.timeMax*1000)) : 0; }
+function onTimeout(){
+  if(!quiz || quiz.answered) return;
+  if(quiz.qType==='geo'){ revealGeo(true); return; }
+  quiz.answered=true;
+  document.querySelectorAll('#quizOptions .quiz-opt').forEach(o=>{ o.style.pointerEvents='none'; if(o.dataset.c==='1') o.classList.add('right'); });
+  finishAnswer(false, 0);
+}
+
+/* ---- ответ (варианты) ---- */
+function optionClick(b){
+  if(quiz.answered) return; quiz.answered=true; clearTimer();
+  const correct=b.dataset.c==='1', frac=timeLeftFrac();
+  document.querySelectorAll('#quizOptions .quiz-opt').forEach(o=>{ o.style.pointerEvents='none'; if(o.dataset.c==='1') o.classList.add('right'); });
+  if(!correct) b.classList.add('wrong');
+  finishAnswer(correct, correct ? 100+Math.round(80*frac) : 0);
+}
+function finishAnswer(correct, basePts){
+  if(correct){
+    quiz.streak++; quiz.bestStreak=Math.max(quiz.bestStreak,quiz.streak); quiz.correctCount++;
+    const mult=1+Math.min(quiz.streak-1,4)*0.25;
+    const pts=Math.round(basePts*mult);
+    quiz.score+=pts; floatPts('+'+pts+(mult>1?'  ×'+(''+mult).replace(/(\.\d)0+$/,'$1'):'')); qSound('right'); pulseStreak();
+  } else {
+    quiz.streak=0; quiz.missed.push(quiz.answer);
+    if(quiz.mode==='survival') quiz.lives--;
+    qSound('wrong'); shakeCard();
+  }
+  const pl=quiz.answer;
+  setLabels([pl]); flyTo({lat:pl.lat,lon:pl.lon},false); lastInteract=performance.now();
+  const fact=(pl.facts&&pl.facts[0])?pl.facts[0]:'';
+  QG('quizHint').innerHTML=`<b>${pl.name}</b> · ${pl.country}<span class="qfact">${fact}</span>`;
+  QG('quizNext').hidden=false;
+  updateHud();
+}
+
+/* ---- HUD / сок ---- */
+function updateHud(){
+  QG('quizScore').textContent=quiz.score;
+  const st=QG('quizStreak');
+  if(quiz.streak>=2){ const m=1+Math.min(quiz.streak-1,4)*0.25; st.hidden=false; st.textContent='🔥 '+quiz.streak+' · ×'+(''+m).replace(/(\.\d)0+$/,'$1'); }
+  else st.hidden=true;
+  const prog=QG('quizProg');
+  if(quiz.mode==='survival') prog.textContent='♥'.repeat(Math.max(0,quiz.lives))||'—';
+  else prog.textContent=Math.min(quiz.qIndex,quiz.total)+' / '+quiz.total;
+}
+function floatPts(txt){ const c=QG('quizCard'), el=document.createElement('div'); el.className='q-float'; el.textContent=txt; c.appendChild(el); setTimeout(()=>el.remove(),1000); }
+function pulseStreak(){ const st=QG('quizStreak'); st.classList.remove('pulse'); void st.offsetWidth; st.classList.add('pulse'); }
+function shakeCard(){ const c=QG('quizCard'); c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake'); }
+
+/* ---- ГЕО: «ткни, где это на планете» ---- */
+function vec3ToLatLon(v){
+  const r=v.length()||1;
+  const lat=90 - Math.acos(Math.max(-1,Math.min(1,v.y/r)))*180/Math.PI;
+  let lon=Math.atan2(v.z, -v.x)*180/Math.PI - 180;
+  while(lon<-180) lon+=360; while(lon>180) lon-=360;
+  return {lat, lon};
+}
+function haversine(a,b){
+  const Rk=6371, dLat=(b.lat-a.lat)*Math.PI/180, dLon=(b.lon-a.lon)*Math.PI/180;
+  const la1=a.lat*Math.PI/180, la2=b.lat*Math.PI/180;
+  const h=Math.sin(dLat/2)**2 + Math.cos(la1)*Math.cos(la2)*Math.sin(dLon/2)**2;
+  return 2*Rk*Math.asin(Math.min(1,Math.sqrt(h)));
+}
+function captureGeoGuess(e){
+  if(!quiz || !geoGuessing || quiz.answered) return;
+  setPointer(e); raycaster.setFromCamera(pointer,camera);
+  const p=new THREE.Vector3();
+  const hit=raycaster.ray.intersectSphere(new THREE.Sphere(new THREE.Vector3(0,0,0), R), p);
+  if(!hit) return;
+  globe.updateMatrixWorld();
+  const local=globe.worldToLocal(p.clone());
+  quiz.guess=vec3ToLatLon(local);
+  geoGuessing=false; renderer.domElement.style.cursor='grab';
+  revealGeo(false);
+}
+function addGeoMarker(lat,lon,color,big){
+  const grp=new THREE.Group(); grp.position.copy(latLonToVec3(lat,lon,R*1.012));
+  grp.add(new THREE.Mesh(new THREE.SphereGeometry(big?.02:.016,16,16), new THREE.MeshBasicMaterial({color})));
+  const halo=new THREE.Sprite(new THREE.SpriteMaterial({map:makeHalo(),color,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));
+  halo.scale.set(big?.17:.12,big?.17:.12,1); grp.add(halo);
+  globe.add(grp); geoObjs.push(grp);
+}
+function addGeoArc(a,b){
+  const va=latLonToVec3(a.lat,a.lon,1), vb=latLonToVec3(b.lat,b.lon,1), pts=[];
+  for(let i=0;i<=40;i++){ pts.push(va.clone().lerp(vb,i/40).normalize().multiplyScalar(R*1.02)); }
+  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({color:0x8ad8ff,transparent:true,opacity:.85}));
+  globe.add(line); geoObjs.push(line);
+}
+function clearGeo(){ geoObjs.forEach(o=>{ globe.remove(o); }); geoObjs=[]; }
+function revealGeo(timedOut){
+  if(quiz.answered) return; quiz.answered=true; geoGuessing=false;
+  const pl=quiz.answer; clearGeo();
+  addGeoMarker(pl.lat,pl.lon,0x48c07a,true);
+  let dist=null, pts=0, correct=false;
+  if(quiz.guess && !timedOut){
+    addGeoMarker(quiz.guess.lat,quiz.guess.lon,0xff6b3d,false);
+    addGeoArc(quiz.guess,{lat:pl.lat,lon:pl.lon});
+    dist=Math.round(haversine(quiz.guess,{lat:pl.lat,lon:pl.lon}));
+    pts=Math.max(0,Math.round(220*(1-dist/5000)));
+    correct=dist<800;
+  }
+  if(correct){ quiz.streak++; quiz.bestStreak=Math.max(quiz.bestStreak,quiz.streak); quiz.correctCount++; if(pts) quiz.score+=pts; floatPts('+'+pts); qSound('right'); pulseStreak(); }
+  else { quiz.streak=0; quiz.missed.push(pl); if(quiz.mode==='survival') quiz.lives--; if(pts){ quiz.score+=pts; floatPts('+'+pts); } qSound('wrong'); shakeCard(); }
+  setLabels([pl]); flyTo({lat:pl.lat,lon:pl.lon},false); lastInteract=performance.now();
+  QG('quizGeo').hidden=true;
+  const dtxt = (timedOut||!quiz.guess) ? 'Время вышло' : (dist<80?'Прямо в точку!':'Промах '+dist.toLocaleString('ru-RU')+' км');
+  QG('quizHint').innerHTML=`<b>${pl.name}</b> · ${pl.country}<span class="qfact">${dtxt}${pts?(' · +'+pts+' очков'):''}</span>`;
+  QG('quizNext').hidden=false;
+  updateHud();
+}
+
+/* ---- переход / финал ---- */
+function quizNextStep(){
+  const over = (quiz.mode==='survival' && quiz.lives<=0) || (quiz.mode!=='survival' && quiz.qIndex>=quiz.total);
+  if(over) quizEnd(); else quizRound();
+}
+function quizEnd(){
+  clearTimer(); clearGeo(); geoGuessing=false;
+  QG('quizPlay').hidden=true; QG('quizEnd').hidden=false;
+  const asked=quiz.qIndex||1, acc=Math.round(quiz.correctCount/asked*100);
+  let rank='Новичок', emo='🧭';
+  if(acc>=90){ rank='Хранитель планеты'; emo='🌍'; }
+  else if(acc>=70){ rank='Исследователь'; emo='🧭'; }
+  else if(acc>=50){ rank='Путешественник'; emo='✈️'; }
+  else if(acc>=30){ rank='Турист'; emo='🎒'; }
+  QG('qeRank').textContent=emo; QG('qeTitle').textContent=rank;
+  QG('qeSub').textContent=`Счёт ${quiz.score} · ты знаешь планету на ${acc}%`;
+  QG('qeStats').innerHTML=
+    `<div class="qe-stat"><b>${quiz.score}</b><span>ОЧКОВ</span></div>`+
+    `<div class="qe-stat"><b>${quiz.correctCount}/${asked}</b><span>ВЕРНО</span></div>`+
+    `<div class="qe-stat"><b>${quiz.bestStreak}</b><span>СЕРИЯ</span></div>`;
+  const missed=[...new Map(quiz.missed.map(p=>[p.id,p])).values()].slice(0,8), mel=QG('qeMissed');
+  if(missed.length){
+    mel.innerHTML=`<h4>Стоит изучить</h4>`+missed.map(p=>`<span class="qe-miss" data-id="${p.id}">${CATS[p.cat].emoji} ${p.name}</span>`).join('');
+    mel.querySelectorAll('.qe-miss').forEach(s=> s.onclick=()=>{ const pl=PLACES.find(x=>x.id===s.dataset.id); endQuiz(); if(pl) flyTo(pl,true); });
+    mel.hidden=false;
+  } else { mel.innerHTML=''; mel.hidden=true; }
+  quiz._acc=acc; quiz._rank=rank;
+  qSound('win');
+}
+function quizShare(){
+  const t=`🌍 Аура Земли — викторина\nСчёт: ${quiz.score} · точность ${quiz._acc||0}% · серия ${quiz.bestStreak}\nЗвание: ${quiz._rank||''}`;
+  const btn=QG('qeShare'), done=()=>{ const o='Поделиться'; btn.textContent='Скопировано ✓'; setTimeout(()=>btn.textContent=o,1600); };
+  if(navigator.share){ navigator.share({title:'Аура Земли', text:t}).catch(()=>{}); }
+  else if(navigator.clipboard){ navigator.clipboard.writeText(t).then(done).catch(done); }
+  else done();
+}
+function endQuiz(){
+  clearTimer(); clearGeo(); geoGuessing=false;
+  QG('quiz').hidden=true; document.body.classList.remove('quizing');
+  QG('quizPlay').hidden=true; QG('quizEnd').hidden=true; QG('quizIntro').hidden=false;
+  setLabels([]); quiz=null;
 }
 
 /* ---- фильтры ---- */
@@ -1846,7 +2942,7 @@ function runSearch(q){
 }
 function pick(pl){
   if(hotelsMode) closeLeft();
-  currentList=null;
+  currentList=null; mineActive=false;
   resultsEl.classList.remove('show'); searchInput.value=pl.name; searchInput.blur();
   flyTo(pl,true);
 }
@@ -1889,12 +2985,24 @@ function addEvents(){
   document.getElementById('surprise').onclick=surprise;
   document.getElementById('journey').onclick=toggleTour;
   document.getElementById('hotelsBtn').onclick=openHotels;
+  document.getElementById('mineBtn').onclick=openMine;
+  document.getElementById('quizBtn').onclick=openQuizIntro;
+  document.getElementById('quizClose').onclick=endQuiz;
+  document.getElementById('quizNext').onclick=quizNextStep;
+  document.getElementById('quizMute').onclick=()=>{ if(!quiz)return; quiz.muted=!quiz.muted; document.getElementById('quizMute').textContent=quiz.muted?'🔇':'🔊'; };
+  document.getElementById('qeAgain').onclick=openQuizIntro;
+  document.getElementById('qeShare').onclick=quizShare;
+  document.querySelectorAll('#quizIntro .qi-mode').forEach(b=> b.onclick=()=>{
+    if(b.dataset.mode==='cat'){ buildCatChips(); document.getElementById('quizCats').hidden=false; }
+    else beginQuiz(b.dataset.mode);
+  });
   document.getElementById('panelLeftClose').onclick=closeLeft;
   document.getElementById('panelClose').onclick=()=>{
-    stopTour(); closePanel(); currentList=null;
+    stopTour(); closePanel(); currentList=null; mineActive=false;
     activeCat=activeRoute=null; clearChipState(); showAllPins(); setLabels([]); clearRoutes(); hideJourney();
   };
   window.addEventListener('resize',onResize);
+  updateMineCount();
 }
 
 function setPointer(e){
@@ -1909,12 +3017,15 @@ function pickPin(e){
   return hit.length?hit[0].object.userData.pinGroup:null;
 }
 function clickSelect(e){
+  if(geoGuessing){ captureGeoGuess(e); return; }
+  if(quiz) return;
   const g=pickPin(e);
   if(!g) return;
   if(hotelsMode) openCountry(g.userData.hotelKey);
   else flyTo(g.userData.place,true);
 }
 function hover(e){
+  if(quiz){ renderer.domElement.style.cursor=geoGuessing?'crosshair':'grab'; tooltip.classList.remove('show'); return; }
   const g=pickPin(e);
   const dom=renderer.domElement;
   if(g){
@@ -1931,7 +3042,7 @@ function hover(e){
 }
 function surprise(){
   if(hotelsMode) closeLeft();
-  currentList=null;
+  currentList=null; mineActive=false;
   const pl = PLACES[Math.floor(Math.random()*PLACES.length)];
   // сбрасываем фильтры для чистого «броска»
   activeCat=activeRoute=null; clearChipState(); showAllPins(); clearRoutes(); setLabels([]);
@@ -2012,7 +3123,7 @@ function openHotels(){
   hotelsMode = true;
   // выходим из режимов планеты
   activeCat = activeRoute = null; clearChipState(); clearRoutes(); setLabels([]); hideJourney();
-  currentList = null; showAllPins();
+  currentList = null; mineActive = false; showAllPins();
   closePanel();
   pinGroup.visible = false; hotelPinGroup.visible = true;
   renderCountryList();
@@ -2037,6 +3148,7 @@ function renderCountryList(){
   el.querySelectorAll('.country').forEach(c=> c.onclick=()=>openCountry(c.dataset.k));
 }
 function openCountry(key){
+  if(DEMO){ raiseLock(); return; }
   const h = HOTELS[key]; if(!h) return;
   hotelsMode = true; hotelPinGroup.visible = true; pinGroup.visible = false;
   flyTo({lat:h.lat, lon:h.lon}, false); lastInteract = performance.now();
@@ -2098,6 +3210,8 @@ function remember(v){ try{ localStorage.setItem('aura_unlocked', v?'1':''); }cat
 function wasUnlocked(){ try{ return localStorage.getItem('aura_unlocked')==='1'; }catch(e){ return false; } }
 
 function unlock(save){
+  DEMO=false;
+  const dh=document.getElementById('demoHint'); if(dh) dh.classList.remove('show');
   if(save) remember(true);
   const g=document.getElementById('gate');
   g.classList.add('unlocked');
@@ -2105,6 +3219,53 @@ function unlock(save){
   // если сайт открыт по ссылке на место — сразу летим туда
   const id = deepLinkId();
   if(id){ const pl = PLACES.find(p=>p.id===id); if(pl) setTimeout(()=>flyTo(pl,true), 950); }
+}
+
+/* ---------- ВИТРИНА → ДЕМО → ЗАМОК ---------- */
+let DEMO = false;
+const FREE_IDS = new Set(["socotra","uyuni","nyiragongo"]);
+
+function gateEl(){ return document.getElementById('gate'); }
+function showGate(){ const g=gateEl(); g.style.display='flex'; requestAnimationFrame(()=>g.classList.remove('unlocked')); }
+function hideGate(){ const g=gateEl(); g.classList.add('unlocked'); setTimeout(()=>{ if(g.classList.contains('unlocked')) g.style.display='none'; }, 750); }
+
+function showShowcase(){
+  document.getElementById('showcase').hidden=false;
+  document.querySelector('.gate-card').hidden=true;
+  showGate();
+}
+function showCode(place){
+  document.getElementById('showcase').hidden=true;
+  document.querySelector('.gate-card').hidden=false;
+  const note=document.getElementById('gateLocked');
+  const back=document.getElementById('gateBack');
+  if(place && place.name){
+    note.hidden=false;
+    note.innerHTML = `<b>«${place.name}»</b> — в полном атласе. Внутри ещё 76 таких мест.`;
+  } else { note.hidden=true; }
+  if(back) back.textContent = DEMO ? '← продолжить осмотр планеты' : '← назад к витрине';
+  showGate();
+  setTimeout(()=>{ const i=document.getElementById('gateInput'); if(i) i.focus(); }, 300);
+}
+function raiseLock(place){ showCode(place||null); }
+
+function showDemoHint(){
+  let h=document.getElementById('demoHint');
+  if(!h){
+    h=document.createElement('div'); h.id='demoHint'; h.className='demo-hint';
+    h.innerHTML='🌍 Демо · открыто <b>3 из 80</b>. Крути планету и жми на точки.<span class="x" id="demoHintX" role="button" aria-label="Скрыть">×</span>';
+    (document.getElementById('app')||document.body).appendChild(h);
+    h.querySelector('#demoHintX').addEventListener('click',()=>h.classList.remove('show'));
+  }
+  requestAnimationFrame(()=>h.classList.add('show'));
+  clearTimeout(showDemoHint._t);
+  showDemoHint._t=setTimeout(()=>{ if(h) h.classList.remove('show'); }, 9000);
+}
+function startDemo(){ DEMO=true; hideGate(); showDemoHint(); }
+function openFree(id){
+  const pl = PLACES.find(p=>p.id===id); if(!pl) return;
+  startDemo();
+  setTimeout(()=>flyTo(pl,true), 780);   // после того как замок растворится
 }
 
 function initGate(){
@@ -2119,6 +3280,23 @@ function initGate(){
   if(LOGO_URL){ gLogo.src=LOGO_URL; gLogo.hidden=false; }
   // ссылка «купить»
   if(BUY_URL){ buy.href=BUY_URL; buy.hidden=false; }
+  // логотип на витрине
+  if(LOGO_URL){ const s=document.getElementById('scLogo'); s.src=LOGO_URL; s.hidden=false; }
+
+  // старт — с витрины
+  showShowcase();
+
+  // витрина: главные кнопки
+  document.getElementById('scTry').addEventListener('click', ()=>openFree('socotra'));
+  document.getElementById('scHave').addEventListener('click', ()=>showCode(null));
+  document.getElementById('gateBack').addEventListener('click', ()=>{ if(DEMO) hideGate(); else showShowcase(); });
+
+  // витрина: карточки-образцы (клик и Enter/Space)
+  document.querySelectorAll('.sc-card').forEach(c=>{
+    const id=c.getAttribute('data-free');
+    c.addEventListener('click', ()=>openFree(id));
+    c.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openFree(id); } });
+  });
 
   
   // сбрасываем старую «память» от прошлого #unlock и всегда показываем замок
@@ -2152,7 +3330,6 @@ function initGate(){
     });
   }
 
-  setTimeout(()=>{ if(!wasUnlocked()) input.focus(); }, 400);
 
   // ---- «жидкое стекло»: блик следует за курсором и мягко дышит сам ----
   const card=gate.querySelector('.gate-card');
