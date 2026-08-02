@@ -772,7 +772,7 @@
 
     <div class="sc-eyebrow">Дикие места Земли</div>
     <h1 class="sc-title">Целая планета <em>помещается в ладони</em></h1>
-    <p class="sc-sub">Крути живую 3D-Землю, лови линию между днём и ночью, открывай самые дикие уголки планеты — от лавовых озёр до зеркальных солончаков. Три места можно открыть прямо сейчас, бесплатно.</p>
+    <p class="sc-sub">Вращай настоящую 3D-Землю и смотри, как день сменяется ночью. Открывай самые дикие места планеты — лавовые озёра, зеркальные солончаки, затерянные острова. Три места доступны прямо сейчас, бесплатно.</p>
 
     <div class="sc-stats">
       <div class="sc-stat"><b>80</b><i>мест</i></div>
@@ -2189,7 +2189,11 @@ function applyCameraFromSpherical(){
 
 /* перелёт к точке */
 function flyTo(place, open=true){
-  if(DEMO && place && place.id && !FREE_IDS.has(place.id)){ raiseLock(place); return; }
+  if(DEMO && open && place && place.id){
+    if(!demoOpened.has(place.id) && demoOpened.size >= FREE_LIMIT){ raiseLock(place); return; }
+    demoOpened.add(place.id);
+    if(typeof updateDemoHint==='function') updateDemoHint();
+  }
   const dir = latLonToVec3(place.lat, place.lon, 1).normalize();
   const targetPhi = Math.acos(Math.max(-1,Math.min(1,dir.y)));
   let targetTheta = Math.atan2(dir.x, dir.z);
@@ -3223,7 +3227,8 @@ function unlock(save){
 
 /* ---------- ВИТРИНА → ДЕМО → ЗАМОК ---------- */
 let DEMO = false;
-const FREE_IDS = new Set(["socotra","uyuni","nyiragongo"]);
+const FREE_LIMIT = 3;                 // сколько любых мест открыто бесплатно
+let demoOpened = new Set();           // какие места человек уже открыл в демо
 
 function gateEl(){ return document.getElementById('gate'); }
 function showGate(){ const g=gateEl(); g.style.display='flex'; requestAnimationFrame(()=>g.classList.remove('unlocked')); }
@@ -3241,7 +3246,9 @@ function showCode(place){
   const back=document.getElementById('gateBack');
   if(place && place.name){
     note.hidden=false;
-    note.innerHTML = `<b>«${place.name}»</b> — в полном атласе. Внутри ещё 76 таких мест.`;
+    note.innerHTML = DEMO
+      ? `Ты открыл <b>3 бесплатных места</b>. «${place.name}» и ещё 77 уголков планеты — в полном атласе.`
+      : `<b>«${place.name}»</b> — в полном атласе. Внутри ещё 77 таких мест.`;
   } else { note.hidden=true; }
   if(back) back.textContent = DEMO ? '← продолжить осмотр планеты' : '← назад к витрине';
   showGate();
@@ -3253,15 +3260,24 @@ function showDemoHint(){
   let h=document.getElementById('demoHint');
   if(!h){
     h=document.createElement('div'); h.id='demoHint'; h.className='demo-hint';
-    h.innerHTML='🌍 Демо · открыто <b>3 из 80</b>. Крути планету и жми на точки.<span class="x" id="demoHintX" role="button" aria-label="Скрыть">×</span>';
     (document.getElementById('app')||document.body).appendChild(h);
-    h.querySelector('#demoHintX').addEventListener('click',()=>h.classList.remove('show'));
   }
+  updateDemoHint();
   requestAnimationFrame(()=>h.classList.add('show'));
   clearTimeout(showDemoHint._t);
   showDemoHint._t=setTimeout(()=>{ if(h) h.classList.remove('show'); }, 9000);
 }
-function startDemo(){ DEMO=true; hideGate(); showDemoHint(); }
+function updateDemoHint(){
+  const h=document.getElementById('demoHint'); if(!h) return;
+  const left=Math.max(0, FREE_LIMIT - demoOpened.size);
+  const txt = left>0
+    ? `🌍 Демо · открой <b>${left}</b> ${plural(left,'место','места','мест')} бесплатно. Жми на любые точки.`
+    : `🌍 Демо · 3 места открыто. Дальше — по коду доступа.`;
+  h.innerHTML = txt + `<span class="x" id="demoHintX" role="button" aria-label="Скрыть">×</span>`;
+  h.querySelector('#demoHintX').addEventListener('click',()=>h.classList.remove('show'));
+}
+function plural(n,one,few,many){ const m=n%100, d=n%10; return (m>=11&&m<=14)?many:(d===1?one:(d>=2&&d<=4?few:many)); }
+function startDemo(){ DEMO=true; demoOpened=new Set(); hideGate(); showDemoHint(); }
 function openFree(id){
   const pl = PLACES.find(p=>p.id===id); if(!pl) return;
   startDemo();
@@ -3287,7 +3303,7 @@ function initGate(){
   showShowcase();
 
   // витрина: главные кнопки
-  document.getElementById('scTry').addEventListener('click', ()=>openFree('socotra'));
+  document.getElementById('scTry').addEventListener('click', ()=>startDemo());
   document.getElementById('scHave').addEventListener('click', ()=>showCode(null));
   document.getElementById('gateBack').addEventListener('click', ()=>{ if(DEMO) hideGate(); else showShowcase(); });
 
