@@ -594,8 +594,8 @@
     color:#8affc8;text-shadow:0 3px 18px rgba(72,255,180,.5);pointer-events:none;animation:qfloat 1s ease-out forwards;white-space:nowrap}
   @keyframes qfloat{0%{opacity:0;transform:translate(-50%,6px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-42px) scale(1.1)}}
 
-  .quiz-body{padding:4px 22px 22px;margin-top:-14px;position:relative;z-index:2}
-  .quiz-q{margin:0 0 12px;font-family:var(--display);font-size:20px;font-weight:600;color:#fff;line-height:1.25}
+  .quiz-body{padding:16px 20px 20px;margin-top:0;position:relative;z-index:2}
+  .quiz-q{margin:0 0 12px;font-family:var(--display);font-size:21px;font-weight:600;color:#fff;line-height:1.3;letter-spacing:.003em}
   .quiz-q em{font-style:normal;color:var(--gold)}
   .quiz-hint{font-size:13.5px;color:#c6cfdd;line-height:1.55;margin-bottom:14px;min-height:20px}
   .quiz-hint .qi{font-size:16px;margin-right:6px}
@@ -638,6 +638,197 @@
     background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
   .qe-share:hover{border-color:rgba(92,200,255,.5)}
 
+  /* ---------- Миллионер: лестница, подсказки, ачивки ---------- */
+  .qi-diff{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
+  .qi-hint2{margin:14px 0 0;font-size:12px;color:var(--muted);line-height:1.5}
+  .qi-rec{margin-top:12px;padding:11px 14px;border-radius:14px;font-size:13px;color:#dfe7f2;
+    background:linear-gradient(150deg,rgba(92,200,255,.14),rgba(92,200,255,.03));border:1px solid rgba(92,200,255,.3)}
+  .qi-rec b{font-family:var(--display);font-weight:600;color:#fff}
+  .qi-achbtn{margin-top:12px;width:100%;padding:12px;border-radius:13px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;
+    color:#dfe7f2;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+  .qi-achbtn:hover{border-color:rgba(92,200,255,.5)}
+
+  .rank-strip{position:relative;z-index:3;margin-top:-18px;padding:0 18px 2px}
+  .rank-now{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+  .rank-now b{font-family:var(--display);font-size:15.5px;font-weight:600;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+  .rank-now i{font-style:normal;font-size:11.5px;color:#aab6c6;margin-left:auto;white-space:nowrap}
+  .rank-bar{display:flex;gap:3px}
+  .rank-seg{flex:1;height:7px;border-radius:3px;background:rgba(255,255,255,.1);position:relative;transition:background .3s}
+  .rank-seg.done{background:linear-gradient(90deg,#4fd1e0,#5cc8ff)}
+  .rank-seg.now{background:#fff;box-shadow:0 0 10px rgba(255,255,255,.8)}
+  .rank-seg.safe::after{content:"★";position:absolute;left:50%;top:-13px;transform:translateX(-50%);font-size:9px;color:var(--gold)}
+  .rank-seg.safe.done::after{color:#ffd58a}
+
+  .lifelines{display:flex;gap:8px;margin:0 0 12px}
+  .ll{flex:1;padding:10px 6px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:700;color:#eaf1fa;
+    background:linear-gradient(150deg,rgba(255,255,255,.09),rgba(255,255,255,.03)),rgba(14,22,36,.4);
+    border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.25);transition:all .15s;line-height:1.3}
+  .ll .ll-ic{display:block;font-size:16px;margin-bottom:3px}
+  .ll:hover:not(.used){border-color:rgba(92,200,255,.55);transform:translateY(-2px)}
+  .ll.used{opacity:.32;cursor:default;filter:grayscale(1)}
+  .quiz-opt.gone{opacity:.15;pointer-events:none;filter:grayscale(1)}
+  .poll{display:flex;align-items:flex-end;gap:10px;height:74px;padding:12px 6px 0;margin-bottom:10px}
+  .poll[hidden]{display:none}
+  .poll-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+  .poll-bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#5cc8ff,#2f83cf);min-height:3px;transition:height .6s cubic-bezier(.22,1,.36,1)}
+  .poll-lab{font-size:10.5px;color:var(--muted);font-weight:700}
+  .guide{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;margin-bottom:11px;font-size:13px;line-height:1.5;color:#dfe7f2;
+    background:linear-gradient(150deg,rgba(255,214,138,.14),rgba(255,214,138,.03));border:1px solid rgba(255,200,120,.32)}
+  .guide[hidden]{display:none}
+  .guide .g-ic{font-size:19px;flex:none}
+  .guide b{color:#ffd58a}
+
+  .quiz-walk{margin-top:9px;width:100%;padding:11px;border-radius:12px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;
+    color:#ffd58a;background:rgba(255,200,120,.08);border:1px solid rgba(255,200,120,.35)}
+  .quiz-walk[hidden]{display:none}
+  .quiz-walk:hover{background:rgba(255,200,120,.16)}
+
+  .ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0 4px;text-align:left}
+  .ach{display:flex;gap:9px;align-items:flex-start;padding:11px;border-radius:13px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11)}
+  .ach.on{background:linear-gradient(150deg,rgba(255,214,138,.16),rgba(255,214,138,.04));border-color:rgba(255,200,120,.4)}
+  .ach .a-ic{font-size:19px;flex:none;filter:grayscale(1);opacity:.45}
+  .ach.on .a-ic{filter:none;opacity:1}
+  .ach .a-t{font-size:12.5px;font-weight:700;color:#eaf1fa;line-height:1.25}
+  .ach .a-d{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.35}
+  .ach-toast{position:fixed;left:50%;bottom:120px;transform:translateX(-50%) translateY(14px);z-index:75;pointer-events:none;
+    display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-size:13.5px;font-weight:700;color:#2a1604;
+    background:linear-gradient(135deg,#ffe6a7,#ffb86b);box-shadow:0 14px 40px rgba(255,160,80,.45);opacity:0;transition:opacity .5s,transform .5s}
+  .ach-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:760px){
+    .quiz{bottom:12px;width:min(440px,96vw)}
+    .quiz-media{height:132px}
+    .quiz-body{padding:14px 15px 16px}
+    .quiz-q{font-size:18.5px;line-height:1.32}
+    .quiz-hint{font-size:13px;margin-bottom:12px}
+    .rank-strip{padding:0 15px 2px}
+    .rank-now b{font-size:14px}
+    .rank-now i{font-size:10.5px}
+    .rank-seg{height:6px}
+    .lifelines{gap:6px;margin-bottom:10px}
+    .ll{font-size:10px;padding:8px 3px}
+    .ll .ll-ic{font-size:14px;margin-bottom:2px}
+    .quiz-opt{padding:12px 13px;font-size:14px}
+    .quiz-hud{top:11px;left:11px;right:46px;gap:6px}
+    .q-score{font-size:12px;padding:5px 10px}
+    .q-streak{font-size:11px;padding:5px 9px}
+    .q-prog{font-size:11px;padding:4px 8px}
+    .quiz-close{top:10px;right:11px;width:29px;height:29px}
+    .guide{font-size:12.5px;padding:10px 12px}
+    #quizIntro,#quizEnd,#quizAch{padding:22px 17px 18px}
+    .qi-title{font-size:20px}
+    .qi-sub{font-size:13.5px}
+    .qi-diff{gap:9px}
+    .qi-mode{padding:13px 13px}
+    .qi-mode b{font-size:15px}
+    .ach-grid{grid-template-columns:1fr;gap:8px}
+  }
+  @media (max-width:420px){
+    .ll{font-size:9.5px}
+    .quiz-q{font-size:17.5px}
+    .qi-diff{grid-template-columns:1fr}
+  }
+
+  /* ---------- Кинотур · Звук · Место дня · Паспорт ---------- */
+  .tour-btn{position:absolute;top:220px;right:26px;z-index:25;display:flex;align-items:center;gap:8px;
+    padding:11px 16px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#eaf1fa;
+    background:linear-gradient(150deg,rgba(255,255,255,.1),rgba(255,255,255,.03)),rgba(14,22,36,.5);
+    border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 26px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.3);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .14s,border-color .18s}
+  .tour-btn:hover{transform:translateY(-1px);border-color:rgba(92,200,255,.5)}
+  .tour-btn .tb-ic{font-size:15px}
+  .sound-control{position:absolute;top:270px;right:26px;z-index:25;display:flex;align-items:center;gap:9px;flex-direction:row-reverse}
+  .snd-btn{position:relative;width:44px;height:44px;border-radius:50%;cursor:pointer;flex:none;
+    display:flex;align-items:center;justify-content:center;font-size:17px;color:#eaf1fa;
+    background:linear-gradient(150deg,rgba(255,255,255,.1),rgba(255,255,255,.03)),rgba(14,22,36,.5);
+    border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 26px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.3);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .14s,border-color .18s}
+  .snd-btn:hover{transform:translateY(-1px);border-color:rgba(92,200,255,.5)}
+  .snd-btn.on{color:#04121f;background:linear-gradient(135deg,#dff3ff,#9adcff 60%,#5cc8ff);border-color:transparent;box-shadow:0 8px 22px rgba(92,200,255,.45)}
+  .volume-popover{width:0;opacity:0;pointer-events:none;overflow:hidden;display:flex;align-items:center;gap:8px;padding:0;
+    border-radius:999px;background:linear-gradient(150deg,rgba(255,255,255,.12),rgba(255,255,255,.035)),rgba(10,17,29,.74);
+    border:1px solid transparent;box-shadow:0 10px 30px rgba(0,0,0,.4);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    transition:width .25s cubic-bezier(.22,1,.36,1),opacity .18s,padding .25s,border-color .18s}
+  .sound-control.open .volume-popover,.sound-control:hover .volume-popover,.sound-control:focus-within .volume-popover{
+    width:206px;opacity:1;pointer-events:auto;padding:10px 14px;border-color:rgba(255,255,255,.16)}
+  .volume-range{width:120px;flex:0 0 120px;height:4px;appearance:none;-webkit-appearance:none;border-radius:999px;outline:0;cursor:pointer;
+    background:linear-gradient(90deg,#8edcff var(--volume,72%),rgba(255,255,255,.16) var(--volume,72%))}
+  .volume-range::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#e9f8ff;
+    border:2px solid #65caff;box-shadow:0 0 0 4px rgba(92,200,255,.14),0 2px 8px rgba(0,0,0,.45)}
+  .volume-range::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#e9f8ff;border:2px solid #65caff;
+    box-shadow:0 0 0 4px rgba(92,200,255,.14),0 2px 8px rgba(0,0,0,.45)}
+  .volume-value{width:38px;min-width:38px;flex:0 0 38px;text-align:right;padding-right:1px;font-size:12px;line-height:1;
+    font-weight:700;color:#e7f7ff;font-variant-numeric:tabular-nums;text-shadow:0 1px 5px rgba(0,0,0,.65)}
+
+  .potd{position:absolute;left:26px;bottom:26px;z-index:24;width:min(320px,84vw);border-radius:18px;overflow:hidden;cursor:pointer;
+    background:linear-gradient(150deg,rgba(20,28,44,.86),rgba(10,15,26,.9));border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    transform:translateY(14px);opacity:0;transition:opacity .5s,transform .5s;display:flex;align-items:stretch}
+  .potd.show{opacity:1;transform:translateY(0)}
+  .potd[hidden]{display:none}
+  .potd .pd-scene{width:96px;flex:none;position:relative;overflow:hidden}
+  .potd .pd-scene svg{position:absolute;inset:0;width:100%;height:100%}
+  .potd .pd-body{padding:12px 34px 12px 14px;min-width:0}
+  .potd .pd-eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .potd .pd-name{font-family:var(--display);font-size:17px;font-weight:600;color:#fff;margin:3px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .potd .pd-country{font-size:12px;color:var(--muted)}
+  .potd .pd-x{position:absolute;top:8px;right:11px;color:#9aa6b6;font-size:15px;cursor:pointer;z-index:2;line-height:1}
+  .potd .pd-x:hover{color:#fff}
+
+  body.cinema .surprise, body.cinema .hotels-btn, body.cinema .mine-btn, body.cinema .quiz-btn,
+  body.cinema .tour-btn, body.cinema .sound-control, body.cinema .filters, body.cinema .journey,
+  body.cinema .hint, body.cinema .search-wrap, body.cinema .potd, body.cinema .brand, body.cinema .logo{opacity:0 !important;pointer-events:none;transition:opacity .6s}
+  .cine{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:0;transition:opacity .6s}
+  .cine.show{opacity:1}
+  .cine::before{content:"";position:absolute;inset:0;box-shadow:inset 0 0 200px 46px rgba(0,0,0,.55)}
+  .cine-cap{position:absolute;left:0;right:0;bottom:9%;text-align:center;padding:0 8vw;opacity:0;transform:translateY(12px);transition:opacity .8s,transform .8s}
+  .cine-cap.show{opacity:1;transform:translateY(0)}
+  .cine-eyebrow{font-size:12px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+  .cine-name{font-family:var(--display);font-size:clamp(30px,5vw,52px);font-weight:600;color:#fff;margin:8px 0 6px;text-shadow:0 4px 30px rgba(0,0,0,.75)}
+  .cine-fact{font-size:15px;color:#dbe4ef;max-width:640px;margin:0 auto;line-height:1.5;text-shadow:0 2px 12px rgba(0,0,0,.75)}
+  .cine-stop{position:fixed;top:26px;right:26px;z-index:72;pointer-events:none;cursor:pointer;padding:11px 18px;border-radius:999px;
+    font-family:inherit;font-weight:600;font-size:14px;color:#fff;background:rgba(10,14,24,.55);border:1px solid rgba(255,255,255,.24);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .6s}
+  .cine-stop.show{opacity:1;pointer-events:auto}
+  .cine-stop:hover{background:rgba(255,255,255,.16)}
+  .cine-bar{position:fixed;left:0;top:0;height:3px;z-index:72;pointer-events:none;background:linear-gradient(90deg,#4fd1e0,#5cc8ff);width:0%;opacity:0;transition:opacity .5s,width .3s linear}
+  .cine-bar.show{opacity:.9}
+
+  .pass{margin:2px 0 20px;padding:18px;border-radius:20px;background:linear-gradient(150deg,rgba(92,200,255,.12),rgba(255,255,255,.02)),rgba(14,22,36,.4);border:1px solid rgba(255,255,255,.12)}
+  .pass-top{display:flex;align-items:center;gap:16px}
+  .pass-ring{width:78px;height:78px;flex:none}
+  .pass-nums{min-width:0}
+  .pass-pct{font-family:var(--display);font-size:26px;font-weight:600;color:#fff;line-height:1}
+  .pass-lab{font-size:12px;color:var(--muted);margin-top:3px}
+  .pass-counts{display:flex;gap:16px;margin-top:9px;font-size:12.5px;color:#c6cfdd}
+  .pass-counts b{color:#eaf3ff;font-family:var(--display);font-size:15px}
+  .pass-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .badge{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#2a1604;
+    background:linear-gradient(135deg,#ffe6a7,#ffb86b);border:1px solid rgba(255,190,120,.5);box-shadow:0 4px 12px rgba(255,160,80,.25)}
+  .badge.locked{color:#8a97a8;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);box-shadow:none;filter:grayscale(.5);opacity:.6}
+
+  /* ---------- Приветственный облёт ---------- */
+  body.intro .filters, body.intro .journey, body.intro .hint, body.intro .surprise,
+  body.intro .hotels-btn, body.intro .mine-btn, body.intro .quiz-btn, body.intro .tour-btn,
+  body.intro .sound-control, body.intro .search-wrap, body.intro .potd{opacity:0 !important;pointer-events:none;transition:opacity .9s}
+  body.intro::after{content:"";position:fixed;inset:0;z-index:57;pointer-events:none;
+    background:radial-gradient(circle at 50% 48%,rgba(36,134,205,0) 0 32%,rgba(5,12,24,.12) 58%,rgba(0,2,8,.72) 100%);
+    animation:introVignette 4.7s cubic-bezier(.22,1,.36,1) both}
+  @keyframes introVignette{0%{opacity:.92}38%{opacity:.48}78%{opacity:.14}100%{opacity:0}}
+  .intro-cap{position:fixed;left:0;right:0;bottom:16%;z-index:58;text-align:center;padding:0 8vw;pointer-events:none;
+    opacity:0;transform:translateY(14px);transition:opacity 1.1s cubic-bezier(.22,1,.36,1),transform 1.1s cubic-bezier(.22,1,.36,1)}
+  .intro-cap.show{opacity:1;transform:translateY(0)}
+  .intro-cap .ic-title{font-family:var(--display);font-size:clamp(24px,3.6vw,40px);font-weight:600;color:#fff;
+    text-shadow:0 4px 34px rgba(0,0,0,.75),0 0 60px rgba(92,200,255,.25);letter-spacing:.005em}
+  .intro-cap .ic-sub{margin-top:9px;font-size:14px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:700;
+    text-shadow:0 2px 18px rgba(0,0,0,.7)}
+  .intro-skip{position:fixed;bottom:28px;right:28px;z-index:59;cursor:pointer;pointer-events:auto;font-family:inherit;font-size:13px;font-weight:600;
+    color:#cdd6e2;padding:9px 15px;border-radius:999px;background:rgba(10,14,24,.5);border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .6s}
+  .intro-skip.show{opacity:.75}
+  .intro-skip:hover{opacity:1;color:#fff}
+  @media (prefers-reduced-motion:reduce){ .intro-cap{transition:none} }
+
   @media (max-width:640px){
     .brand{top:16px;left:16px}
     .brand p{display:none}
@@ -654,6 +845,13 @@
     .mine-btn .lbl{display:none}
     .quiz-btn{top:140px;right:14px;padding:10px 13px;font-size:13px}
     .quiz-btn .lbl{display:none}
+    .tour-btn{top:182px;right:14px;padding:10px 13px;font-size:13px}
+    .tour-btn .lbl{display:none}
+    .sound-control{top:224px;right:14px}
+    .snd-btn{width:40px;height:40px;font-size:16px}
+    .sound-control.open .volume-popover,.sound-control:hover .volume-popover,.sound-control:focus-within .volume-popover{width:186px;padding:9px 11px}
+    .volume-range{width:108px;flex-basis:108px}
+    .potd{left:14px;bottom:14px;width:min(300px,88vw)}
     .search-wrap{top:64px;left:14px;transform:none;width:calc(100% - 76px)}
     .lpanel-head{padding:60px 20px 4px}
   }
@@ -681,8 +879,42 @@
 
 <button class="surprise" id="surprise"><span class="die">🎲</span><span class="lbl">Удиви меня</span></button>
 <button class="hotels-btn" id="hotelsBtn"><span class="hb-ic">🏨</span><span class="lbl">Отели</span></button>
-<button class="mine-btn" id="mineBtn"><span class="mb-ic">★</span><span class="lbl">Мои места</span><span class="mine-count" id="mineCount"></span></button>
+<button class="mine-btn" id="mineBtn"><span class="mb-ic">🛂</span><span class="lbl">Паспорт</span><span class="mine-count" id="mineCount"></span></button>
 <button class="quiz-btn" id="quizBtn"><span class="qb-ic">🎓</span><span class="lbl">Викторина</span></button>
+<button class="tour-btn" id="tourBtn"><span class="tb-ic">🎬</span><span class="lbl">Кинотур</span></button>
+<div class="sound-control" id="soundControl">
+  <button class="snd-btn" id="sndBtn" title="Включить или выключить звук" aria-label="Включить или выключить звук">🔈</button>
+  <div class="volume-popover" id="volumePopover">
+    <input class="volume-range" id="volumeRange" type="range" min="0" max="100" value="72" aria-label="Громкость звуков атласа">
+    <span class="volume-value" id="volumeValue">72%</span>
+  </div>
+</div>
+
+<div class="potd" id="potd" hidden>
+  <div class="pd-scene" id="potdScene"></div>
+  <div class="pd-body">
+    <div class="pd-eyebrow">Место дня</div>
+    <div class="pd-name" id="potdName"></div>
+    <div class="pd-country" id="potdCountry"></div>
+  </div>
+  <span class="pd-x" id="potdX">✕</span>
+</div>
+
+<div class="intro-cap" id="introCap">
+  <div class="ic-title" id="introTitle"></div>
+  <div class="ic-sub" id="introSub"></div>
+</div>
+<button class="intro-skip" id="introSkip">Пропустить →</button>
+
+<div class="cine" id="cine">
+  <div class="cine-cap" id="cineCap">
+    <div class="cine-eyebrow" id="cineEyebrow"></div>
+    <div class="cine-name" id="cineName"></div>
+    <div class="cine-fact" id="cineFact"></div>
+  </div>
+</div>
+<div class="cine-bar" id="cineBar"></div>
+<button class="cine-stop" id="cineStop">■ Остановить тур</button>
 
 <div class="filters" id="filters"></div>
 
@@ -712,16 +944,16 @@
 
     <!-- экран: выбор режима -->
     <div class="quiz-screen" id="quizIntro">
-      <div class="qi-badge">🎓</div>
-      <h2 class="qi-title">Викторина «Аура Земли»</h2>
-      <p class="qi-sub">Насколько хорошо ты знаешь планету? Выбери режим.</p>
-      <div class="qi-modes">
-        <button class="qi-mode" data-mode="quick"><b>Быстрая</b><span>10 вопросов</span></button>
-        <button class="qi-mode" data-mode="marathon"><b>Марафон</b><span>20 вопросов</span></button>
-        <button class="qi-mode" data-mode="survival"><b>На выживание</b><span>3 ошибки — конец</span></button>
-        <button class="qi-mode" data-mode="cat"><b>По стихии</b><span>выбери тему</span></button>
+      <div class="qi-badge">🌍</div>
+      <h2 class="qi-title">Путь Хранителя планеты</h2>
+      <p class="qi-sub">15 вопросов. От Случайного туриста до Хранителя планеты. Есть подсказки и две несгораемые ступени.</p>
+      <div class="qi-diff">
+        <button class="qi-mode" data-diff="kid"><b>Юный исследователь</b><span>проще, больше времени</span></button>
+        <button class="qi-mode" data-diff="pro"><b>Знаток планеты</b><span>сложнее, жёсткий таймер</span></button>
       </div>
-      <div class="qi-cats" id="quizCats" hidden></div>
+      <div class="qi-rec" id="quizRec" hidden></div>
+      <button class="qi-achbtn" id="quizAchBtn">🏅 Мои достижения</button>
+      <p class="qi-hint2">Ошибся — падаешь до последней несгораемой ступени. Можно забрать звание в любой момент.</p>
     </div>
 
     <!-- экран: вопрос -->
@@ -734,12 +966,24 @@
         <span class="q-prog" id="quizProg"></span>
         <button class="q-mute" id="quizMute" title="Звук">🔊</button>
       </div>
+      <div class="rank-strip">
+        <div class="rank-now"><b id="rankName">Случайный турист</b><i id="rankStep">вопрос 1 / 15</i></div>
+        <div class="rank-bar" id="rankBar"></div>
+      </div>
       <div class="quiz-body">
         <p class="quiz-q" id="quizQ">Что это за место?</p>
         <div class="quiz-hint" id="quizHint"></div>
+        <div class="lifelines" id="lifelines">
+          <button class="ll" id="ll5050"><span class="ll-ic">🌫️</span>Туман<br>рассеется</button>
+          <button class="ll" id="llGuide"><span class="ll-ic">🧭</span>Спросить<br>проводника</button>
+          <button class="ll" id="llPoll"><span class="ll-ic">👥</span>Мнение<br>путешественников</button>
+        </div>
+        <div class="guide" id="guideBox" hidden><span class="g-ic">🧭</span><span id="guideText"></span></div>
+        <div class="poll" id="pollBox" hidden></div>
         <div class="quiz-options" id="quizOptions"></div>
         <div class="quiz-geo" id="quizGeo" hidden>Крути планету и <b>ткни, где это место</b> ↗</div>
         <button class="quiz-next" id="quizNext" hidden>Дальше →</button>
+        <button class="quiz-walk" id="quizWalk" hidden>Забрать звание и выйти</button>
       </div>
     </div>
 
@@ -754,6 +998,15 @@
         <button class="qe-again" id="qeAgain">Ещё раз</button>
         <button class="qe-share" id="qeShare">Поделиться</button>
       </div>
+    </div>
+
+    <!-- экран: достижения -->
+    <div class="quiz-screen" id="quizAch" hidden>
+      <div class="qi-badge">🏅</div>
+      <h2 class="qi-title">Достижения</h2>
+      <p class="qi-sub" id="achSub"></p>
+      <div class="ach-grid" id="achGrid"></div>
+      <div class="qe-actions"><button class="qe-again" id="achBack">Назад</button></div>
     </div>
   </div>
 </div>
@@ -2189,7 +2442,7 @@ function applyCameraFromSpherical(){
 
 /* перелёт к точке */
 function flyTo(place, open=true){
-  if(DEMO && open && place && place.id){
+  if(DEMO && open && place && place.id && !cine){
     if(!demoOpened.has(place.id) && demoOpened.size >= FREE_LIMIT){ raiseLock(place); return; }
     demoOpened.add(place.id);
     if(typeof updateDemoHint==='function') updateDemoHint();
@@ -2221,17 +2474,20 @@ function animate(now){
     cam.radius= fly.from.radius+ (fly.to.radius-fly.from.radius)*k;
     applyCameraFromSpherical();
     if(fly.t>=fly.dur){ if(fly.open) openPanel(fly.place); fly=null; lastInteract=now; }
-  } else if(idle && !geoGuessing){
+  } else if(idle && !geoGuessing && !intro){
     cam.theta += dt*0.00007;
     applyCameraFromSpherical();
   }
+  if(intro) introTick();
   if(!idle && !fly && now-lastInteract>4200) idle=true;
 
   // облака медленно плывут, аура мягко дышит
   if(clouds) clouds.rotation.y += dt*0.00002;
   if(cloudShadow) cloudShadow.rotation.y = clouds.rotation.y + 0.03;
   sunAcc += dt; if(sunAcc > 2000){ updateSun(); sunAcc = 0; }
-  if(aura) aura.material.uniforms.p.value = 0.9 + Math.sin(now*0.0011)*0.18;
+  if(aura) aura.material.uniforms.p.value = intro
+    ? .24 + intro.visualEase*.82                         // атмосфера мягко разгорается при подлёте
+    : .9 + Math.sin(now*.0011)*.18;
 
   // пульсация выбранной точки
   pinGroup.children.forEach(g=>{
@@ -2372,6 +2628,7 @@ function sceneSVG(pl){
 
 function openPanel(pl){
   selectedId = pl.id;
+  if(typeof biomeOn==='function') biomeOn(pl.cat);
   document.getElementById('postcard').style.display = '';
   const cat = CATS[pl.cat];
   const grad = `linear-gradient(135deg, ${cat.grad[0]}, ${cat.grad[1]} 55%, ${cat.grad[2]})`;
@@ -2531,7 +2788,8 @@ function openMine(){
     ? `<div class="mine-sec"><p class="lead">${title} · ${arr.length}</p>${arr.map(item).join('')}</div>`
     : `<div class="mine-sec"><p class="lead">${title}</p><p class="mine-empty">${empty}</p></div>`;
   body.innerHTML = `
-    <div class="list-head"><h2>★ Мои места</h2><p class="list-sub">Нажми на место — покажу на планете.</p></div>
+    <div class="list-head"><h2>🛂 Паспорт путешественника</h2><p class="list-sub">Твоя карта планеты. Нажми на место — покажу на глобусе.</p></div>
+    ${passportHTML(wish, visited)}
     ${sec('Хочу поехать', wish, 'Пока пусто.')}
     ${sec('Уже был', visited, 'Пока пусто.')}
     <div class="block"><a class="sharelink" id="mineBrowse2">➕ Добавить ещё места</a></div>
@@ -2569,32 +2827,85 @@ function qSound(type){
 }
 
 /* ---- открытие / выбор режима ---- */
+/* ---- лестница званий (15 ступеней), несгораемые: 5 и 10 ---- */
+const RANKS=[
+  {n:'Случайный турист',e:'🧳'},{n:'Турист',e:'🎒'},{n:'Отпускник',e:'🏖️'},{n:'Любознательный',e:'🔎'},
+  {n:'Путешественник',e:'✈️'},{n:'Странник',e:'🧭'},{n:'Следопыт',e:'🐾'},{n:'Знаток',e:'📖'},
+  {n:'Первопроходец',e:'⛺'},{n:'Исследователь',e:'🔭'},{n:'Географ',e:'🗺️'},{n:'Натуралист',e:'🦉'},
+  {n:'Покоритель стихий',e:'🌪️'},{n:'Легенда странствий',e:'⭐'},{n:'Хранитель планеты',e:'🌍'}
+];
+const SAFE=[4,9];                       // индексы несгораемых ступеней (5-й и 10-й вопрос)
+const TOTAL_STEPS=15;
+
+/* ---- достижения ---- */
+const ACHS=[
+  {id:'first',   ic:'👣', t:'Первый шаг',        d:'Сыграть первую игру'},
+  {id:'safe1',   ic:'🛡️', t:'Несгораемый',       d:'Дойти до 5-й ступени'},
+  {id:'safe2',   ic:'🏕️', t:'Полпути',           d:'Дойти до 10-й ступени'},
+  {id:'top',     ic:'🌍', t:'Хранитель планеты', d:'Пройти все 15 ступеней'},
+  {id:'nohelp',  ic:'💪', t:'Без подсказок',     d:'Пройти 10 ступеней без подсказок'},
+  {id:'flash',   ic:'⚡', t:'Молния',            d:'5 ответов подряд быстрее 5 секунд'},
+  {id:'nav',     ic:'🧭', t:'Штурман',           d:'3 гео-ответа подряд ближе 300 км'},
+  {id:'nerve',   ic:'🔥', t:'Железные нервы',    d:'Верный ответ на последней секунде'},
+  {id:'pro100',  ic:'🎓', t:'Профессор',         d:'100 верных ответов всего'},
+  {id:'round10', ic:'🗺️', t:'Кругосветка',       d:'Сыграть 10 игр'}
+];
+function achLoad(){ try{ return JSON.parse(localStorage.getItem('aura_ach')||'{}'); }catch(e){ return {}; } }
+function achSave(o){ try{ localStorage.setItem('aura_ach',JSON.stringify(o)); }catch(e){} }
+function statLoad(){ try{ return JSON.parse(localStorage.getItem('aura_qstat')||'{}'); }catch(e){ return {}; } }
+function statSave(o){ try{ localStorage.setItem('aura_qstat',JSON.stringify(o)); }catch(e){} }
+function achUnlock(id){
+  const a=achLoad(); if(a[id]) return; a[id]=1; achSave(a);
+  const def=ACHS.find(x=>x.id===id); if(!def) return;
+  let t=document.getElementById('achToast');
+  if(!t){ t=document.createElement('div'); t.id='achToast'; t.className='ach-toast'; document.body.appendChild(t); }
+  t.innerHTML=`${def.ic} Достижение: ${def.t}`;
+  requestAnimationFrame(()=>t.classList.add('show'));
+  clearTimeout(achUnlock._t); achUnlock._t=setTimeout(()=>t.classList.remove('show'),2600);
+  qSound('win');
+}
+function showAch(){
+  const a=achLoad(), got=ACHS.filter(x=>a[x.id]).length;
+  QG('achSub').textContent=`Открыто ${got} из ${ACHS.length}`;
+  QG('achGrid').innerHTML=ACHS.map(x=>
+    `<div class="ach ${a[x.id]?'on':''}"><span class="a-ic">${x.ic}</span><span><span class="a-t">${x.t}</span><span class="a-d">${x.d}</span></span></div>`).join('');
+  QG('quizIntro').hidden=true; QG('quizPlay').hidden=true; QG('quizEnd').hidden=true; QG('quizAch').hidden=false;
+}
+
 function openQuizIntro(){
   if(hotelsMode) closeLeft();
   closePanel(); currentList=null; mineActive=false;
   activeCat=activeRoute=null; clearChipState(); showAllPins(); clearRoutes(); hideJourney(); stopTour();
   document.body.classList.add('quizing');
   QG('quiz').hidden=false;
-  QG('quizIntro').hidden=false; QG('quizPlay').hidden=true; QG('quizEnd').hidden=true; QG('quizCats').hidden=true;
+  QG('quizIntro').hidden=false; QG('quizPlay').hidden=true; QG('quizEnd').hidden=true; QG('quizAch').hidden=true;
+  const st=statLoad(), rec=QG('quizRec');
+  if(st.bestStep){ rec.hidden=false; rec.innerHTML=`Твой рекорд: <b>${RANKS[st.bestStep-1].e} ${RANKS[st.bestStep-1].n}</b> · ступень ${st.bestStep} из ${TOTAL_STEPS}`; }
+  else rec.hidden=true;
   setLabels([]);
 }
-function buildCatChips(){
-  const el=QG('quizCats');
-  el.innerHTML=Object.entries(CATS).map(([k,c])=>`<button class="qi-cat" data-cat="${k}">${c.emoji} ${c.label}</button>`).join('');
-  el.querySelectorAll('.qi-cat').forEach(b=> b.onclick=()=>beginQuiz('cat', b.dataset.cat));
-}
-function beginQuiz(mode, cat){
+function beginQuiz(diff){
   const muted = quiz ? quiz.muted : false;
-  let pool = PLACES.slice(), total = 10;
-  if(mode==='marathon') total=20;
-  else if(mode==='survival') total=999;
-  else if(mode==='cat' && cat){ pool = PLACES.filter(p=>p.cat===cat); total=Math.min(pool.length,12); }
-  quiz = {mode, cat, pool, total, qIndex:0, score:0, streak:0, bestStreak:0, lives:3,
+  quiz = {diff, step:0, score:0, streak:0, bestStreak:0, fastStreak:0, navStreak:0,
           correctCount:0, missed:[], used:new Set(), answered:false, answer:null,
-          qType:null, lastType:null, muted, guess:null};
-  QG('quizIntro').hidden=true; QG('quizEnd').hidden=true; QG('quizPlay').hidden=false;
+          qType:null, lastType:null, muted, guess:null, lifelines:{f:false,g:false,p:false}, usedAnyLifeline:false,
+          pool:PLACES.slice()};
+  const st=statLoad(); st.games=(st.games||0)+1; statSave(st);
+  achUnlock('first'); if((st.games||0)>=10) achUnlock('round10');
+  QG('quizIntro').hidden=true; QG('quizEnd').hidden=true; QG('quizAch').hidden=true; QG('quizPlay').hidden=false;
   QG('quizMute').textContent = muted?'🔇':'🔊';
+  ['ll5050','llGuide','llPoll'].forEach(id=>QG(id).classList.remove('used'));
   quizRound();
+}
+function renderLadder(){
+  const bar=QG('rankBar');
+  bar.innerHTML=RANKS.map((r,i)=>{
+    const cls=i<quiz.step?'done':(i===quiz.step?'now':'');
+    return `<span class="rank-seg ${cls} ${SAFE.includes(i)?'safe':''}"></span>`;
+  }).join('');
+  const cur=RANKS[Math.min(quiz.step,TOTAL_STEPS-1)];
+  QG('rankName').textContent=cur.e+'  '+cur.n;
+  QG('rankStep').textContent='вопрос '+Math.min(quiz.step+1,TOTAL_STEPS)+' / '+TOTAL_STEPS;
 }
 
 /* ---- один вопрос ---- */
@@ -2604,14 +2915,32 @@ function quizMediaHTML(pl, hide){
   if(pl.image) return `<img class="quiz-thumb" alt="" src="${pl.image}">`;
   return sceneSVG(pl);
 }
+function tier(){ const s=quiz.step; return s<5?'easy':(s<10?'mid':'hard'); }
 function pickType(pl){
-  let bag=['name','name','geo','geo','country'];
-  if(pl.facts&&pl.facts.length){ bag.push('fact','truefalse'); }
-  if(pl.animals&&pl.animals.length>=1){ bag.push('animal'); }
-  let t, tries=0;
-  do{ t=bag[Math.floor(Math.random()*bag.length)]; tries++; } while(t===quiz.lastType && tries<8);
-  quiz.lastType=t; return t;
+  const hasF=pl.facts&&pl.facts.length, hasA=pl.animals&&pl.animals.length;
+  let bag;
+  const t=tier();
+  if(t==='easy'){ bag=['name','name','country']; if(hasA) bag.push('animal'); }
+  else if(t==='mid'){ bag=['fact','hemisphere','odd','geo']; if(hasF) bag.push('truefalse'); if(hasA) bag.push('animal'); }
+  else { bag=['geo','westeast','equator','desc','odd']; if(hasF) bag.push('truefalse','fact'); }
+  if(quiz.diff==='kid') bag=bag.filter(x=>x!=='westeast'&&x!=='equator')||bag;
+  if(!bag.length) bag=['name'];
+  let ty, tries=0;
+  do{ ty=bag[Math.floor(Math.random()*bag.length)]; tries++; } while(ty===quiz.lastType && tries<8);
+  quiz.lastType=ty; return ty;
 }
+function secsFor(type){
+  const kid=quiz.diff==='kid';
+  const base={name:18,country:18,animal:20,fact:22,truefalse:18,hemisphere:16,odd:20,westeast:18,equator:18,desc:24,geo:0}[type]||18;
+  return kid ? Math.round(base*1.6) : base;
+}
+function oddOpts(pl){
+  const others=shuffle(PLACES.filter(p=>p.id!==pl.id && p.cat===pl.cat)).slice(0,2);
+  if(others.length<2) return nameOpts(pl);
+  const odd=shuffle(PLACES.filter(p=>p.cat!==pl.cat))[0];
+  return {list:shuffle([...[pl,...others].map(p=>({label:p.name,correct:false})),{label:odd.name,correct:true}]), theme:CATS[pl.cat].label};
+}
+function twoPlaces(){ const a=shuffle(PLACES); return [a[0],a[1]]; }
 function nameOpts(pl){
   const diff=shuffle(PLACES.filter(p=>p.id!==pl.id && p.cat!==pl.cat));
   const same=shuffle(PLACES.filter(p=>p.id!==pl.id && p.cat===pl.cat));
@@ -2639,11 +2968,15 @@ function renderOptions(list){
 function quizRound(){
   clearGeo(); geoGuessing=false; quiz.answered=false; quiz.guess=null;
   QG('quizNext').hidden=true; QG('quizGeo').hidden=true; QG('quizOptions').hidden=false;
+  QG('guideBox').hidden=true; QG('pollBox').hidden=true;
+  QG('quizWalk').hidden = quiz.step<1;
+  QG('lifelines').style.display='';
   { const bar=QG('quizBar').firstElementChild; bar.classList.remove('low'); bar.style.transition='none'; bar.style.width='100%'; }
+  renderLadder();
   let avail=quiz.pool.filter(p=>!quiz.used.has(p.id));
   if(!avail.length){ quiz.used.clear(); avail=quiz.pool.slice(); }
   const pl=avail[Math.floor(Math.random()*avail.length)];
-  quiz.used.add(pl.id); quiz.answer=pl; quiz.qIndex++;
+  quiz.used.add(pl.id); quiz.answer=pl;
   setLabels([]);
   const type=pickType(pl); quiz.qType=type;
   const media=QG('quizMedia'), qEl=QG('quizQ'), hintEl=QG('quizHint');
@@ -2652,22 +2985,57 @@ function quizRound(){
     media.innerHTML=quizMediaHTML(pl,false);
     qEl.innerHTML=`Где на планете <em>${pl.name}</em>?`;
     hintEl.innerHTML=`<span class="qi">${CATS[pl.cat].emoji}</span>${pl.country}`;
-    QG('quizOptions').hidden=true; QG('quizGeo').hidden=false;
+    QG('quizOptions').hidden=true; QG('quizGeo').hidden=false; QG('lifelines').style.display='none';
     geoGuessing=true;
   } else if(type==='fact'){
     media.innerHTML=quizMediaHTML(pl,true);
     qEl.textContent='Угадай место по факту:';
     const f=(pl.facts[Math.floor(Math.random()*pl.facts.length)]||'').split(pl.name).join('это место');
     hintEl.innerHTML=`<span class="qi">${CATS[pl.cat].emoji}</span>${f}`;
-    renderOptions(nameOpts(pl)); startTimer(22);
+    renderOptions(nameOpts(pl)); startTimer(secsFor(type));
+  } else if(type==='desc'){
+    media.innerHTML=quizMediaHTML(pl,true);
+    qEl.textContent='Узнай место по описанию:';
+    const d=(pl.desc||'').split(pl.name).join('это место');
+    hintEl.innerHTML=`<span class="qi">📜</span>${d}`;
+    renderOptions(nameOpts(pl)); startTimer(secsFor(type));
   } else if(type==='country'){
     media.innerHTML=quizMediaHTML(pl,false);
     qEl.innerHTML=`В какой стране <em>${pl.name}</em>?`;
-    renderOptions(countryOpts(pl)); startTimer(18);
+    renderOptions(countryOpts(pl)); startTimer(secsFor(type));
   } else if(type==='animal'){
     media.innerHTML=quizMediaHTML(pl,false);
     qEl.innerHTML=`Кто из них живёт здесь — <em>${pl.name}</em>?`;
-    renderOptions(animalOpts(pl)); startTimer(20);
+    renderOptions(animalOpts(pl)); startTimer(secsFor(type));
+  } else if(type==='hemisphere'){
+    media.innerHTML=quizMediaHTML(pl,false);
+    qEl.innerHTML=`В каком полушарии <em>${pl.name}</em>?`;
+    hintEl.innerHTML=`<span class="qi">${CATS[pl.cat].emoji}</span>${pl.country}`;
+    const north=pl.lat>=0;
+    renderOptions([{label:'⬆️ Северное',correct:north},{label:'⬇️ Южное',correct:!north}]);
+    startTimer(secsFor(type));
+  } else if(type==='equator'){
+    const [a,b]=twoPlaces(); const first=Math.abs(a.lat)<Math.abs(b.lat);
+    media.innerHTML=quizMediaHTML(a,true);
+    qEl.textContent='Что ближе к экватору?';
+    hintEl.innerHTML=`<span class="qi">🌐</span>Сравни два места на планете`;
+    renderOptions(shuffle([{label:a.name,correct:first},{label:b.name,correct:!first}]));
+    quiz.answer=first?a:b; startTimer(secsFor(type));
+  } else if(type==='westeast'){
+    const [a,b]=twoPlaces(); const aWest=a.lon<b.lon;
+    media.innerHTML=quizMediaHTML(a,true);
+    qEl.textContent='Что западнее?';
+    hintEl.innerHTML=`<span class="qi">🧭</span>Смотри на долготу мысленно`;
+    renderOptions(shuffle([{label:a.name,correct:aWest},{label:b.name,correct:!aWest}]));
+    quiz.answer=aWest?a:b; startTimer(secsFor(type));
+  } else if(type==='odd'){
+    const o=oddOpts(pl);
+    if(o.list){
+      media.innerHTML=quizMediaHTML(pl,true);
+      qEl.textContent='Найди лишнее место';
+      hintEl.innerHTML=`<span class="qi">🧩</span>Три места — это <b>${o.theme}</b>, а одно — нет`;
+      renderOptions(o.list); startTimer(secsFor(type));
+    } else { renderOptions(nameOpts(pl)); startTimer(secsFor('name')); }
   } else if(type==='truefalse'){
     media.innerHTML=quizMediaHTML(pl,false);
     const own=Math.random()<0.5; let stmt, isTrue;
@@ -2676,11 +3044,11 @@ function quizRound(){
     stmt=(stmt||'').split(pl.name).join('это место');
     qEl.innerHTML=`Про <em>${pl.name}</em> — правда или миф?`;
     hintEl.innerHTML=`<span class="qi">💬</span>«${stmt}»`;
-    renderOptions(shuffle([{label:'✓ Правда', correct:isTrue},{label:'✕ Миф', correct:!isTrue}])); startTimer(18);
-  } else { // name
+    renderOptions(shuffle([{label:'✓ Правда', correct:isTrue},{label:'✕ Миф', correct:!isTrue}])); startTimer(secsFor(type));
+  } else {
     media.innerHTML=quizMediaHTML(pl,false);
     qEl.textContent='Что это за место?';
-    renderOptions(nameOpts(pl)); startTimer(18);
+    renderOptions(nameOpts(pl)); startTimer(secsFor('name'));
   }
   updateHud();
 }
@@ -2714,22 +3082,37 @@ function optionClick(b){
   finishAnswer(correct, correct ? 100+Math.round(80*frac) : 0);
 }
 function finishAnswer(correct, basePts){
+  const frac=timeLeftFrac();
   if(correct){
     quiz.streak++; quiz.bestStreak=Math.max(quiz.bestStreak,quiz.streak); quiz.correctCount++;
+    quiz.step++;
     const mult=1+Math.min(quiz.streak-1,4)*0.25;
     const pts=Math.round(basePts*mult);
     quiz.score+=pts; floatPts('+'+pts+(mult>1?'  ×'+(''+mult).replace(/(\.\d)0+$/,'$1'):'')); qSound('right'); pulseStreak();
+    // ачивки
+    const st=statLoad(); st.right=(st.right||0)+1;
+    if(quiz.step>st.bestStep||!st.bestStep) st.bestStep=quiz.step;
+    statSave(st);
+    if(st.right>=100) achUnlock('pro100');
+    if(quiz.step>=5) achUnlock('safe1');
+    if(quiz.step>=10) achUnlock('safe2');
+    if(quiz.step>=10 && !quiz.usedAnyLifeline) achUnlock('nohelp');
+    if(quiz.timeMax && frac>0 && (quiz.timeMax*(1-frac))<5){ quiz.fastStreak++; if(quiz.fastStreak>=5) achUnlock('flash'); } else quiz.fastStreak=0;
+    if(quiz.timeMax && frac>0 && frac*quiz.timeMax<1.2) achUnlock('nerve');
   } else {
-    quiz.streak=0; quiz.missed.push(quiz.answer);
-    if(quiz.mode==='survival') quiz.lives--;
+    quiz.streak=0; quiz.fastStreak=0; quiz.missed.push(quiz.answer);
     qSound('wrong'); shakeCard();
   }
   const pl=quiz.answer;
   setLabels([pl]); flyTo({lat:pl.lat,lon:pl.lon},false); lastInteract=performance.now();
   const fact=(pl.facts&&pl.facts[0])?pl.facts[0]:'';
   QG('quizHint').innerHTML=`<b>${pl.name}</b> · ${pl.country}<span class="qfact">${fact}</span>`;
-  QG('quizNext').hidden=false;
-  updateHud();
+  QG('quizWalk').hidden=true;
+  QG('lifelines').style.display='none';
+  if(!correct){ setTimeout(()=>quizEnd('fail'), 1700); }        // ошибка — падение до несгораемой
+  else if(quiz.step>=TOTAL_STEPS){ achUnlock('top'); setTimeout(()=>quizEnd('win'), 1700); }
+  else QG('quizNext').hidden=false;
+  updateHud(); renderLadder();
 }
 
 /* ---- HUD / сок ---- */
@@ -2738,9 +3121,8 @@ function updateHud(){
   const st=QG('quizStreak');
   if(quiz.streak>=2){ const m=1+Math.min(quiz.streak-1,4)*0.25; st.hidden=false; st.textContent='🔥 '+quiz.streak+' · ×'+(''+m).replace(/(\.\d)0+$/,'$1'); }
   else st.hidden=true;
-  const prog=QG('quizProg');
-  if(quiz.mode==='survival') prog.textContent='♥'.repeat(Math.max(0,quiz.lives))||'—';
-  else prog.textContent=Math.min(quiz.qIndex,quiz.total)+' / '+quiz.total;
+  const safeNow=SAFE.filter(i=>quiz.step>i).length;
+  QG('quizProg').textContent = safeNow? '🛡️ '+safeNow : (quiz.diff==='kid'?'юный':'знаток');
 }
 function floatPts(txt){ const c=QG('quizCard'), el=document.createElement('div'); el.className='q-float'; el.textContent=txt; c.appendChild(el); setTimeout(()=>el.remove(),1000); }
 function pulseStreak(){ const st=QG('quizStreak'); st.classList.remove('pulse'); void st.offsetWidth; st.classList.add('pulse'); }
@@ -2791,55 +3173,114 @@ function revealGeo(timedOut){
   const pl=quiz.answer; clearGeo();
   addGeoMarker(pl.lat,pl.lon,0x48c07a,true);
   let dist=null, pts=0, correct=false;
+  const tol = quiz.diff==='kid' ? 1200 : (tier()==='hard'?600:900);
   if(quiz.guess && !timedOut){
     addGeoMarker(quiz.guess.lat,quiz.guess.lon,0xff6b3d,false);
     addGeoArc(quiz.guess,{lat:pl.lat,lon:pl.lon});
     dist=Math.round(haversine(quiz.guess,{lat:pl.lat,lon:pl.lon}));
     pts=Math.max(0,Math.round(220*(1-dist/5000)));
-    correct=dist<800;
+    correct=dist<tol;
   }
-  if(correct){ quiz.streak++; quiz.bestStreak=Math.max(quiz.bestStreak,quiz.streak); quiz.correctCount++; if(pts) quiz.score+=pts; floatPts('+'+pts); qSound('right'); pulseStreak(); }
-  else { quiz.streak=0; quiz.missed.push(pl); if(quiz.mode==='survival') quiz.lives--; if(pts){ quiz.score+=pts; floatPts('+'+pts); } qSound('wrong'); shakeCard(); }
+  if(correct){
+    quiz.streak++; quiz.bestStreak=Math.max(quiz.bestStreak,quiz.streak); quiz.correctCount++; quiz.step++;
+    if(pts) quiz.score+=pts; floatPts('+'+pts); qSound('right'); pulseStreak();
+    if(dist!==null && dist<300){ quiz.navStreak++; if(quiz.navStreak>=3) achUnlock('nav'); } else quiz.navStreak=0;
+    const st=statLoad(); st.right=(st.right||0)+1; if(!st.bestStep||quiz.step>st.bestStep) st.bestStep=quiz.step; statSave(st);
+    if(st.right>=100) achUnlock('pro100');
+    if(quiz.step>=5) achUnlock('safe1');
+    if(quiz.step>=10) achUnlock('safe2');
+    if(quiz.step>=10 && !quiz.usedAnyLifeline) achUnlock('nohelp');
+  }
+  else { quiz.streak=0; quiz.navStreak=0; quiz.missed.push(pl); if(pts){ quiz.score+=pts; floatPts('+'+pts); } qSound('wrong'); shakeCard(); }
   setLabels([pl]); flyTo({lat:pl.lat,lon:pl.lon},false); lastInteract=performance.now();
-  QG('quizGeo').hidden=true;
+  QG('quizGeo').hidden=true; QG('quizWalk').hidden=true;
   const dtxt = (timedOut||!quiz.guess) ? 'Время вышло' : (dist<80?'Прямо в точку!':'Промах '+dist.toLocaleString('ru-RU')+' км');
   QG('quizHint').innerHTML=`<b>${pl.name}</b> · ${pl.country}<span class="qfact">${dtxt}${pts?(' · +'+pts+' очков'):''}</span>`;
-  QG('quizNext').hidden=false;
-  updateHud();
+  if(!correct){ setTimeout(()=>quizEnd('fail'), 1900); }
+  else if(quiz.step>=TOTAL_STEPS){ achUnlock('top'); setTimeout(()=>quizEnd('win'), 1900); }
+  else QG('quizNext').hidden=false;
+  updateHud(); renderLadder();
+}
+
+/* ---- переход / финал ---- */
+/* ---- подсказки ---- */
+function opts(){ return [...document.querySelectorAll('#quizOptions .quiz-opt')]; }
+function use5050(){
+  if(!quiz||quiz.answered||quiz.lifelines.f) return;
+  const list=opts(); if(list.length<3) return;
+  quiz.lifelines.f=true; quiz.usedAnyLifeline=true; QG('ll5050').classList.add('used');
+  shuffle(list.filter(b=>b.dataset.c!=='1')).slice(0,list.length-2).forEach(b=>b.classList.add('gone'));
+}
+function useGuide(){
+  if(!quiz||quiz.answered||quiz.lifelines.g) return;
+  quiz.lifelines.g=true; quiz.usedAnyLifeline=true; QG('llGuide').classList.add('used');
+  const list=opts(); const right=list.find(b=>b.dataset.c==='1'); if(!right) return;
+  const sure=Math.random()<(quiz.diff==='kid'?0.92:0.78);      // проводник иногда ошибается
+  const pick=sure?right:shuffle(list.filter(b=>b!==right))[0]||right;
+  const phrases=sure
+    ? [`Я бывал в тех краях. Ставлю на <b>${pick.textContent}</b>.`,`Почти уверен — это <b>${pick.textContent}</b>.`,`Спроси любого проводника: <b>${pick.textContent}</b>.`]
+    : [`Давно там не был… кажется, <b>${pick.textContent}</b>. Но я бы перепроверил.`,`Вроде бы <b>${pick.textContent}</b>, хотя память может подвести.`];
+  QG('guideText').innerHTML=phrases[Math.floor(Math.random()*phrases.length)];
+  QG('guideBox').hidden=false;
+}
+function usePoll(){
+  if(!quiz||quiz.answered||quiz.lifelines.p) return;
+  quiz.lifelines.p=true; quiz.usedAnyLifeline=true; QG('llPoll').classList.add('used');
+  const list=opts().filter(b=>!b.classList.contains('gone')); if(!list.length) return;
+  const rightBias=quiz.diff==='kid'?0.62:0.5;
+  let vals=list.map(b=> b.dataset.c==='1' ? rightBias*100+Math.random()*12 : Math.random()*30);
+  const sum=vals.reduce((a,b)=>a+b,0); vals=vals.map(v=>Math.round(v/sum*100));
+  const box=QG('pollBox');
+  box.innerHTML=list.map((b,i)=>{
+    const letter=String.fromCharCode(65+i);
+    return `<div class="poll-col"><div class="poll-bar" style="height:0"></div><div class="poll-lab">${letter} · ${vals[i]}%</div></div>`;
+  }).join('');
+  box.hidden=false;
+  list.forEach((b,i)=>{ b.textContent=String.fromCharCode(65+i)+'. '+b.textContent.replace(/^[A-Z]\. /,''); });
+  requestAnimationFrame(()=>{ [...box.querySelectorAll('.poll-bar')].forEach((bar,i)=>{ bar.style.height=Math.max(4,vals[i]*0.62)+'px'; }); });
+}
+function walkAway(){
+  if(!quiz||quiz.step<1) return;
+  clearTimer(); quizEnd('walk');
 }
 
 /* ---- переход / финал ---- */
 function quizNextStep(){
-  const over = (quiz.mode==='survival' && quiz.lives<=0) || (quiz.mode!=='survival' && quiz.qIndex>=quiz.total);
-  if(over) quizEnd(); else quizRound();
+  if(quiz.step>=TOTAL_STEPS) quizEnd('win'); else quizRound();
 }
-function quizEnd(){
+function quizEnd(how){
   clearTimer(); clearGeo(); geoGuessing=false;
   QG('quizPlay').hidden=true; QG('quizEnd').hidden=false;
-  const asked=quiz.qIndex||1, acc=Math.round(quiz.correctCount/asked*100);
-  let rank='Новичок', emo='🧭';
-  if(acc>=90){ rank='Хранитель планеты'; emo='🌍'; }
-  else if(acc>=70){ rank='Исследователь'; emo='🧭'; }
-  else if(acc>=50){ rank='Путешественник'; emo='✈️'; }
-  else if(acc>=30){ rank='Турист'; emo='🎒'; }
-  QG('qeRank').textContent=emo; QG('qeTitle').textContent=rank;
-  QG('qeSub').textContent=`Счёт ${quiz.score} · ты знаешь планету на ${acc}%`;
+  let step=quiz.step;
+  if(how==='fail'){                                  // падение до последней несгораемой
+    let safe=0; SAFE.forEach(i=>{ if(quiz.step>i) safe=i+1; });
+    step=safe;
+  }
+  const r=RANKS[Math.max(0,Math.min(step,TOTAL_STEPS)-1)] || RANKS[0];
+  const gotRank = step>0;
+  QG('qeRank').textContent = gotRank ? r.e : '🌫️';
+  QG('qeTitle').textContent = gotRank ? r.n : 'Пока не звание';
+  QG('qeSub').textContent =
+    how==='win'  ? 'Ты прошёл весь путь — вершина планеты твоя!' :
+    how==='walk' ? 'Ты забрал звание и остался при своём.' :
+    (step>0 ? 'Ошибка сбросила тебя до несгораемой ступени.' : 'В этот раз не вышло — попробуй ещё.');
   QG('qeStats').innerHTML=
+    `<div class="qe-stat"><b>${step}/${TOTAL_STEPS}</b><span>СТУПЕНЬ</span></div>`+
     `<div class="qe-stat"><b>${quiz.score}</b><span>ОЧКОВ</span></div>`+
-    `<div class="qe-stat"><b>${quiz.correctCount}/${asked}</b><span>ВЕРНО</span></div>`+
     `<div class="qe-stat"><b>${quiz.bestStreak}</b><span>СЕРИЯ</span></div>`;
+  const st=statLoad(); if(!st.bestStep || step>st.bestStep){ st.bestStep=step; statSave(st); }
   const missed=[...new Map(quiz.missed.map(p=>[p.id,p])).values()].slice(0,8), mel=QG('qeMissed');
   if(missed.length){
     mel.innerHTML=`<h4>Стоит изучить</h4>`+missed.map(p=>`<span class="qe-miss" data-id="${p.id}">${CATS[p.cat].emoji} ${p.name}</span>`).join('');
     mel.querySelectorAll('.qe-miss').forEach(s=> s.onclick=()=>{ const pl=PLACES.find(x=>x.id===s.dataset.id); endQuiz(); if(pl) flyTo(pl,true); });
     mel.hidden=false;
   } else { mel.innerHTML=''; mel.hidden=true; }
-  quiz._acc=acc; quiz._rank=rank;
+  quiz._step=step; quiz._rank=gotRank?r.n:'—';
   qSound('win');
 }
 function quizShare(){
-  const t=`🌍 Аура Земли — викторина\nСчёт: ${quiz.score} · точность ${quiz._acc||0}% · серия ${quiz.bestStreak}\nЗвание: ${quiz._rank||''}`;
-  const btn=QG('qeShare'), done=()=>{ const o='Поделиться'; btn.textContent='Скопировано ✓'; setTimeout(()=>btn.textContent=o,1600); };
+  const t=`🌍 Аура Земли — путь Хранителя планеты\nЗвание: ${quiz._rank||'—'} · ступень ${quiz._step||0} из ${TOTAL_STEPS}\nОчков: ${quiz.score}`;
+  const btn=QG('qeShare'), done=()=>{ btn.textContent='Скопировано ✓'; setTimeout(()=>btn.textContent='Поделиться',1600); };
   if(navigator.share){ navigator.share({title:'Аура Земли', text:t}).catch(()=>{}); }
   else if(navigator.clipboard){ navigator.clipboard.writeText(t).then(done).catch(done); }
   else done();
@@ -2847,7 +3288,7 @@ function quizShare(){
 function endQuiz(){
   clearTimer(); clearGeo(); geoGuessing=false;
   QG('quiz').hidden=true; document.body.classList.remove('quizing');
-  QG('quizPlay').hidden=true; QG('quizEnd').hidden=true; QG('quizIntro').hidden=false;
+  QG('quizPlay').hidden=true; QG('quizEnd').hidden=true; QG('quizAch').hidden=true; QG('quizIntro').hidden=false;
   setLabels([]); quiz=null;
 }
 
@@ -2990,16 +3431,32 @@ function addEvents(){
   document.getElementById('journey').onclick=toggleTour;
   document.getElementById('hotelsBtn').onclick=openHotels;
   document.getElementById('mineBtn').onclick=openMine;
+  document.getElementById('introSkip').onclick=()=>endIntro(true);
+  document.addEventListener('keydown', e=>{ if(intro && (e.key==='Escape'||e.key===' ')) endIntro(true); });
   document.getElementById('quizBtn').onclick=openQuizIntro;
+  document.getElementById('tourBtn').onclick=cineStart;
+  document.getElementById('cineStop').onclick=cineStop;
+  const soundControl=document.getElementById('soundControl'), volumeRange=document.getElementById('volumeRange');
+  try{ const raw=localStorage.getItem('aura_volume'),v=Number(raw); setVolume(raw!==null&&Number.isFinite(v)&&v>=0?v:72,true); }catch(e){ setVolume(72,true); }
+  document.getElementById('sndBtn').onclick=e=>{ e.stopPropagation(); soundControl.classList.add('open'); setSound(!audioOn); };
+  volumeRange.addEventListener('pointerdown',e=>e.stopPropagation());
+  volumeRange.addEventListener('input',e=>setVolume(Number(e.target.value)));
+  soundControl.addEventListener('click',e=>e.stopPropagation());
+  document.addEventListener('click',()=>soundControl.classList.remove('open'));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && cine) cineStop(); });
+  try{ if(localStorage.getItem('aura_sound')==='1' && audioVolume>0){ const once=()=>{ setSound(true); window.removeEventListener('pointerdown',once,true); }; window.addEventListener('pointerdown',once,true); } }catch(e){}
   document.getElementById('quizClose').onclick=endQuiz;
   document.getElementById('quizNext').onclick=quizNextStep;
   document.getElementById('quizMute').onclick=()=>{ if(!quiz)return; quiz.muted=!quiz.muted; document.getElementById('quizMute').textContent=quiz.muted?'🔇':'🔊'; };
   document.getElementById('qeAgain').onclick=openQuizIntro;
   document.getElementById('qeShare').onclick=quizShare;
-  document.querySelectorAll('#quizIntro .qi-mode').forEach(b=> b.onclick=()=>{
-    if(b.dataset.mode==='cat'){ buildCatChips(); document.getElementById('quizCats').hidden=false; }
-    else beginQuiz(b.dataset.mode);
-  });
+  document.getElementById('ll5050').onclick=use5050;
+  document.getElementById('llGuide').onclick=useGuide;
+  document.getElementById('llPoll').onclick=usePoll;
+  document.getElementById('quizWalk').onclick=walkAway;
+  document.getElementById('quizAchBtn').onclick=showAch;
+  document.getElementById('achBack').onclick=openQuizIntro;
+  document.querySelectorAll('#quizIntro .qi-mode').forEach(b=> b.onclick=()=>beginQuiz(b.dataset.diff));
   document.getElementById('panelLeftClose').onclick=closeLeft;
   document.getElementById('panelClose').onclick=()=>{
     stopTour(); closePanel(); currentList=null; mineActive=false;
@@ -3047,10 +3504,16 @@ function hover(e){
 function surprise(){
   if(hotelsMode) closeLeft();
   currentList=null; mineActive=false;
-  const pl = PLACES[Math.floor(Math.random()*PLACES.length)];
   // сбрасываем фильтры для чистого «броска»
   activeCat=activeRoute=null; clearChipState(); showAllPins(); clearRoutes(); setLabels([]);
   hideJourney();
+  let pool = PLACES;
+  if(DEMO){
+    const fresh = PLACES.filter(p=>!demoOpened.has(p.id));
+    pool = fresh.length ? fresh : PLACES;   // всегда бросаем на НОВОЕ место:
+  }                                          // пока есть лимит — откроется, дальше — замок
+  if(!pool.length) pool = PLACES;
+  const pl = pool[Math.floor(Math.random()*pool.length)];
   const btn=document.getElementById('surprise');
   btn.style.transform='rotate(0deg)';
   btn.querySelector('.die').animate([{transform:'rotate(0)'},{transform:'rotate(360deg)'}],{duration:500});
@@ -3217,12 +3680,18 @@ function unlock(save){
   DEMO=false;
   const dh=document.getElementById('demoHint'); if(dh) dh.classList.remove('show');
   if(save) remember(true);
+  const playIntro=!introSeen();
+  if(playIntro){ introPlanned=true; primeIntroView(); }
   const g=document.getElementById('gate');
   g.classList.add('unlocked');
   setTimeout(()=>{ g.style.display='none'; }, 750);
+  setTimeout(()=>{
+    if(playIntro) startIntro();
+    else if(typeof showPOTD==='function') showPOTD();
+  }, 620);
   // если сайт открыт по ссылке на место — сразу летим туда
   const id = deepLinkId();
-  if(id){ const pl = PLACES.find(p=>p.id===id); if(pl) setTimeout(()=>flyTo(pl,true), 950); }
+  if(id){ const pl = PLACES.find(p=>p.id===id); if(pl){ if(playIntro) pendingPlace=pl; else setTimeout(()=>flyTo(pl,true),780); } }
 }
 
 /* ---------- ВИТРИНА → ДЕМО → ЗАМОК ---------- */
@@ -3277,11 +3746,326 @@ function updateDemoHint(){
   h.querySelector('#demoHintX').addEventListener('click',()=>h.classList.remove('show'));
 }
 function plural(n,one,few,many){ const m=n%100, d=n%10; return (m>=11&&m<=14)?many:(d===1?one:(d>=2&&d<=4?few:many)); }
-function startDemo(){ DEMO=true; demoOpened=new Set(); hideGate(); showDemoHint(); }
+function startDemo(){
+  DEMO=true; demoOpened=new Set();
+  if(!introSeen()){
+    introPlanned = true;
+    primeIntroView();                       // ставим камеру далеко ещё под закрывающимся экраном
+    hideGate();
+    setTimeout(()=>startIntro(), 620);      // один непрерывный подлёт без отъезда назад
+  } else {
+    introPlanned = false;
+    hideGate();
+    showDemoHint();
+  }
+}
 function openFree(id){
   const pl = PLACES.find(p=>p.id===id); if(!pl) return;
-  startDemo();
-  setTimeout(()=>flyTo(pl,true), 780);   // после того как замок растворится
+  startDemo();                       // включает DEMO
+  if(introPlanned){ pendingPlace = pl; }   // облёт играет — откроем сразу после него
+  else setTimeout(()=>flyTo(pl,true), 780);
+}
+
+/* ===================== ЗВУК: эмбиент по биому + мягкий отклик ===================== */
+let AUDIO=null, audioOn=false, audioVolume=.72, masterGain=null, noiseBuf=null, whiteBuf=null, ambient=null, ambientCat=null, currentBiome=null;
+function audioReady(){
+  if(AUDIO) return true;
+  try{
+    AUDIO=new (window.AudioContext||window.webkitAudioContext)();
+    masterGain=AUDIO.createGain(); masterGain.gain.value=0; masterGain.connect(AUDIO.destination);
+    const len=Math.floor(AUDIO.sampleRate*2.5); noiseBuf=AUDIO.createBuffer(1,len,AUDIO.sampleRate); whiteBuf=AUDIO.createBuffer(1,len,AUDIO.sampleRate);
+    const d=noiseBuf.getChannelData(0), w=whiteBuf.getChannelData(0); let last=0;
+    for(let i=0;i<len;i++){ const x=Math.random()*2-1; last=(last+0.018*x)/1.018; d[i]=last*3.4; w[i]=x*.42; }
+    return true;
+  }catch(e){ return false; }
+}
+const BIOME={
+  ocean:{type:'lowpass',freq:620,q:.55,lfo:.075,depth:.7,vol:.75,layer:'space'},
+  water:{type:'lowpass',freq:1050,q:.65,lfo:.16,depth:.7,vol:.82,layer:'water'},
+  island:{type:'lowpass',freq:700,q:.65,lfo:.11,depth:.55,vol:.68,layer:'island'},
+  paradise:{type:'lowpass',freq:760,q:.6,lfo:.12,depth:.55,vol:.64,layer:'island'},
+  forest:{type:'bandpass',freq:1550,q:.55,lfo:.22,depth:.42,vol:.58,layer:'forest'},
+  animals:{type:'highpass',freq:480,q:.45,lfo:.07,depth:.45,vol:.48,layer:'forest'},
+  desert:{type:'highpass',freq:650,q:.35,lfo:.045,depth:.55,vol:.48,layer:'wind'},
+  mountain:{type:'highpass',freq:760,q:.35,lfo:.035,depth:.6,vol:.46,layer:'wind'},
+  volcano:{type:'lowpass',freq:190,q:.85,lfo:.025,depth:.4,vol:.78,layer:'rumble'}
+};
+function buildAmbient(cat){
+  const cfg=BIOME[cat]||BIOME.ocean;
+  const src=AUDIO.createBufferSource(); src.buffer=noiseBuf; src.loop=true;
+  const filt=AUDIO.createBiquadFilter(); filt.type=cfg.type; filt.frequency.value=cfg.freq; filt.Q.value=cfg.q;
+  const g=AUDIO.createGain(); g.gain.value=0;
+  const lfo=AUDIO.createOscillator(); lfo.frequency.value=cfg.lfo;
+  const lfoG=AUDIO.createGain(); lfoG.gain.value=cfg.depth*0.5*cfg.vol;
+  const base=AUDIO.createConstantSource(); base.offset.value=cfg.vol*0.5;
+  lfo.connect(lfoG); lfoG.connect(g.gain); base.connect(g.gain);
+  src.connect(filt); filt.connect(g); g.connect(masterGain);
+  src.start(); lfo.start(); base.start();
+  const node={src,g,lfo,base,birds:null,extra:[]};
+  const addNoise=(buffer,filterType,freq,level,rate=.1)=>{
+    const s=AUDIO.createBufferSource(), f=AUDIO.createBiquadFilter(), x=AUDIO.createGain(), m=AUDIO.createOscillator(), mg=AUDIO.createGain();
+    s.buffer=buffer; s.loop=true; f.type=filterType; f.frequency.value=freq; f.Q.value=.7; x.gain.value=level;
+    m.frequency.value=rate; mg.gain.value=level*.55; m.connect(mg); mg.connect(x.gain); s.connect(f); f.connect(x); x.connect(masterGain); s.start(); m.start(); node.extra.push({s,m});
+  };
+  if(cfg.layer==='space'){ addNoise(whiteBuf,'bandpass',240,.045,.035); addNoise(noiseBuf,'lowpass',150,.07,.018); }
+  if(cfg.layer==='water'){ addNoise(whiteBuf,'highpass',1800,.09,.18); node.birds=setInterval(()=>{ if(audioOn){ splash(); if(Math.random()<.35) splash(); } },900+Math.random()*1500); }
+  if(cfg.layer==='island'){ addNoise(whiteBuf,'lowpass',900,.045,.11); node.birds=setInterval(()=>{ if(audioOn) chirp(Math.random()<.45?'bird':'bird2'); },2200+Math.random()*3600); }
+  if(cfg.layer==='forest'){ addNoise(whiteBuf,'bandpass',2200,.055,.28); node.birds=setInterval(()=>{ if(audioOn) chirp('bird2'); },1800+Math.random()*2800); }
+  if(cfg.layer==='wind') addNoise(whiteBuf,'bandpass',520,.075,.035);
+  if(cfg.layer==='rumble') addNoise(noiseBuf,'lowpass',95,.16,.025);
+  return node;
+}
+function chirp(kind='bird'){ try{ const o=AUDIO.createOscillator(),g=AUDIO.createGain(),t=AUDIO.currentTime;
+  const f=kind==='bird2'?850+Math.random()*900:1600+Math.random()*1400, dur=kind==='bird2'?.28:.16;
+  o.type=kind==='bird2'?'triangle':'sine'; o.frequency.setValueAtTime(f,t); o.frequency.exponentialRampToValueAtTime(f*(kind==='bird2'?1.8:1.5),t+dur*.55);
+  g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.04,t+.025); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g); g.connect(masterGain); o.start(t); o.stop(t+dur+.02); }catch(e){} }
+function splash(){ try{ const s=AUDIO.createBufferSource(),f=AUDIO.createBiquadFilter(),g=AUDIO.createGain(),t=AUDIO.currentTime;
+  s.buffer=whiteBuf; f.type='bandpass'; f.frequency.value=1700+Math.random()*1000; f.Q.value=.7; g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.055,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+.22+Math.random()*.18);
+  s.connect(f); f.connect(g); g.connect(masterGain); s.start(t); s.stop(t+.45); }catch(e){} }
+function ambientTo(cat){
+  if(!audioOn || !audioReady()) return;
+  if(ambientCat===cat && ambient) return;
+  ambientCat=cat;
+  const next=buildAmbient(cat), now=AUDIO.currentTime;
+  next.g.gain.setValueAtTime(0,now); next.g.gain.linearRampToValueAtTime(1,now+1.6);
+  const old=ambient;
+  if(old){ old.g.gain.cancelScheduledValues(now); old.g.gain.setValueAtTime(old.g.gain.value||0,now); old.g.gain.linearRampToValueAtTime(0,now+1.6); setTimeout(()=>stopAmbient(old),1900); }
+  ambient=next;
+}
+function stopAmbient(n){ if(!n) return; try{ n.src.stop(); n.lfo.stop(); n.base.stop(); }catch(e){} if(n.extra) n.extra.forEach(x=>{try{x.s.stop();x.m.stop();}catch(e){}}); if(n.birds) clearInterval(n.birds); }
+function soundIcon(){
+  if(!audioOn || audioVolume<=0) return '🔇';
+  return audioVolume<.38?'🔉':'🔊';
+}
+function setVolume(value,quiet=false){
+  audioVolume=Math.max(0,Math.min(1,Number(value)/100));
+  const range=document.getElementById('volumeRange'), label=document.getElementById('volumeValue'), btn=document.getElementById('sndBtn');
+  const pct=Math.round(audioVolume*100);
+  if(range){ range.value=pct; range.style.setProperty('--volume',pct+'%'); }
+  if(label) label.textContent=pct+'%';
+  if(!quiet){
+    if(pct===0) setSound(false);
+    else if(!audioOn) setSound(true);
+    else if(AUDIO&&masterGain){ const t=AUDIO.currentTime; masterGain.gain.cancelScheduledValues(t); masterGain.gain.linearRampToValueAtTime(.3*audioVolume,t+.08); }
+    try{ localStorage.setItem('aura_volume',String(pct)); }catch(e){}
+  }
+  if(btn) btn.textContent=soundIcon();
+}
+function setSound(on){
+  const btn=document.getElementById('sndBtn');
+  if(on){
+    if(audioVolume<=0){ audioVolume=.25; setVolume(25,true); try{ localStorage.setItem('aura_volume','25'); }catch(e){} }
+    if(!audioReady()){ return; }
+    audioOn=true;
+    if(AUDIO.state==='suspended') AUDIO.resume();
+    masterGain.gain.cancelScheduledValues(AUDIO.currentTime);
+    masterGain.gain.linearRampToValueAtTime(.3*audioVolume, AUDIO.currentTime+0.8);
+    btn.classList.add('on'); btn.textContent=soundIcon();
+    ambientTo(currentBiome||'ocean');
+  } else {
+    audioOn=false;
+    if(AUDIO){ masterGain.gain.cancelScheduledValues(AUDIO.currentTime); masterGain.gain.linearRampToValueAtTime(0,AUDIO.currentTime+0.5); }
+    btn.classList.remove('on'); btn.textContent=soundIcon();
+  }
+  try{ localStorage.setItem('aura_sound', on?'1':''); }catch(e){}
+}
+function sfx(type){
+  if(!audioOn || !audioReady()) return;
+  try{ const o=AUDIO.createOscillator(),g=AUDIO.createGain(),t=AUDIO.currentTime;
+    if(type==='open'){ o.type='sine'; o.frequency.setValueAtTime(520,t); o.frequency.exponentialRampToValueAtTime(760,t+0.12); }
+    else { o.type='sine'; o.frequency.setValueAtTime(660,t); }
+    g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(0.055,t+0.02); g.gain.exponentialRampToValueAtTime(.0001,t+0.18);
+    o.connect(g); g.connect(masterGain); o.start(t); o.stop(t+0.2);
+  }catch(e){}
+}
+function biomeOn(cat){ currentBiome=cat; if(audioOn){ ambientTo(cat); sfx('open'); } }
+
+/* ===================== МЕСТО ДНЯ ===================== */
+function placeOfDay(){ const day=Math.floor(Date.now()/86400000); return PLACES[day % PLACES.length]; }
+function potdKey(){ return 'aura_potd_'+Math.floor(Date.now()/86400000); }
+function showPOTD(){
+  if(DEMO) return;
+  try{ if(localStorage.getItem(potdKey())==='x') return; }catch(e){}
+  const pl=placeOfDay(); if(!pl) return;
+  const el=document.getElementById('potd'); if(!el) return;
+  document.getElementById('potdScene').innerHTML=sceneSVG(pl);
+  document.getElementById('potdName').textContent=pl.name;
+  document.getElementById('potdCountry').textContent=(CATS[pl.cat].emoji)+' '+pl.country;
+  el.hidden=false; requestAnimationFrame(()=>el.classList.add('show'));
+  el.onclick=(e)=>{ if(e.target.id==='potdX') return; dismissPOTD(); flyTo(pl,true); };
+  document.getElementById('potdX').onclick=(e)=>{ e.stopPropagation(); dismissPOTD(); };
+}
+function dismissPOTD(){ const el=document.getElementById('potd'); if(!el) return; el.classList.remove('show'); setTimeout(()=>{el.hidden=true;},500); try{ localStorage.setItem(potdKey(),'x'); }catch(e){} }
+
+/* ===================== КИНОТУР (B-roll с подписями) ===================== */
+const CINE_IDS=["everest","socotra","uyuni","nyiragongo","iguazu","lofoten","sahara","zhangjiajie","rajaampat","cappadocia","patagonia","angelfalls"];
+let cine=null;
+function cineStart(){
+  if(cine) return;
+  if(DEMO){ raiseLock(); return; }          // кинотур — часть полного атласа
+  if(hotelsMode) closeLeft();
+  hideJourney(); stopTour();
+  const seq=CINE_IDS.map(id=>PLACES.find(p=>p.id===id)).filter(Boolean);
+  if(seq.length<2) return;
+  cine={seq, i:0, timer:null, playing:true};
+  document.getElementById('cineStop').classList.add('show');
+  document.getElementById('cineBar').classList.add('show');
+  cineStep();
+}
+function cineStep(){
+  if(!cine || !cine.playing) return;
+  if(cine.i>=cine.seq.length) cine.i=0;         // по кругу
+  const pl=cine.seq[cine.i];
+  flyTo(pl, true);                               // летим и ОТКРЫВАЕМ карточку места
+  document.getElementById('cineBar').style.width=((cine.i+1)/cine.seq.length*100)+'%';
+  cine.timer=setTimeout(()=>{ if(cine){ cine.i++; cineStep(); } }, 6500);
+}
+function cineStop(){
+  if(!cine) return; clearTimeout(cine.timer); cine=null;
+  document.getElementById('cineStop').classList.remove('show');
+  document.getElementById('cineBar').classList.remove('show');
+  closePanel();
+}
+
+/* ===================== ПАСПОРТ ===================== */
+function passportHTML(wish, visited){
+  const total=PLACES.length, vN=visited.length, pct=Math.round(vN/total*100);
+  const cats=new Set(visited.map(p=>p.cat));
+  const badges=[
+    {on:vN>=1,ic:'👣',t:'Первый шаг'},
+    {on:vN>=5,ic:'🧭',t:'Путешественник'},
+    {on:vN>=10,ic:'🎒',t:'Бывалый'},
+    {on:vN>=25,ic:'🏆',t:'Коллекционер'},
+    {on:vN>=50,ic:'👑',t:'Легенда'},
+    {on:cats.has('ocean')||cats.has('water'),ic:'🌊',t:'Покоритель вод'},
+    {on:cats.has('volcano'),ic:'🌋',t:'Огонь Земли'},
+    {on:cats.has('mountain'),ic:'⛰️',t:'Вершины'},
+    {on:cats.has('desert'),ic:'🏜️',t:'Пустыни'},
+    {on:cats.size>=5,ic:'🌍',t:'Все стихии'}
+  ];
+  const earned=badges.filter(b=>b.on), locked=badges.filter(b=>!b.on).slice(0,3);
+  const C=2*Math.PI*32, off=C*(1-pct/100);
+  const ring=`<svg class="pass-ring" viewBox="0 0 78 78"><defs><linearGradient id="pgr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5cc8ff"/><stop offset="1" stop-color="#4fd1e0"/></linearGradient></defs>`+
+    `<circle cx="39" cy="39" r="32" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="7"/>`+
+    `<circle cx="39" cy="39" r="32" fill="none" stroke="url(#pgr)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 39 39)"/>`+
+    `<text x="39" y="45" text-anchor="middle" font-family="Playfair Display,serif" font-size="19" fill="#fff" font-weight="600">${pct}%</text></svg>`;
+  const badgeEls=[...earned.map(b=>`<span class="badge">${b.ic} ${b.t}</span>`), ...locked.map(b=>`<span class="badge locked">${b.ic} ${b.t}</span>`)].join('');
+  return `<div class="pass"><div class="pass-top">${ring}
+    <div class="pass-nums"><div class="pass-pct">${vN} / ${total}</div>
+      <div class="pass-lab">мест планеты пройдено</div>
+      <div class="pass-counts"><span><b>${vN}</b> был</span><span><b>${wish.length}</b> хочу</span><span><b>${cats.size}</b> стихий</span></div>
+    </div></div>
+    <div class="pass-badges">${badgeEls}</div></div>`;
+}
+
+/* ===================== ПРИВЕТСТВЕННЫЙ ОБЛЁТ ===================== */
+let intro=null, pendingPlace=null, introPlanned=false;
+const INTRO_START_R = 10.8;     // Земля сначала маленькая и действительно далеко в космосе
+const INTRO_START_THETA = 0.02;
+const INTRO_START_PHI = 1.02;
+function introKey(){ return DEMO ? 'aura_intro_demo' : 'aura_intro'; }
+function introSeen(){ return false; }        // облёт играет при каждом открытии атласа
+function markIntroSeen(){ }
+try{ localStorage.removeItem('aura_intro'); localStorage.removeItem('aura_intro_demo'); }catch(e){}
+
+function pinsHide(){
+  if(!pinGroup) return;
+  pinGroup.children.forEach(g=>{
+    const d=g.userData; if(!d) return;
+    d._introHidden=true;
+    if(d.core) d.core.visible=false;
+    if(d.halo) d.halo.visible=false;
+  });
+}
+function pinsRevealWave(dur){
+  if(!pinGroup) return;
+  const kids=pinGroup.children.slice();
+  // зажигаем по мере поворота: сортируем по долготе места
+  kids.sort((a,b)=>{
+    const pa=a.userData&&a.userData.place, pb=b.userData&&b.userData.place;
+    return ((pa?pa.lon:0)) - ((pb?pb.lon:0));
+  });
+  kids.forEach((g,i)=>{
+    const t=dur*(i/Math.max(1,kids.length-1));
+    setTimeout(()=>{
+      const d=g.userData; if(!d) return;
+      d._introHidden=false;
+      if(d.core) d.core.visible=true;
+      if(d.halo){
+        d.halo.visible=true;
+        const s0=d.halo.scale.x||0.09;
+        d.halo.scale.set(s0*2.6,s0*2.6,s0*2.6);         // вспышка
+        const t0=performance.now();
+        (function ease(){
+          const k=Math.min(1,(performance.now()-t0)/520);
+          const s=s0*(2.6-1.6*k);
+          d.halo.scale.set(s,s,s);
+          if(k<1) requestAnimationFrame(ease);
+        })();
+      }
+    }, t);
+  });
+}
+function primeIntroView(){
+  cam.radius=INTRO_START_R;
+  cam.phi=INTRO_START_PHI;
+  cam.theta=INTRO_START_THETA;
+  applyCameraFromSpherical();
+  idle=false; fly=null;
+  pinsHide();
+  if(aura) aura.material.uniforms.p.value=.24;
+}
+function startIntro(){
+  if(intro) return;
+  document.body.classList.add('intro');
+  const skip=document.getElementById('introSkip');
+  primeIntroView();
+  intro={t0:performance.now(),dur:4200,done:false,fromTheta:cam.theta,fromPhi:cam.phi,visualEase:0};
+  setTimeout(()=>{ if(intro) skip.classList.add('show'); }, 650);
+  // точки появляются ближе к Земле, когда уже различимы материки
+  setTimeout(()=>{ if(intro) pinsRevealWave(1450); }, 2350);
+  // титр
+  setTimeout(()=>{
+    if(!intro) return;
+    document.getElementById('introTitle').textContent = DEMO
+      ? 'Выбирай любые три места'
+      : 'Целая планета в твоих руках';
+    document.getElementById('introSub').textContent = DEMO
+      ? 'Открой бесплатно · '+PLACES.length+' мест на планете'
+      : PLACES.length+' диких мест Земли';
+    document.getElementById('introCap').classList.add('show');
+  }, 2450);
+  setTimeout(()=>{ if(intro) document.getElementById('introCap').classList.remove('show'); }, 4250);
+  setTimeout(()=>{ endIntro(false); }, 4700);
+}
+function endIntro(skipped){
+  if(!intro) return;
+  intro=null;
+  introPlanned=false;
+  markIntroSeen();
+  document.body.classList.remove('intro');
+  document.getElementById('introCap').classList.remove('show');
+  document.getElementById('introSkip').classList.remove('show');
+  if(pinGroup) pinGroup.children.forEach(g=>{ const d=g.userData; if(!d) return; d._introHidden=false;
+    if(d.core) d.core.visible=true; if(d.halo) d.halo.visible=true; });
+  if(skipped){ cam.radius=IDLE_RADIUS; applyCameraFromSpherical(); }
+  idle=true; lastInteract=performance.now();
+  setTimeout(()=>{
+    if(pendingPlace){ const p=pendingPlace; pendingPlace=null; flyTo(p,true); if(typeof showDemoHint==='function') showDemoHint(); return; }
+    if(DEMO){ if(typeof showDemoHint==='function') showDemoHint(); }
+    else if(typeof showPOTD==='function') showPOTD();
+  }, 600);
+}
+function introTick(){
+  if(!intro) return;
+  const k=Math.min(1,(performance.now()-intro.t0)/intro.dur);
+  const e=k*k*k*(k*(k*6-15)+10);                             // кинематографичный smootherstep
+  intro.visualEase=e;
+  cam.radius = INTRO_START_R + (IDLE_RADIUS-INTRO_START_R)*e; // только вперёд, без обратного отъезда
+  cam.theta = intro.fromTheta + .46*e;                        // подлёт по плавной дуге
+  cam.phi   = intro.fromPhi + .13*e - Math.sin(Math.PI*k)*.035;
+  applyCameraFromSpherical();
 }
 
 function initGate(){
